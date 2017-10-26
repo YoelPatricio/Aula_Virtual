@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26/10/2017 01:18:49 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.cpyt.model.Inscripcion" table="inscripcion" catalog="aulavirtual" optimistic-lock="version">
+        <id name="idIns" type="java.lang.Integer">
+            <column name="id_ins" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="curso" class="com.cpyt.model.Curso" fetch="select">
+            <column name="id_cur" not-null="true" />
+        </many-to-one>
+        <many-to-one name="persona" class="com.cpyt.model.Persona" fetch="select">
+            <column name="id_per" not-null="true" />
+        </many-to-one>
+        <property name="fecIns" type="date">
+            <column name="fec_ins" length="10" not-null="true" />
+        </property>
+        <property name="estIns" type="int">
+            <column name="est_ins" not-null="true" />
+        </property>
+        <set name="trabajoFinals" table="trabajo_final" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_ins" not-null="true" />
+            </key>
+            <one-to-many class="com.cpyt.model.TrabajoFinal" />
+        </set>
+    </class>
+</hibernate-mapping>

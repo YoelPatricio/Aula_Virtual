@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26/10/2017 01:18:49 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.cpyt.model.Persona" table="persona" catalog="aulavirtual" optimistic-lock="version">
+        <id name="idPer" type="java.lang.Integer">
+            <column name="id_per" />
+            <generator class="identity" />
+        </id>
+        <property name="dni" type="string">
+            <column name="dni" length="20" not-null="true" />
+        </property>
+        <property name="apaterno" type="string">
+            <column name="apaterno" length="50" not-null="true" />
+        </property>
+        <property name="amaterno" type="string">
+            <column name="amaterno" length="50" not-null="true" />
+        </property>
+        <property name="nombres" type="string">
+            <column name="nombres" length="100" not-null="true" />
+        </property>
+        <property name="correo" type="string">
+            <column name="correo" length="50" not-null="true" />
+        </property>
+        <property name="celular" type="string">
+            <column name="celular" length="20" not-null="true" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion" length="100" not-null="true" />
+        </property>
+        <property name="cip" type="string">
+            <column name="CIP" length="50" />
+        </property>
+        <property name="imgCol" type="string">
+            <column name="img_col" length="100" not-null="true" />
+        </property>
+        <property name="estado" type="int">
+            <column name="estado" not-null="true" />
+        </property>
+        <set name="usuarios" table="usuario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_per" not-null="true" />
+            </key>
+            <one-to-many class="com.cpyt.model.Usuario" />
+        </set>
+        <set name="inscripcions" table="inscripcion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_per" not-null="true" />
+            </key>
+            <one-to-many class="com.cpyt.model.Inscripcion" />
+        </set>
+        <set name="cursos" table="curso" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_per" not-null="true" />
+            </key>
+            <one-to-many class="com.cpyt.model.Curso" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26/10/2017 01:18:49 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.cpyt.model.Usuario" table="usuario" catalog="aulavirtual" optimistic-lock="version">
+        <id name="idUsu" type="java.lang.Integer">
+            <column name="id_usu" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="persona" class="com.cpyt.model.Persona" fetch="select">
+            <column name="id_per" not-null="true" />
+        </many-to-one>
+        <many-to-one name="rol" class="com.cpyt.model.Rol" fetch="select">
+            <column name="id_rol" not-null="true" />
+        </many-to-one>
+        <property name="logUsu" type="string">
+            <column name="log_usu" length="50" not-null="true" />
+        </property>
+        <property name="pasUsu" type="string">
+            <column name="pas_usu" length="50" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

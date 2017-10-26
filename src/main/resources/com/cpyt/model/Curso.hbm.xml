@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26/10/2017 01:18:49 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.cpyt.model.Curso" table="curso" catalog="aulavirtual" optimistic-lock="version">
+        <id name="idCur" type="java.lang.Integer">
+            <column name="id_cur" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="persona" class="com.cpyt.model.Persona" fetch="select">
+            <column name="id_per" not-null="true" />
+        </many-to-one>
+        <property name="nomCur" type="string">
+            <column name="nom_cur" length="100" not-null="true" />
+        </property>
+        <property name="desCur" type="string">
+            <column name="des_cur" length="5000" not-null="true" />
+        </property>
+        <property name="preCur" type="big_decimal">
+            <column name="pre_cur" precision="10" not-null="true" />
+        </property>
+        <property name="traCur" type="string">
+            <column name="tra_cur" length="100" not-null="true" />
+        </property>
+        <set name="inscripcions" table="inscripcion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_cur" not-null="true" />
+            </key>
+            <one-to-many class="com.cpyt.model.Inscripcion" />
+        </set>
+        <set name="leccioneses" table="lecciones" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_cur" not-null="true" />
+            </key>
+            <one-to-many class="com.cpyt.model.Lecciones" />
+        </set>
+    </class>
+</hibernate-mapping>

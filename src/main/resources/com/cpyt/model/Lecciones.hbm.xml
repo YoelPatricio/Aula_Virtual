@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26/10/2017 01:18:49 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.cpyt.model.Lecciones" table="lecciones" catalog="aulavirtual" optimistic-lock="version">
+        <id name="idLec" type="java.lang.Integer">
+            <column name="id_lec" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="curso" class="com.cpyt.model.Curso" fetch="select">
+            <column name="id_cur" not-null="true" />
+        </many-to-one>
+        <property name="nomLec" type="string">
+            <column name="nom_lec" length="100" not-null="true" />
+        </property>
+        <property name="vidLec" type="string">
+            <column name="vid_lec" length="100" not-null="true" />
+        </property>
+        <property name="arcLec" type="string">
+            <column name="arc_lec" length="100" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

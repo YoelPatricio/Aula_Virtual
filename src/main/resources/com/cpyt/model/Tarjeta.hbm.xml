@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26/10/2017 01:18:49 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.cpyt.model.Tarjeta" table="tarjeta" catalog="aulavirtual" optimistic-lock="version">
+        <id name="idTar" type="java.lang.Integer">
+            <column name="id_tar" />
+            <generator class="identity" />
+        </id>
+        <property name="numTar" type="string">
+            <column name="num_tar" length="16" not-null="true" />
+        </property>
+        <property name="fecVen" type="string">
+            <column name="fec_ven" length="10" not-null="true" />
+        </property>
+        <property name="numCvv" type="string">
+            <column name="num_cvv" length="5" not-null="true" />
+        </property>
+        <property name="saldo" type="big_decimal">
+            <column name="saldo" precision="10" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
