@@ -193,7 +193,6 @@ public class GenericDAO {
         tar.setNumCvv("256");
         tar.setSaldo(BigDecimal.ZERO);
         
-        
         g.insert(tar);
     }
 }
