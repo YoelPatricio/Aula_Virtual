@@ -71,6 +71,15 @@ public class GenericDAO {
         return results;
     }
     
+     public List<Tarjeta> listAll(String entidad) {
+
+        Session session = sessionFactory.openSession();
+        Query query = session.createQuery("from "+entidad);
+        
+        List results = query.list();
+        return results;
+    }
+    
     public void delete(String tabla, String campoID,Integer id) {
 
         Session session = sessionFactory.openSession();
@@ -188,13 +197,19 @@ public class GenericDAO {
         GenericDAO g = new GenericDAO();
         
         Tarjeta tar = new Tarjeta();
-        tar.setNumTar("4524");
+        tar.setNumTar("13546346356");
         tar.setFecVen("09/22");
         tar.setNumCvv("256");
         tar.setSaldo(BigDecimal.ZERO);
         //Hola mundo
-        g.insert(tar);
+        //g.insert(tar);
         
-        System.out.println("HOLA MUNDOOOOOOOOOOOO!!!!");
+        List<Tarjeta> tj =  g.listAll("Tarjeta");
+        
+        System.out.println(tj);
+        
+        for (int i = 0; i<tj.size(); i++) {
+            System.out.println(tj.get(i).getNumTar());
+        }
     }
 }
