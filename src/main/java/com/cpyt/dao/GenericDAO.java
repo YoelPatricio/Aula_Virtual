@@ -194,5 +194,7 @@ public class GenericDAO {
         tar.setSaldo(BigDecimal.ZERO);
         //Hola mundo
         g.insert(tar);
+        
+        System.out.println("HOLA MUNDOOOOOOOOOOOO!!!!");
     }
 }
