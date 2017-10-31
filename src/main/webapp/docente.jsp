@@ -49,6 +49,14 @@
             <h3>Grabado Correctamente!</h3> 
 
         </div>
+        
+        <div id="dialogCargando" title="Cargando..." style="display: none;">
+            <br>
+
+            <h3 id="label">Grabado Correctamente!</h3> 
+            <img id="gif" src="assets/img/loading.gif" width="128" height="128" alt="loading"/>
+
+        </div>
         <div id="dialog" title="Lecciones" style="display: none;">
 
 
@@ -161,33 +169,10 @@
     <script>
         $(document).ready(function () {
 
-            var español = {
-                "sProcessing": "Procesando...",
-                "sLengthMenu": "Mostrar _MENU_ registros",
-                "sZeroRecords": "No se encontraron resultados",
-                "sEmptyTable": "NingÃºn dato disponible en esta tabla",
-                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-                "sInfoPostFix": "",
-                "sSearch": "Buscar:",
-                "sUrl": "",
-                "sInfoThousands": ",",
-                "sLoadingRecords": "Cargando...",
-                "oPaginate": {
-                    "sFirst": "Primero",
-                    "sLast": "Ãšltimo",
-                    "sNext": "Siguiente",
-                    "sPrevious": "Anterior"
-                },
-                "oAria": {
-                    "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-                }
-            };
-            $('#example').dataTable({
-                "languaje": español
-            });
+            
+            $('#example').dataTable();
+            
+            
 
 
             jQuery("#interesAddButton").click(function () {
@@ -214,7 +199,7 @@
                                             saldo: $('#saldo').val()
                                         },
                                         success: function (responseText) {
-                                            //alert(responseText);
+                                            
 
 
                                             mostrarAlerta();
@@ -237,7 +222,19 @@
             });
         });
 
+        function cargando(){
+            $("#dialogCargando").dialog({
+                resizable: false,
+                modal: true,
+                width: 350,
+                height: 200,
+                open: function (event, ui) {
+                    $(".ui-dialog-titlebar-close", ui.dialog).hide();
+                }
+            });
+        }
         function mostrarAlerta() {
+            cargando();
             $("#dialogMensaje").dialog({
                 resizable: false,
                 modal: true,
