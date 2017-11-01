@@ -31,7 +31,7 @@
         <link rel="stylesheet" href="assets/css/main.css">
         <!-- DataTables-->
         <link rel="stylesheet" href="assets/plugins/dataTables/css/dataTables.css">
-        <!-- Fonts -->
+        <!-- Fonts 
         <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
         <!-- Feature detection -->
@@ -104,8 +104,7 @@
 
         </div>
 
-    <section class="main-content-wrapper">
-        <section id="main-content">
+    <div id="contenidoIncrustado">
             <div class="row">
                 <br>
                 <div class="col-md-10">
@@ -175,9 +174,8 @@
                     </div>
                 </div>
             </div>
-
-        </section>
-    </section>
+    </div>                                
+     
 
     <!--Global JS-->
     <script src="assets/js/jquery-1.10.2.min.js"></script>

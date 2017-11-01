@@ -11,7 +11,7 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
-<html class="no-js">
+<html>
 <!--<![endif]-->
 
 <head>
@@ -95,17 +95,17 @@
         </aside>
         <!--sidebar left end-->
         <!--main content start-->
-        <div id="contenidoDerecha">
+        
         <section class="main-content-wrapper">
             <section id="main-content">
                 <!--tiles start-->
-                
+                <div id="contenidoDerecha">
                     <div class="row">
                     <div class="col-md-3 col-sm-6">
                         <div class="dashboard-tile detail tile-red">
                             <div class="content">
-                                <h1 class="text-left timer" data-from="0" data-to="180" data-speed="2500"> </h1>
-                                <p>New Users</p>
+                                <h1 class="text-left timer" data-from="0" data-to="180" data-speed="2000"> </h1>
+                                <p>Docentes</p>
                             </div>
                             <div class="icon"><i class="fa fa-users"></i>
                             </div>
@@ -115,28 +115,28 @@
                     <div class="col-md-3 col-sm-6">
                         <div class="dashboard-tile detail tile-turquoise">
                             <div class="content">
-                                <h1 class="text-left timer" data-from="0" data-to="56" data-speed="2500"> </h1>
-                                <p>New Comments</p>
+                                <h1 class="text-left timer" data-from="0" data-to="56" data-speed="2000"> </h1>
+                                <p>Alumnos</p>
                             </div>
-                            <div class="icon"><i class="fa fa-comments"></i>
+                            <div class="icon"><i class="fa fa-user"></i>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6">
                         <div class="dashboard-tile detail tile-blue">
                             <div class="content">
-                                <h1 class="text-left timer" data-from="0" data-to="32" data-speed="2500"> </h1>
-                                <p>New Messages</p>
+                                <h1 class="text-left timer" data-from="0" data-to="32" data-speed="2000"> </h1>
+                                <p>Cursos</p>
                             </div>
-                            <div class="icon"><i class="fa fa fa-envelope"></i>
+                            <div class="icon"><i class="fa fa-book"></i>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6">
                         <div class="dashboard-tile detail tile-purple">
                             <div class="content">
-                                <h1 class="text-left timer" data-to="105" data-speed="2500"> </h1>
-                                <p>New Sales</p>
+                                <h1 class="text-left timer" data-to="10" data-speed="2000"> </h1>
+                                <p>Alumnos +1 Curso</p>
                             </div>
                             <div class="icon"><i class="fa fa-bar-chart-o"></i>
                             </div>
@@ -145,17 +145,21 @@
                 </div>
                 <br>
                 <div class="row" >
-                    <div class="col-sm-12">
-                        <h1>inicio</h1>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <div class="col-sm-12" align="center">
+                        <h1>BIENVENIDO A LA PLATAFORMA DE AULA VIRTUAL</h1>
                     </div>
                     
                 </div>
                
-                
+                 </div>
                
             </section>
         </section>
-             </div>
+            
         
     </section>
     <!--Global JS-->
