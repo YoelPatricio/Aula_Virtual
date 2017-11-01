@@ -57,27 +57,52 @@
             <img id="gif" src="assets/img/loading.gif" width="128" height="128" alt="loading"/>
 
         </div>
-        <div id="dialog" title="Lecciones" style="display: none;">
-
-
-
-            Num:<input type="text" id="numTar" placeholder="Numero de Tarjeta" class="form-control"/>
-            <br>
-            <input type="text" id="fecVen" placeholder="Fecha de Vencimiento" class="form-control"/>
-            <br>
-            <input type="text" id="numCvv" placeholder="CVV" class="form-control"/>
-            <br>
-            <input type="text" id="saldo"  placeholder="Saldo" class="form-control"/>
-
-
+        <div id="dialog" title="Datos del Docente" style="display: none;">
+            <div class="row">
+                <br>
+                <div class="col-md-6">
+                    <label for="txtDNI">DNI:</label>
+                    <input type="text" id="txtDNI" placeholder="DNI" class="form-control"/>
+                </div>
+                <div class="col-md-6">
+                    <label for="txtNombres">Nombres:</label>
+                    <input type="text" id="txtNombres" placeholder="Nombres" class="form-control"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="txtPaterno">Apellido Paterno:</label>
+                    <input type="text" id="txtPaterno" placeholder="Apellido Paterno" class="form-control"/>
+                </div>
+                <div class="col-md-6">
+                    <label for="txtMaterno">Apellido Materno:</label>
+                    <input type="text" id="txtMaterno"  placeholder="Apellido Materno" class="form-control"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="txtCorreo">Correo Electrónico:</label>
+                    <input type="text" id="txtCorreo" placeholder="Correo Electrónico" class="form-control"/>
+                </div>
+                <div class="col-md-6">
+                    <label for="txtCelular">Celular:</label>
+                    <input type="text" id="txtCelular"  placeholder="Celular" class="form-control"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="txtDireccion">Dirección:</label>
+                    <input type="text" id="txtDireccion" placeholder="Dirección" class="form-control"/>
+                </div>
+                <div class="col-md-6">
+                    <label for="txtCIP">Celular:</label>
+                    <input type="text" id="txtCIP"  placeholder="CIP" class="form-control"/>
+                </div>
+            </div>
+            
+                   
 
         </div>
-
-
-
-
-
-    </div>
 
     <section class="main-content-wrapper">
         <section id="main-content">
@@ -90,7 +115,7 @@
                 </div>
                 <div class="col-md-2">
 
-                    <button id="interesAddButton" class="btn btn-success">Agregar</button> 
+                    <button id="interesAddButton" class="btn btn-success"><span class="glyphicons glyphicon-plus"></span> Agregar</button> 
 
                 </div>
             </div>
@@ -99,7 +124,7 @@
                 <div class="col-md-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Data Tables</h3>
+                            <h3 class="panel-title">Listado de Docentes</h3>
                             <div class="actions pull-right">
                                 <i class="fa fa-chevron-down"></i>
                                 <!--<i class="fa fa-times"></i>-->
@@ -109,7 +134,7 @@
                             <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        <th>N°</th>
                                         <th>Numero Tarjeta</th>
                                         <th>Fecha Vencimiento</th>
                                         <th>Numero CVV</th>
@@ -125,15 +150,15 @@
 
                                     %>
                                     <tr>
-                                        <td><%= tj.get(i).getIdTar()%></td>
+                                        <td><%= i+1%></td>
                                         <td><%= tj.get(i).getNumTar()%></td>
                                         <td><%= tj.get(i).getFecVen()%></td>
                                         <td><%= tj.get(i).getNumCvv()%></td>
                                         <td><%= tj.get(i).getSaldo()%></td>
 
                                         <td align="center">
-                                            <button>Editar</button>
-                                            <button>Borrar</button>
+                                            <button class="btn btn-info"><span class="glyphicon glyphicon-edit"></span></button>
+                                            <button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
 
                                         </td>
                                     </tr>
@@ -181,8 +206,8 @@
                     $("#dialog").dialog({
                         resizable: false,
                         modal: true,
-                        width: 500,
-                        height: 400,
+                        width: 650,
+                        height: 500,
                         buttons: [
                             {
                                 text: "Ok",

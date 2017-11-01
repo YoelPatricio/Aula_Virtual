@@ -29,20 +29,19 @@
     
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-     <link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
+    
 </head>
 
 <body>
     <section id="container">
-        <header id="header">
+        <div id="header">
             <!--logo start-->
             <div class="brand">
-                <a href="index.html" class="logo"><span>Aula</span>Virtual</a>
+                <a href="dashboard.jsp" class="logo"><span>Aula</span>Virtual</a>
             </div>
             <!--logo end-->
             <div class="toggle-navigation toggle-left">
-                <button type="button" class="btn btn-default" id="toggle-left" data-toggle="tooltip" data-placement="right" title="Toggle Navigation">
+                <button type="button" class="btn btn-default" id="toggle-left" data-toggle="tooltip" data-placement="right">
                     <i class="fa fa-bars"></i>
                 </button>
             </div>
@@ -68,7 +67,7 @@
                     
                 </ul>
             </div>
-        </header>
+        </div>
         <!--sidebar left start-->
         <aside class="sidebar">
             <div id="leftside-navigation" class="nano">
@@ -169,13 +168,15 @@
     <script src="assets/plugins/countTo/jquery.countTo.js"></script>
     <script src="assets/plugins/weather/js/skycons.js"></script>
    
-    
+     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+     <link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
     <script>
         $(document).ready(function() {
             
             
             
             $("#docente").click(function(){
+                $("#contenidoDerecha").load("docente.jsp");
                 $("#contenidoDerecha").load("docente.jsp");
             });
             
