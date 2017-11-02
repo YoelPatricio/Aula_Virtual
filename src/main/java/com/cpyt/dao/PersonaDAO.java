@@ -6,6 +6,7 @@
 package com.cpyt.dao;
 
 import static com.cpyt.dao.GenericDAO.sessionFactory;
+import com.cpyt.model.Persona;
 import com.cpyt.model.Tarjeta;
 import java.util.List;
 import org.hibernate.Query;
@@ -27,7 +28,7 @@ public class PersonaDAO {
 	}
         
         
-    public List<PersonaDAO> listPersona() {
+    public List<Persona> listPersona() {
 
         Session session = sessionFactory.openSession();
         Query query = session.createQuery("from Persona");

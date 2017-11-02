@@ -4,13 +4,15 @@
     Author     : Yoel
 --%>
 
-<%@page import="com.cpyt.model.Tarjeta"%>
+<%@page import="com.cpyt.model.Persona"%>
+<%@page import="com.cpyt.dao.PersonaDAO"%>
+
 <%@page import="java.util.List"%>
-<%@page import="com.cpyt.dao.GenericDAO"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    GenericDAO g = new GenericDAO();
-    List<Tarjeta> tj = g.listAll("Tarjeta");
+    PersonaDAO g = new PersonaDAO();
+    List<Persona> per = g.listPersona();
 
 %>
 <!DOCTYPE html>
@@ -38,9 +40,11 @@
         <script src="assets/js/modernizr-2.6.2.min.js"></script>
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
-        <script src="assets/js/html5shiv.js"></script>
-        <script src="assets/js/respond.min.js"></script>
+        <script src="assets/js/html5shiv.js"></script>        
         <![endif]-->
+        <script src="assets/js/PersonaJS.js"></script>
+        
+        
     </head>
     <body>
         <div id="dialogMensaje" title="Mensaje" style="display: none;">
@@ -49,7 +53,7 @@
             <h3>Grabado Correctamente!</h3> 
 
         </div>
-        
+
         <div id="dialogCargando" title="Cargando..." style="display: none;">
             <br>
 
@@ -69,6 +73,7 @@
                     <input type="text" id="txtNombres" placeholder="Nombres" class="form-control"/>
                 </div>
             </div>
+            <br>
             <div class="row">
                 <div class="col-md-6">
                     <label for="txtPaterno">Apellido Paterno:</label>
@@ -79,6 +84,7 @@
                     <input type="text" id="txtMaterno"  placeholder="Apellido Materno" class="form-control"/>
                 </div>
             </div>
+            <br>
             <div class="row">
                 <div class="col-md-6">
                     <label for="txtCorreo">Correo Electrónico:</label>
@@ -89,22 +95,31 @@
                     <input type="text" id="txtCelular"  placeholder="Celular" class="form-control"/>
                 </div>
             </div>
+            <br>
             <div class="row">
                 <div class="col-md-6">
                     <label for="txtDireccion">Dirección:</label>
                     <input type="text" id="txtDireccion" placeholder="Dirección" class="form-control"/>
                 </div>
                 <div class="col-md-6">
-                    <label for="txtCIP">Celular:</label>
+                    <label for="txtCIP">CIP:</label>
                     <input type="text" id="txtCIP"  placeholder="CIP" class="form-control"/>
                 </div>
             </div>
-            
-                   
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="imgDocente">Certificado de Colegiatura:</label>
+                    <input type="file" id="imgDocente" class="form-control"/>
+                </div>
+
+            </div>
+
+
 
         </div>
 
-    <div id="contenidoIncrustado">
+        <div id="contenidoIncrustado">
             <div class="row">
                 <br>
                 <div class="col-md-10">
@@ -114,7 +129,7 @@
                 </div>
                 <div class="col-md-2">
 
-                    <button id="interesAddButton" class="btn btn-success"><span class="glyphicons glyphicon-plus"></span> Agregar</button> 
+                    <button id="interesAddButton" class="btn btn-success"  onClick="dialogoPersona()"><span class="glyphicons glyphicon-plus"></span> Agregar</button> 
 
                 </div>
             </div>
@@ -133,28 +148,35 @@
                             <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>N°</th>
-                                        <th>Numero Tarjeta</th>
-                                        <th>Fecha Vencimiento</th>
-                                        <th>Numero CVV</th>
-                                        <th>Saldo</th>
+                                        <th>DNI</th>
+                                        <th>Apellidos y Nombres</th>                                        
+                                        <th>Correo</th>
+                                        <th>Celular</th>
+                                        <th>Dirección</th>                                        
+                                        <th>CIP</th>
+                                        <th>Certificado</th>
 
                                         <th>Action</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    <%                                            for (int i = 0; i < tj.size(); i++) {
+                                    <%                                            for (int i = 0; i < per.size(); i++) {
 
 
                                     %>
                                     <tr>
-                                        <td><%= i+1%></td>
-                                        <td><%= tj.get(i).getNumTar()%></td>
-                                        <td><%= tj.get(i).getFecVen()%></td>
-                                        <td><%= tj.get(i).getNumCvv()%></td>
-                                        <td><%= tj.get(i).getSaldo()%></td>
-
+                                        
+                                        <td><%= per.get(i).getDni()%></td>
+                                        <td><%= per.get(i).getApaterno().toString()+" "+per.get(i).getAmaterno().toString()+","+per.get(i).getNombres().toString()  %></td>
+                                        <td><%= per.get(i).getCorreo() %></td>
+                                        <td><%= per.get(i).getCelular() %></td>
+                                        <td><%= per.get(i).getDireccion() %></td>
+                                        <td><%= per.get(i).getCip() %></td>
+                                        
+                                        <td align="center">
+                                            <button class="btn btn-warning"><span class="glyphicon glyphicon-certificate"></span></button>
+                                        </td>
                                         <td align="center">
                                             <button class="btn btn-info"><span class="glyphicon glyphicon-edit"></span></button>
                                             <button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
@@ -174,108 +196,24 @@
                     </div>
                 </div>
             </div>
-    </div>                                
-     
+        </div>                                
 
-    <!--Global JS-->
-    <script src="assets/js/jquery-1.10.2.min.js"></script>
-    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/plugins/waypoints/waypoints.min.js"></script>
-    <script src="assets/js/application.js"></script>
 
-    <script src="assets/plugins/dataTables/js/jquery.dataTables.js"></script>
-    <script src="assets/plugins/dataTables/js/dataTables.bootstrap.js"></script>
+        <!--Global JS-->
+        <script src="assets/js/jquery-1.10.2.min.js"></script>
+        <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+        <script src="assets/plugins/waypoints/waypoints.min.js"></script>
+        <script src="assets/js/application.js"></script>
 
-    <script src="assets/js/jquery-ui.min.js"></script>
-    <link rel="stylesheet" href="assets/css/jquery-ui.css">
+        <script src="assets/plugins/dataTables/js/jquery.dataTables.js"></script>
+        <script src="assets/plugins/dataTables/js/dataTables.bootstrap.js"></script>
 
-    <script>
-        $(document).ready(function () {
+        <script src="assets/js/jquery-ui.min.js"></script>
+        <link rel="stylesheet" href="assets/css/jquery-ui.css">
 
-            
-            $('#example').dataTable();
-            
+        <script>
             
 
-
-            jQuery("#interesAddButton").click(function () {
-
-                $(function () {
-                    $("#dialog").dialog({
-                        resizable: false,
-                        modal: true,
-                        width: 650,
-                        height: 500,
-                        buttons: [
-                            {
-                                text: "Ok",
-
-                                click: function () {
-                                    $(this).dialog("close");
-
-                                    $.ajax({
-                                        url: 'TarjetaController',
-                                        data: {
-                                            numTar: $('#numTar').val(),
-                                            fecVen: $('#fecVen').val(),
-                                            numCvv: $('#numCvv').val(),
-                                            saldo: $('#saldo').val()
-                                        },
-                                        success: function (responseText) {
-                                            
-
-
-                                            mostrarAlerta();
-
-                                            $('#numTar').val('');
-                                            $('#fecVen').val('');
-                                            $('#numCvv').val('');
-                                            $('#saldo').val('');
-
-                                        }
-                                    });
-                                }
-                                // Uncommenting the following line would hide the text,
-                                // resulting in the label being used as a tooltip
-                                //showText: false
-                            }
-                        ]
-                    });
-                });
-            });
-        });
-
-        function cargando(){
-            $("#dialogCargando").dialog({
-                resizable: false,
-                modal: true,
-                width: 350,
-                height: 200,
-                open: function (event, ui) {
-                    $(".ui-dialog-titlebar-close", ui.dialog).hide();
-                }
-            });
-        }
-        function mostrarAlerta() {
-            cargando();
-            $("#dialogMensaje").dialog({
-                resizable: false,
-                modal: true,
-                width: 350,
-                height: 200,
-                buttons: [
-                    {
-                        text: "Ok",
-
-                        click: function () {
-                            $("#contenidoDerecha").load("docente.jsp");
-                            $(this).dialog("close");
-                        }
-                    }
-                ]
-            });
-        }
-
-    </script>
-</body>
+        </script>
+    </body>
 </html>

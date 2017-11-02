@@ -15,7 +15,7 @@
 </head>
 <body class="cover" style="background-image: url(assets/img/loginFont.jpg);">
 	<form action="dashboard.jsp" method="" autocomplete="off" class="full-box logInForm">
-		<p class="text-center text-muted"><i class="zmdi zmdi-account-circle zmdi-hc-5x"></i></p>
+		<p class="text-center text-muted"></i></p>
 		<p class="text-center text-muted text-uppercase">Inicia sesión con tu cuenta</p>
 		<div class="form-group label-floating">
 		  <label class="control-label" for="UserEmail">E-mail</label>
