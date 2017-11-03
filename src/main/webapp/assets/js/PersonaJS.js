@@ -18,7 +18,7 @@ function cargando() {
     });
 }
 function mostrarAlerta() {
-   
+
     $("#dialogMensaje").dialog({
         resizable: false,
         modal: true,
@@ -37,9 +37,33 @@ function mostrarAlerta() {
     });
 }
 
+function limpiarDialogo() {
+        $('#txtDNI').val('');        
+        $('#txtNombres').val('');
+        $('#txtPaterno').val('');
+        $('#txtMaterno').val('');
+        $('#txtCorreo').val('');
+        $('#txtCelular').val('');
+        $('#txtDireccion').val('');
+        $('#txtCIP').val('');
+}
 
 
-function dialogoPersona() {
+
+function dialogoPersona(accion,idPer,dni,nombres,paterno,materno,correo,celular,direccion,cip,imgDocente) {
+    debugger;
+    if(accion=='editar'){
+        $('#txtDNI').val(dni);        
+        $('#txtNombres').val(nombres);
+        $('#txtPaterno').val(paterno);
+        $('#txtMaterno').val(materno);
+        $('#txtCorreo').val(correo);
+        $('#txtCelular').val(celular);
+        $('#txtDireccion').val(direccion);
+        $('#txtCIP').val(cip);   
+    }else{
+        limpiarDialogo();
+    }
 
     $("#dialog").dialog({
         resizable: false,
@@ -51,32 +75,37 @@ function dialogoPersona() {
                 text: "Grabar",
 
                 click: function () {
-                    $(this).dialog("close");
+
+                    var inputFileImage = document.getElementById("imgDocente");
+                    var file = inputFileImage.files[0];
+                    var data = new FormData();
+                    debugger;
+                    data.append('imgDocente', file);
+                    data.append('txtDNI',$('#txtDNI').val());
+                    data.append('txtNombres',$('#txtNombres').val());
+                    data.append('txtPaterno',$('#txtPaterno').val());
+                    data.append('txtMaterno',$('#txtMaterno').val());
+                    data.append('txtCorreo',$('#txtCorreo').val());
+                    data.append('txtCelular',$('#txtCelular').val());
+                    data.append('txtDireccion',$('#txtDireccion').val());
+                    data.append('txtCIP',$('#txtCIP').val());
+                    data.append('accion',accion);
+                   
 
                     $.ajax({
                         url: 'PersonaServlet',
                         type: 'POST',
-                        data: {
-                            txtDNI: $('#txtDNI').val(),
-                            txtNombres: $('#txtNombres').val(),
-                            txtPaterno: $('#txtPaterno').val(),
-                            txtMaterno: $('#txtMaterno').val(),
-                            txtCorreo: $('#txtCorreo').val(),
-                            txtCelular: $('#txtCelular').val(),
-                            txtDireccion: $('#txtDireccion').val(),
-                            txtCIP: $('#txtCIP').val(),
-                            imgDocente: $('#imgDocente').val()
-                        },
+                        contentType: false,
+                        data: data,
+                        processData: false,
+                        cache: false,
                         success: function (responseText) {
-
-
-
                             mostrarAlerta();
-
-                            
-
+                            limpiarDialogo();
                         }
                     });
+                    
+                    $(this).dialog("close");
                 }
 
 

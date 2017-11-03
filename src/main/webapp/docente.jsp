@@ -129,7 +129,7 @@
                 </div>
                 <div class="col-md-2">
 
-                    <button id="interesAddButton" class="btn btn-success"  onClick="dialogoPersona()"><span class="glyphicons glyphicon-plus"></span> Agregar</button> 
+                    <button id="interesAddButton" class="btn btn-success"  onClick="dialogoPersona('add',null,null,null,null,null,null,null,null,null,null)"><span class="glyphicons glyphicon-plus"></span> Agregar</button> 
 
                 </div>
             </div>
@@ -178,7 +178,7 @@
                                             <button class="btn btn-warning"><span class="glyphicon glyphicon-certificate"></span></button>
                                         </td>
                                         <td align="center">
-                                            <button class="btn btn-info"><span class="glyphicon glyphicon-edit"></span></button>
+                                            <button class="btn btn-info" onclick="dialogoPersona('editar','<%= per.get(i).getIdPer() %>','<%= per.get(i).getDni()%>','<%=per.get(i).getNombres()%>','<%=per.get(i).getApaterno()%>','<%=per.get(i).getAmaterno()%>','<%= per.get(i).getCorreo() %>','<%= per.get(i).getCelular() %>','<%= per.get(i).getDireccion() %>','<%= per.get(i).getCip() %>','<%= per.get(i).getImgCol() %>')"><span class="glyphicon glyphicon-edit"></span></button>
                                             <button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
 
                                         </td>
