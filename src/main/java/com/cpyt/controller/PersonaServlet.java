@@ -40,8 +40,10 @@ public class PersonaServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-                
-        String url = "C:\\Users\\Yoel\\Desktop";
+        
+        PrintWriter out = response.getWriter();
+            
+        String url = "C:\\AulaVirtual_Files\\certificate";
         DiskFileItemFactory factory = new DiskFileItemFactory();
         factory.setRepository(new File(url));        
         
@@ -62,6 +64,8 @@ public class PersonaServlet extends HttpServlet {
                 }
                 
             }
+            String accion = campos.get("accion").toString();
+            
             
             GenericDAO g = new GenericDAO();
             Persona p = new Persona();
@@ -76,11 +80,19 @@ public class PersonaServlet extends HttpServlet {
             p.setCip(campos.get("txtCIP").toString());
             p.setImgCol(campos.get("imgDocente").toString());
             
-            g.insert(p);
+            if(accion.equals("add")){
+                g.insert(p);
+            }else{
+                p.setIdPer(Integer.parseInt(campos.get("txtIdPer").toString()));
+                g.update(p);
+            }
             
+            
+            out.print("true");
             System.out.println("Funkoooo");
             
         } catch (Exception e) {
+            out.print("false");
             System.out.println("Noooooooooo  :(" + e);
         }
         

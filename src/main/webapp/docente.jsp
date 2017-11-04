@@ -43,21 +43,135 @@
         <script src="assets/js/html5shiv.js"></script>        
         <![endif]-->
         <script src="assets/js/PersonaJS.js"></script>
-        
-        
+        <style>
+            #myImg {
+                border-radius: 5px;
+                cursor: pointer;
+                transition: 0.3s;
+            }
+
+            #myImg:hover {opacity: 0.7;}
+
+            /* The Modal (background) */
+            .modal {
+                display: none; /* Hidden by default */
+                position: fixed; /* Stay in place */
+                z-index: 1; /* Sit on top */
+                padding-top: 100px; /* Location of the box */
+                left: 0;
+                top: 0;
+                width: 100%; /* Full width */
+                height: 100%; /* Full height */
+                overflow: auto; /* Enable scroll if needed */
+                background-color: rgb(0,0,0); /* Fallback color */
+                background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+            }
+
+            /* Modal Content (image) */
+            .modal-content {
+                margin: auto;
+                display: block;
+                width: 80%;
+                max-width: 700px;
+            }
+
+            /* Caption of Modal Image */
+            #caption {
+                margin: auto;
+                display: block;
+                width: 80%;
+                max-width: 700px;
+                text-align: center;
+                color: #ccc;
+                padding: 10px 0;
+                height: 150px;
+            }
+
+            /* Add Animation */
+            .modal-content, #caption {    
+                -webkit-animation-name: zoom;
+                -webkit-animation-duration: 0.6s;
+                animation-name: zoom;
+                animation-duration: 0.6s;
+            }
+
+            @-webkit-keyframes zoom {
+                from {-webkit-transform:scale(0)} 
+                to {-webkit-transform:scale(1)}
+            }
+
+            @keyframes zoom {
+                from {transform:scale(0)} 
+                to {transform:scale(1)}
+            }
+
+            /* The Close Button */
+            .close {
+                position: absolute;
+                top: 15px;
+                right: 35px;
+                color: #f1f1f1;
+                font-size: 40px;
+                font-weight: bold;
+                transition: 0.3s;
+            }
+
+            .close:hover,
+            .close:focus {
+                color: #bbb;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+            /* 100% Image Width on Smaller Screens */
+            @media only screen and (max-width: 700px){
+                .modal-content {
+                    width: 100%;
+                }
+            }
+        </style>
+
     </head>
     <body>
+
+
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content" id="img01">
+            <div id="caption"></div>
+        </div>
+
+
+
         <div id="dialogMensaje" title="Mensaje" style="display: none;">
             <br>
+            <div align="center">
+                <h3>Grabado Correctamente!</h3> 
+            </div>
 
-            <h3>Grabado Correctamente!</h3> 
+
+        </div>
+
+        <div id="dialogError" title="Error" style="display: none;">
+            <br>
+            <div align="center">
+                <h3>Ocurrio un error !</h3>
+            </div>
+
+
+        </div>
+
+        <div id="dialogCertificado" title="Certificado" style="display: none;">
+
+            <div id="imgCertificado" align="center">                
+
+            </div>
 
         </div>
 
         <div id="dialogCargando" title="Cargando..." style="display: none;">
             <br>
-
-            <h3 id="label">Grabado Correctamente!</h3> 
             <img id="gif" src="assets/img/loading.gif" width="128" height="128" alt="loading"/>
 
         </div>
@@ -67,6 +181,7 @@
                 <div class="col-md-6">
                     <label for="txtDNI">DNI:</label>
                     <input type="text" id="txtDNI" placeholder="DNI" class="form-control"/>
+                    <input type="hidden" id="txtIdPer"/>
                 </div>
                 <div class="col-md-6">
                     <label for="txtNombres">Nombres:</label>
@@ -129,7 +244,7 @@
                 </div>
                 <div class="col-md-2">
 
-                    <button id="interesAddButton" class="btn btn-success"  onClick="dialogoPersona('add',null,null,null,null,null,null,null,null,null,null)"><span class="glyphicons glyphicon-plus"></span> Agregar</button> 
+                    <button id="interesAddButton" class="btn btn-success"  onClick="dialogoPersona('add', null, null, null, null, null, null, null, null, null, null)"><span class="glyphicons glyphicon-plus"></span> Agregar</button> 
 
                 </div>
             </div>
@@ -166,19 +281,20 @@
 
                                     %>
                                     <tr>
-                                        
+
                                         <td><%= per.get(i).getDni()%></td>
-                                        <td><%= per.get(i).getApaterno().toString()+" "+per.get(i).getAmaterno().toString()+","+per.get(i).getNombres().toString()  %></td>
-                                        <td><%= per.get(i).getCorreo() %></td>
-                                        <td><%= per.get(i).getCelular() %></td>
-                                        <td><%= per.get(i).getDireccion() %></td>
-                                        <td><%= per.get(i).getCip() %></td>
-                                        
+                                        <td><%= per.get(i).getApaterno().toString() + " " + per.get(i).getAmaterno().toString() + "," + per.get(i).getNombres().toString()%></td>
+                                        <td><%= per.get(i).getCorreo()%></td>
+                                        <td><%= per.get(i).getCelular()%></td>
+                                        <td><%= per.get(i).getDireccion()%></td>
+                                        <td><%= per.get(i).getCip()%></td>
+
                                         <td align="center">
-                                            <button class="btn btn-warning"><span class="glyphicon glyphicon-certificate"></span></button>
+                                            <button class="btn btn-warning" onclick="dialogCertificado2('<%= per.get(i).getImgCol()%>')"><span class="glyphicon glyphicon-certificate"></span></button>
+
                                         </td>
                                         <td align="center">
-                                            <button class="btn btn-info" onclick="dialogoPersona('editar','<%= per.get(i).getIdPer() %>','<%= per.get(i).getDni()%>','<%=per.get(i).getNombres()%>','<%=per.get(i).getApaterno()%>','<%=per.get(i).getAmaterno()%>','<%= per.get(i).getCorreo() %>','<%= per.get(i).getCelular() %>','<%= per.get(i).getDireccion() %>','<%= per.get(i).getCip() %>','<%= per.get(i).getImgCol() %>')"><span class="glyphicon glyphicon-edit"></span></button>
+                                            <button class="btn btn-info" onclick="dialogoPersona('edit', '<%= per.get(i).getIdPer()%>', '<%= per.get(i).getDni()%>', '<%=per.get(i).getNombres()%>', '<%=per.get(i).getApaterno()%>', '<%=per.get(i).getAmaterno()%>', '<%= per.get(i).getCorreo()%>', '<%= per.get(i).getCelular()%>', '<%= per.get(i).getDireccion()%>', '<%= per.get(i).getCip()%>', '<%= per.get(i).getImgCol()%>')"><span class="glyphicon glyphicon-edit"></span></button>
                                             <button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
 
                                         </td>
@@ -212,7 +328,7 @@
         <link rel="stylesheet" href="assets/css/jquery-ui.css">
 
         <script>
-            
+
 
         </script>
     </body>

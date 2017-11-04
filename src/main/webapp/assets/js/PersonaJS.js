@@ -1,9 +1,10 @@
 $(document).ready(function () {
+    $('#example').dataTable();
 
 });
 
 
-$('#example').dataTable();
+
 
 
 function cargando() {
@@ -27,7 +28,25 @@ function mostrarAlerta() {
         buttons: [
             {
                 text: "Ok",
+                click: function () {
+                    $("#contenidoDerecha").load("docente.jsp");
+                    $(this).dialog("close");
+                }
+            }
+        ]
+    });
+}
 
+function mostrarAlertaError() {
+
+    $("#dialogError").dialog({
+        resizable: false,
+        modal: true,
+        width: 350,
+        height: 200,
+        buttons: [
+            {
+                text: "Cerrar",
                 click: function () {
                     $("#contenidoDerecha").load("docente.jsp");
                     $(this).dialog("close");
@@ -38,33 +57,35 @@ function mostrarAlerta() {
 }
 
 function limpiarDialogo() {
-        $('#txtDNI').val('');        
-        $('#txtNombres').val('');
-        $('#txtPaterno').val('');
-        $('#txtMaterno').val('');
-        $('#txtCorreo').val('');
-        $('#txtCelular').val('');
-        $('#txtDireccion').val('');
-        $('#txtCIP').val('');
+    $('#txtDNI').val('');
+    $('#txtNombres').val('');
+    $('#txtPaterno').val('');
+    $('#txtMaterno').val('');
+    $('#txtCorreo').val('');
+    $('#txtCelular').val('');
+    $('#txtDireccion').val('');
+    $('#txtCIP').val('');
 }
 
 
 
-function dialogoPersona(accion,idPer,dni,nombres,paterno,materno,correo,celular,direccion,cip,imgDocente) {
+function dialogoPersona(accion, idPer, dni, nombres, paterno, materno, correo, celular, direccion, cip, imgDocente) {
     debugger;
-    if(accion=='editar'){
-        $('#txtDNI').val(dni);        
+    if (accion == 'edit') {
+        $('#txtIdPer').val(idPer);
+        $('#txtDNI').val(dni);
         $('#txtNombres').val(nombres);
         $('#txtPaterno').val(paterno);
         $('#txtMaterno').val(materno);
         $('#txtCorreo').val(correo);
         $('#txtCelular').val(celular);
         $('#txtDireccion').val(direccion);
-        $('#txtCIP').val(cip);   
-    }else{
+        $('#txtCIP').val(cip);
+    } else {
         limpiarDialogo();
     }
-
+    
+    
     $("#dialog").dialog({
         resizable: false,
         modal: true,
@@ -73,24 +94,24 @@ function dialogoPersona(accion,idPer,dni,nombres,paterno,materno,correo,celular,
         buttons: [
             {
                 text: "Grabar",
-
                 click: function () {
-
+                    cargando();
                     var inputFileImage = document.getElementById("imgDocente");
                     var file = inputFileImage.files[0];
                     var data = new FormData();
                     debugger;
                     data.append('imgDocente', file);
-                    data.append('txtDNI',$('#txtDNI').val());
-                    data.append('txtNombres',$('#txtNombres').val());
-                    data.append('txtPaterno',$('#txtPaterno').val());
-                    data.append('txtMaterno',$('#txtMaterno').val());
-                    data.append('txtCorreo',$('#txtCorreo').val());
-                    data.append('txtCelular',$('#txtCelular').val());
-                    data.append('txtDireccion',$('#txtDireccion').val());
-                    data.append('txtCIP',$('#txtCIP').val());
-                    data.append('accion',accion);
-                   
+                    data.append('txtIdPer', $('#txtIdPer').val());
+                    data.append('txtDNI', $('#txtDNI').val());
+                    data.append('txtNombres', $('#txtNombres').val());
+                    data.append('txtPaterno', $('#txtPaterno').val());
+                    data.append('txtMaterno', $('#txtMaterno').val());
+                    data.append('txtCorreo', $('#txtCorreo').val());
+                    data.append('txtCelular', $('#txtCelular').val());
+                    data.append('txtDireccion', $('#txtDireccion').val());
+                    data.append('txtCIP', $('#txtCIP').val());
+                    data.append('accion', accion);
+
 
                     $.ajax({
                         url: 'PersonaServlet',
@@ -100,11 +121,20 @@ function dialogoPersona(accion,idPer,dni,nombres,paterno,materno,correo,celular,
                         processData: false,
                         cache: false,
                         success: function (responseText) {
-                            mostrarAlerta();
-                            limpiarDialogo();
-                        }
+                            debugger;
+                            if(responseText=='true'){
+                                $("#dialogCargando").dialog("close");
+                                mostrarAlerta();
+                                limpiarDialogo();
+                            }else{
+                                $("#dialogCargando").dialog("close");
+                                mostrarAlertaError();
+                                limpiarDialogo();
+                            }
+                            
+                        } 
                     });
-                    
+
                     $(this).dialog("close");
                 }
 
@@ -115,6 +145,60 @@ function dialogoPersona(accion,idPer,dni,nombres,paterno,materno,correo,celular,
             }, {
                 text: "Cancelar",
                 click: function () {
+                    $(this).dialog("close");
+                }
+            }
+        ]
+    });
+}
+
+function dialogCertificado(img) {
+    debugger;
+    //$('#imgCertificado').html("<img src='C:/AulaVirtual_Files/certificate/logo_muni.png' height='300' width='700'>"); 
+
+    var modal = document.getElementById('myModal');
+
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+    var img = document.getElementById('myImg');
+    var modalImg = document.getElementById("img01");
+    var captionText = document.getElementById("caption");
+    
+        modal.style.display = "block";
+        modalImg.src = "certificate/logo_muni.png";
+        captionText.innerHTML = this.alt;
+    
+
+// Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    //$("#contenidoDerecha").load("certificate.jsp?img=" + img);
+}
+
+function dialogCertificado2(img) {
+    
+    if(img=="undefined" || img==""){
+        $('#imgCertificado').html("<br><br><br><br><br><br><br><br><h1>NO EXISTE CERTIFICADO ADJUNTADO</h1>"); 
+        
+    }else{
+        $('#imgCertificado').html("<img src='certificate/"+img+"' height='480' width='900'>");
+    }
+     
+    
+    $("#dialogCertificado").dialog({
+        resizable: false,
+        modal: true,
+        width: 1000,
+        height: 600,
+        buttons: [
+            {
+                text: "Cerrar",
+                click: function () {
+                    
                     $(this).dialog("close");
                 }
             }
