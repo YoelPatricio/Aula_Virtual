@@ -75,8 +75,14 @@
                     <li class="active">
                         <a href="dashboard.jsp"><i class="fa fa-dashboard"></i><span>Inicio</span></a>
                     </li>
-                    <li id="docente">
-                        <a href="#"><i class="fa fa-cogs"></i><span>Docentes</span></a>
+                    <li class="sub-menu">
+                        <a href="javascript:void(0);"><i class="fa fa-cogs"></i><span>Docentes</span><i class="arrow fa fa-angle-right pull-right"></i></a>
+                        <ul>
+                            <li id="docente">
+                                <a href="#"><!--<i class="fa fa-cogs"></i>--><span>Activos</span></a>
+                            </li>
+                        </ul>
+                        
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-cogs"></i><span>Estudiantes</span></a>
@@ -86,6 +92,23 @@
                     </li>
                     <li id="bienvenida">
                         <a href="#" ><i class="fa fa-cogs"></i><span>Bienvenida</span></a>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:void(0);"><i class="fa fa fa-tasks"></i><span>Forms</span><i class="arrow fa fa-angle-right pull-right"></i></a>
+                        <ul>
+                            <li><a href="forms-components.html">Components</a>
+                            </li>
+                            <li><a href="forms-validation.html">Validation</a>
+                            </li>
+                            <li><a href="forms-mask.html">Mask</a>
+                            </li>
+                            <li><a href="forms-wizard.html">Wizard</a>
+                            </li>
+                            <li><a href="forms-multiple-file.html">Multiple File Upload</a>
+                            </li>
+                            <li><a href="forms-wysiwyg.html">WYSIWYG Editor</a>
+                            </li>
+                        </ul>
                     </li>
                     
                    
