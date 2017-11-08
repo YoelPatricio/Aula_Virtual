@@ -69,7 +69,7 @@ function limpiarDialogo() {
 
 
 
-function dialogoPersona(accion, idPer, dni, nombres, paterno, materno, correo, celular, direccion, cip, imgDocente) {
+function dialogoPersona(accion, tipo, idPer, dni, nombres, paterno, materno, correo, celular, direccion, cip, imgDocente) {
     debugger;
     if (accion == 'edit') {
         $('#txtIdPer').val(idPer);
@@ -84,8 +84,8 @@ function dialogoPersona(accion, idPer, dni, nombres, paterno, materno, correo, c
     } else {
         limpiarDialogo();
     }
-    
-    
+
+
     $("#dialog").dialog({
         resizable: false,
         modal: true,
@@ -111,6 +111,7 @@ function dialogoPersona(accion, idPer, dni, nombres, paterno, materno, correo, c
                     data.append('txtDireccion', $('#txtDireccion').val());
                     data.append('txtCIP', $('#txtCIP').val());
                     data.append('accion', accion);
+                    data.append('tipo', tipo);
 
 
                     $.ajax({
@@ -122,17 +123,17 @@ function dialogoPersona(accion, idPer, dni, nombres, paterno, materno, correo, c
                         cache: false,
                         success: function (responseText) {
                             debugger;
-                            if(responseText=='true'){
+                            if (responseText == 'true') {
                                 $("#dialogCargando").dialog("close");
                                 mostrarAlerta();
                                 limpiarDialogo();
-                            }else{
+                            } else {
                                 $("#dialogCargando").dialog("close");
                                 mostrarAlertaError();
                                 limpiarDialogo();
                             }
-                            
-                        } 
+
+                        }
                     });
 
                     $(this).dialog("close");
@@ -162,11 +163,11 @@ function dialogCertificado(img) {
     var img = document.getElementById('myImg');
     var modalImg = document.getElementById("img01");
     var captionText = document.getElementById("caption");
-    
-        modal.style.display = "block";
-        modalImg.src = "certificate/logo_muni.png";
-        captionText.innerHTML = this.alt;
-    
+
+    modal.style.display = "block";
+    modalImg.src = "certificate/logo_muni.png";
+    captionText.innerHTML = this.alt;
+
 
 // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
@@ -180,15 +181,15 @@ function dialogCertificado(img) {
 }
 
 function dialogCertificado2(img) {
-    
-    if(img=="undefined" || img==""){
-        $('#imgCertificado').html("<br><br><br><br><br><br><br><br><h1>NO EXISTE CERTIFICADO ADJUNTADO</h1>"); 
-        
-    }else{
-        $('#imgCertificado').html("<img src='certificate/"+img+"' height='480' width='900'>");
+
+    if (img == "undefined" || img == "") {
+        $('#imgCertificado').html("<br><br><br><br><br><br><br><br><h1>NO EXISTE CERTIFICADO ADJUNTADO</h1>");
+
+    } else {
+        $('#imgCertificado').html("<img src='certificate/" + img + "' height='480' width='900'>");
     }
-     
-    
+
+
     $("#dialogCertificado").dialog({
         resizable: false,
         modal: true,
@@ -198,10 +199,38 @@ function dialogCertificado2(img) {
             {
                 text: "Cerrar",
                 click: function () {
-                    
+
                     $(this).dialog("close");
                 }
             }
         ]
     });
+}
+
+function deletePersona(idPer) {
+    debugger;
+    cargando();
+    $.ajax({
+        url: 'PersonaServlet',
+        type: 'POST',
+        data: {
+            idPer: idPer,
+            accion:'delete'
+        },
+        success: function (responseText) {
+            debugger;
+            if (responseText == 'true') {
+                $("#dialogCargando").dialog("close");
+                mostrarAlerta();
+
+            } else {
+                $("#dialogCargando").dialog("close");
+                mostrarAlertaError();
+
+            }
+
+        }
+    });
+
+    //$(this).dialog("close");
 }

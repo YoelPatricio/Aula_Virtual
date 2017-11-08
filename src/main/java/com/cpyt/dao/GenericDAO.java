@@ -3,12 +3,8 @@ package com.cpyt.dao;
 
 
 
-import com.cpyt.model.Tarjeta;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
+import com.cpyt.model.Tarjeta; 
+import java.util.List; 
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -83,7 +79,7 @@ public class GenericDAO {
     public void delete(String tabla, String campoID,Integer id) {
 
         Session session = sessionFactory.openSession();
-        Query query = session.createSQLQuery("update "+tabla+" set is_deleted=1 where "+campoID+"=?");
+        Query query = session.createSQLQuery("update "+tabla+" set estado=1 where "+campoID+"=?");
        
         query.setParameter(0, id); 
        
@@ -121,6 +117,17 @@ public class GenericDAO {
         return results;
 
     }   
+    
+    public Integer ultimoID(String id,String entidad){
+        Session session = sessionFactory.openSession();
+        Query query = session.createQuery("select max("+id+") from "+entidad);
+        List results = query.list();
+        Integer ultimoID =  (Integer) results.get(0);
+        
+        return ultimoID;
+    }
+    
+    
     
     public static void main(String[] args) {
         
@@ -196,7 +203,7 @@ public class GenericDAO {
         
         GenericDAO g = new GenericDAO();
         
-        Tarjeta tar = new Tarjeta();
+        /*Tarjeta tar = new Tarjeta();
         tar.setNumTar("13546346356");
         tar.setFecVen("09/22");
         tar.setNumCvv("256");
@@ -211,5 +218,10 @@ public class GenericDAO {
         for (int i = 0; i<tj.size(); i++) {
             System.out.println(tj.get(i).getNumTar());
         }
+        
+        Integer a = g.ultimoID("idPer", "Persona");
+        System.out.println(a);*/
+       
+        
     }
 }

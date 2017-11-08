@@ -8,6 +8,10 @@
         <servlet-name>FileUpload</servlet-name>
         <servlet-class>com.cpyt.controller.FileUpload</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GenericServlet</servlet-name>
+        <servlet-class>com.cpyt.controller.GenericServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PersonaServlet</servlet-name>
         <url-pattern>/PersonaServlet</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>FileUpload</servlet-name>
         <url-pattern>/FileUpload</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GenericServlet</servlet-name>
+        <url-pattern>/GenericServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

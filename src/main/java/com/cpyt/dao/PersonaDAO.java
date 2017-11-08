@@ -12,6 +12,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 /**
@@ -28,12 +29,39 @@ public class PersonaDAO {
 	}
         
         
-    public List<Persona> listPersona() {
+    public static List<Object> listDocente() {
 
         Session session = sessionFactory.openSession();
-        Query query = session.createQuery("from Persona");
+        Query query = session.createSQLQuery("select * from persona where id_per in (select p.id_per from persona p inner join usuario u on p.id_per=u.id_per where u.id_rol=2) and estado=0");
         
         List results = query.list();
         return results;
+    }
+    
+    public void deletePersona(String idPer) {
+
+        Session session = sessionFactory.openSession();
+        Query query = session.createSQLQuery("update persona set estado=1 where id_per="+idPer);
+        //query.setParameter(0, idPer);
+        
+        query.executeUpdate();
+        Transaction tx = session.beginTransaction();
+        tx.commit();
+        session.close();
+    }
+    
+    
+    
+    public static void main(String[] args) {
+        
+        List<Object> per = listDocente();
+        
+        for (int i = 0; i < per.size(); i++) {
+            Object  a [] = (Object[]) per.get(i);      
+                
+            System.out.println(a[0]);           
+            
+        }
+        int a = 23;
     }
 }

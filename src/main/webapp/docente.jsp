@@ -12,7 +12,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     PersonaDAO g = new PersonaDAO();
-    List<Persona> per = g.listPersona();
+    List<Object> doc = g.listDocente();
 
 %>
 <!DOCTYPE html>
@@ -147,7 +147,7 @@
         <div id="dialogMensaje" title="Mensaje" style="display: none;">
             <br>
             <div align="center">
-                <h3>Grabado Correctamente!</h3> 
+                <h3>Proceso Ejecutado Correctamente!</h3> 
             </div>
 
 
@@ -244,7 +244,7 @@
                 </div>
                 <div class="col-md-2">
 
-                    <button id="interesAddButton" class="btn btn-success"  onClick="dialogoPersona('add', null, null, null, null, null, null, null, null, null, null)"><span class="glyphicons glyphicon-plus"></span> Agregar</button> 
+                    <button id="interesAddButton" class="btn btn-success"  onClick="dialogoPersona('add','docente', null, null, null, null, null, null, null, null, null, null)"><span class="glyphicons glyphicon-plus"></span> Agregar</button> 
 
                 </div>
             </div>
@@ -276,26 +276,26 @@
                                 </thead>
 
                                 <tbody>
-                                    <%                                            for (int i = 0; i < per.size(); i++) {
-
-
+                                    <%   
+                                        for (int i = 0; i < doc.size(); i++) {
+                                            Object  a [] = (Object[]) doc.get(i);    
                                     %>
                                     <tr>
 
-                                        <td><%= per.get(i).getDni()%></td>
-                                        <td><%= per.get(i).getApaterno().toString() + " " + per.get(i).getAmaterno().toString() + "," + per.get(i).getNombres().toString()%></td>
-                                        <td><%= per.get(i).getCorreo()%></td>
-                                        <td><%= per.get(i).getCelular()%></td>
-                                        <td><%= per.get(i).getDireccion()%></td>
-                                        <td><%= per.get(i).getCip()%></td>
+                                        <td><%= a[1]%></td>
+                                        <td><%= a[2].toString() + " " + a[3].toString() + "," + a[4].toString()%></td>
+                                        <td><%= a[5]%></td>
+                                        <td><%= a[6]%></td>
+                                        <td><%= a[7]%></td>
+                                        <td><%= a[8]%></td>
 
                                         <td align="center">
-                                            <button class="btn btn-warning" onclick="dialogCertificado2('<%= per.get(i).getImgCol()%>')"><span class="glyphicon glyphicon-certificate"></span></button>
+                                            <button class="btn btn-warning" onclick="dialogCertificado2('<%= a[9]%>')"><span class="glyphicon glyphicon-certificate"></span></button>
 
                                         </td>
                                         <td align="center">
-                                            <button class="btn btn-info" onclick="dialogoPersona('edit', '<%= per.get(i).getIdPer()%>', '<%= per.get(i).getDni()%>', '<%=per.get(i).getNombres()%>', '<%=per.get(i).getApaterno()%>', '<%=per.get(i).getAmaterno()%>', '<%= per.get(i).getCorreo()%>', '<%= per.get(i).getCelular()%>', '<%= per.get(i).getDireccion()%>', '<%= per.get(i).getCip()%>', '<%= per.get(i).getImgCol()%>')"><span class="glyphicon glyphicon-edit"></span></button>
-                                            <button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
+                                            <button class="btn btn-info" onclick="dialogoPersona('edit','docente', '<%= a[0]%>', '<%= a[1]%>', '<%=a[4]%>', '<%=a[2]%>', '<%=a[3]%>', '<%= a[5]%>', '<%= a[6]%>', '<%= a[7]%>', '<%= a[8]%>', '<%= a[9]%>')"><span class="glyphicon glyphicon-edit"></span></button>
+                                            <button class="btn btn-danger" onclick="deletePersona('<%= a[0]%>')"><span class="glyphicon glyphicon-remove"></span></button>
 
                                         </td>
                                     </tr>
