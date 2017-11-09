@@ -57,6 +57,7 @@ function mostrarAlertaError() {
 }
 
 function limpiarDialogo() {
+    $('#txtIdPer').val('');
     $('#txtDNI').val('');
     $('#txtNombres').val('');
     $('#txtPaterno').val('');
@@ -95,7 +96,11 @@ function dialogoPersona(accion, tipo, idPer, dni, nombres, paterno, materno, cor
             {
                 text: "Grabar",
                 click: function () {
-                    cargando();
+                    if(accion == 'add'){
+                        cargando();
+                    }
+                    
+                    debugger;
                     var inputFileImage = document.getElementById("imgDocente");
                     var file = inputFileImage.files[0];
                     var data = new FormData();
@@ -112,31 +117,16 @@ function dialogoPersona(accion, tipo, idPer, dni, nombres, paterno, materno, cor
                     data.append('txtCIP', $('#txtCIP').val());
                     data.append('accion', accion);
                     data.append('tipo', tipo);
-
-
-                    $.ajax({
-                        url: 'PersonaServlet',
-                        type: 'POST',
-                        contentType: false,
-                        data: data,
-                        processData: false,
-                        cache: false,
-                        success: function (responseText) {
-                            debugger;
-                            if (responseText == 'true') {
-                                $("#dialogCargando").dialog("close");
-                                mostrarAlerta();
-                                limpiarDialogo();
-                            } else {
-                                $("#dialogCargando").dialog("close");
-                                mostrarAlertaError();
-                                limpiarDialogo();
-                            }
-
-                        }
-                    });
-
+                    
                     $(this).dialog("close");
+                    if(accion == 'add'){
+                        addAjax(data);
+                    }else{
+                        editAjax(data);
+                    }
+                    
+                    
+                    
                 }
 
 
@@ -233,4 +223,56 @@ function deletePersona(idPer) {
     });
 
     //$(this).dialog("close");
+}
+
+function addAjax(data){
+    
+                    $.ajax({
+                        url: 'PersonaServlet',
+                        type: 'POST',
+                        contentType: false,
+                        data: data,
+                        processData: false,
+                        cache: false,
+                        success: function (responseText) {
+                            debugger;
+                            $("#dialogCargando").dialog("close");
+                            if (responseText == 'true') {
+                                
+                                mostrarAlerta();
+                                limpiarDialogo();
+                            } else {
+                                
+                                mostrarAlertaError();
+                                limpiarDialogo();
+                            }
+
+                        }
+                    });
+                   
+
+}
+function editAjax(data){
+    $.ajax({
+                        url: 'PersonaServlet',
+                        type: 'POST',
+                        contentType: false,
+                        data: data,
+                        processData: false,
+                        cache: false,
+                        success: function (responseText) {
+                            
+                            
+                            if (responseText == 'true') {
+                                
+                                mostrarAlerta();
+                                limpiarDialogo();
+                            } else {
+                                
+                                mostrarAlertaError();
+                                limpiarDialogo();
+                            }
+
+                        }
+                    });
 }
