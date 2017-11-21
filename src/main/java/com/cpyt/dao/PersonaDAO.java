@@ -38,6 +38,15 @@ public class PersonaDAO {
         return results;
     }
     
+    public static List<Object> listAdm() {
+
+        Session session = sessionFactory.openSession();
+        Query query = session.createSQLQuery("select * from persona where id_per in (select p.id_per from persona p inner join usuario u on p.id_per=u.id_per where u.id_rol=1) and estado=0");
+        
+        List results = query.list();
+        return results;
+    }
+    
     public void deletePersona(String idPer) {
 
         Session session = sessionFactory.openSession();

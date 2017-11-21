@@ -5,6 +5,10 @@
         <servlet-class>com.cpyt.controller.PersonaServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>AdministradorServlet</servlet-name>
+        <servlet-class>com.cpyt.controller.AdministradorServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>FileUpload</servlet-name>
         <servlet-class>com.cpyt.controller.FileUpload</servlet-class>
     </servlet>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>PersonaServlet</servlet-name>
         <url-pattern>/PersonaServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdministradorServlet</servlet-name>
+        <url-pattern>/AdministradorServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>FileUpload</servlet-name>

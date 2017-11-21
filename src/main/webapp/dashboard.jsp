@@ -75,24 +75,19 @@
                     <li class="active">
                         <a href="dashboard.jsp"><i class="fa fa-dashboard"></i><span>Inicio</span></a>
                     </li>
-                    <li class="sub-menu">
-                        <a href="javascript:void(0);"><i class="fa fa-cogs"></i><span>Docentes</span><i class="arrow fa fa-angle-right pull-right"></i></a>
-                        <ul>
-                            <li id="docente">
-                                <a href="#"><!--<i class="fa fa-cogs"></i>--><span>Activos</span></a>
-                            </li>
-                        </ul>
-                        
+                    <li id="admin">
+                        <a href="#"><i class="fa fa-cogs"></i><span>Administradores</span></a>
                     </li>
-                    <li>
+                    <li id="docente">
+                        <a href="#"><i class="fa fa-cogs"></i><span>Docentes</span></a>
+                    </li>
+                    <li id="estudiante">
                         <a href="#"><i class="fa fa-cogs"></i><span>Estudiantes</span></a>
                     </li>
-                    <li>
+                    <li id="cursos">
                         <a href="#"><i class="fa fa-cogs"></i><span>Cursos</span></a>
                     </li>
-                    <li id="bienvenida">
-                        <a href="#" ><i class="fa fa-cogs"></i><span>Bienvenida</span></a>
-                    </li>
+                    
                     <li class="sub-menu">
                         <a href="javascript:void(0);"><i class="fa fa fa-tasks"></i><span>Forms</span><i class="arrow fa fa-angle-right pull-right"></i></a>
                         <ul>
@@ -205,6 +200,11 @@
             $("#docente").click(function(){
                 $("#contenidoDerecha").load("docente.jsp");
                 $("#contenidoDerecha").load("docente.jsp");
+            });
+            
+            $("#admin").click(function(){
+                $("#contenidoDerecha").load("administrador.jsp");
+                $("#contenidoDerecha").load("administrador.jsp");
             });
             
             app.timer();

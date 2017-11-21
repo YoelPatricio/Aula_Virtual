@@ -33,7 +33,7 @@
             <column name="CIP" length="50" />
         </property>
         <property name="imgCol" type="string">
-            <column name="img_col" length="100" not-null="true" />
+            <column name="img_col" length="100"/>
         </property>
         <property name="estado" type="int">
             <column name="estado" not-null="true" />

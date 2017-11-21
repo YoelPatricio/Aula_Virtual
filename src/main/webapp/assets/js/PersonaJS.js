@@ -240,11 +240,11 @@ function addAjax(data){
                             if (responseText == 'true') {
                                 
                                 mostrarAlerta();
-                                limpiarDialogo();
+                                
                             } else {
                                 
                                 mostrarAlertaError();
-                                limpiarDialogo();
+                                
                             }
 
                         }
@@ -266,11 +266,11 @@ function editAjax(data){
                             if (responseText == 'true') {
                                 
                                 mostrarAlerta();
-                                limpiarDialogo();
+                                
                             } else {
                                 
                                 mostrarAlertaError();
-                                limpiarDialogo();
+                                
                             }
 
                         }
