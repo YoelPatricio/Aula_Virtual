@@ -1,26 +1,28 @@
 <%-- 
-    Document   : docente
-    Created on : 31/10/2017, 01:41:26 AM
+    Document   : adm
+    Created on : 22/11/2017, 12:49:07 AM
     Author     : Yoel
 --%>
 
-<%@page import="com.cpyt.model.Persona"%>
-<%@page import="com.cpyt.dao.PersonaDAO"%>
-
 <%@page import="java.util.List"%>
-
+<%@page import="com.cpyt.dao.PersonaDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%
-    PersonaDAO g = new PersonaDAO();
-    List<Object> doc = g.listAdm();
-
-%>
 <!DOCTYPE html>
-<html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <%
+        PersonaDAO g = new PersonaDAO();
+        List<Object> doc = g.listAdm();
+
+    %>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <!-- DataTables-->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>SpaceLab</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <!-- Favicon -->
         <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
         <!-- Bootstrap core CSS -->
@@ -33,22 +35,20 @@
         <link rel="stylesheet" href="assets/css/main.css">
         <!-- DataTables-->
         <link rel="stylesheet" href="assets/plugins/dataTables/css/dataTables.css">
-        <!-- Fonts 
+        <!-- Fonts -->
         <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
         <!-- Feature detection -->
         <script src="assets/js/modernizr-2.6.2.min.js"></script>
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
-        <script src="assets/js/html5shiv.js"></script>        
+        <script src="assets/js/html5shiv.js"></script>
+        <script src="assets/js/respond.min.js"></script>
         <![endif]-->
-        <script src="assets/js/AdmJS.js"></script>
-        
 
+        <script src="assets/js/AdmJS.js"></script>
     </head>
     <body>
-
-
         <!-- The Modal -->
         <div id="myModal" class="modal">
             <span class="close">&times;</span>
@@ -76,7 +76,7 @@
 
         </div>
 
-        
+
 
         <div id="dialogCargando" title="Cargando..." style="display: none;">
             <br>
@@ -124,105 +124,273 @@
                     <label for="txtDireccion">Dirección:</label>
                     <input type="text" id="txtDireccion" placeholder="Dirección" class="form-control"/>
                 </div>
-                
+
             </div>
             <br>
-            
+
 
 
 
         </div>
 
-        <div id="contenidoIncrustado">
-            <div class="row">
-                <br>
-                <div class="col-md-10">
-
-                    <h2 class="h1">Administrador</h2>
-
+        <section id="container">
+            <header id="header">
+                <!--logo start-->
+                <div class="brand">
+                    <a href="dashboard.jsp" class="logo"><span>Aula</span>Virtual</a>
                 </div>
-                <div class="col-md-2">
-
-                    <button id="interesAddButton" class="btn btn-success"  onClick="dialogoPersona('add','adm', null, null, null, null, null, null, null, null)"><span class="glyphicons glyphicon-plus"></span> Agregar</button> 
-
+                <!--logo end-->
+                <div class="toggle-navigation toggle-left">
+                    <button type="button" class="btn btn-default" id="toggle-left" data-toggle="tooltip" data-placement="right" title="Toggle Navigation">
+                        <i class="fa fa-bars"></i>
+                    </button>
                 </div>
-            </div>
+                <div class="user-nav">
+                    <ul>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Listado de Adm</h3>
-                            <div class="actions pull-right">
-                                <i class="fa fa-chevron-down"></i>
-                                <!--<i class="fa fa-times"></i>-->
-                            </div>
+                        <!--<li class="profile-photo">
+                            <img src="assets/img/avatar.png" alt="" class="img-circle">
+                        </li>-->
+                        <li class="dropdown settings">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                Mike Adams <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu animated fadeInDown">
+                                <li>
+                                    <a href="#"><i class="fa fa-user"></i> Mi Perfil</a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-power-off"></i> Salir</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </div>
+            </header>
+            <!--sidebar start-->
+            <aside class="sidebar">
+                <div id="leftside-navigation" class="nano">
+                    <ul class="nano-content">
+                        <li >
+                            <a href="dashboard.jsp"><i class="fa fa-dashboard"></i><span>Inicio</span></a>
+                        </li>
+                        <li id="admin" class="active">
+                            <a href="administrador.jsp"><i class="fa fa-cogs"></i><span>Administradores</span></a>
+                        </li>
+                        <li id="docente">
+                            <a href="docente.jsp"><i class="fa fa-cogs"></i><span>Docentes</span></a>
+                        </li>
+                        <li id="estudiante">
+                            <a href="estudiante.jsp"><i class="fa fa-cogs"></i><span>Estudiantes</span></a>
+                        </li>
+                        <li id="cursos">
+                            <a href="curso.jsp"><i class="fa fa-cogs"></i><span>Cursos</span></a>
+                        </li>
+
+                        <li class="sub-menu">
+                            <a href="javascript:void(0);"><i class="fa fa fa-tasks"></i><span>Forms</span><i class="arrow fa fa-angle-right pull-right"></i></a>
+                            <ul>
+                                <li><a href="forms-components.html">Components</a>
+                                </li>
+                                <li><a href="forms-validation.html">Validation</a>
+                                </li>
+                                <li><a href="forms-mask.html">Mask</a>
+                                </li>
+                                <li><a href="forms-wizard.html">Wizard</a>
+                                </li>
+                                <li><a href="forms-multiple-file.html">Multiple File Upload</a>
+                                </li>
+                                <li><a href="forms-wysiwyg.html">WYSIWYG Editor</a>
+                                </li>
+                            </ul>
+                        </li>
+
+
+                    </ul>
+                </div>
+
+            </aside>
+            <!--sidebar end-->
+            <!--main content start-->
+            <section class="main-content-wrapper">
+                <section id="main-content">
+                    <div class="row">
+                        <br>
+                        <div class="col-md-10">
+
+                            <h2 class="h1">Administrador</h2>
+
                         </div>
-                        <div class="panel-body">
-                            <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                                <thead>
-                                    <tr>
-                                        <th>DNI</th>
-                                        <th>Apellidos y Nombres</th>                                        
-                                        <th>Correo</th>
-                                        <th>Celular</th>
-                                        <th>Dirección</th>                                        
-                                       
+                        <div class="col-md-2">
 
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    <%   
-                                        for (int i = 0; i < doc.size(); i++) {
-                                            Object  a [] = (Object[]) doc.get(i);    
-                                    %>
-                                    <tr>
-
-                                        <td><%= a[1]%></td>
-                                        <td><%= a[2].toString() + " " + a[3].toString() + "," + a[4].toString()%></td>
-                                        <td><%= a[5]%></td>
-                                        <td><%= a[6]%></td>
-                                        <td><%= a[7]%></td>
-                                        
-                                        <td align="center">
-                                            <button class="btn btn-info" onclick="dialogoPersonaEdit('edit','adm', '<%= a[0]%>', '<%= a[1]%>', '<%=a[4]%>', '<%=a[2]%>', '<%=a[3]%>', '<%= a[5]%>', '<%= a[6]%>', '<%= a[7]%>')"><span class="glyphicon glyphicon-edit"></span></button>
-                                            <button class="btn btn-danger" onclick="deletePersona('<%= a[0]%>')"><span class="glyphicon glyphicon-remove"></span></button>
-
-                                        </td>
-                                    </tr>
-                                    <%
-
-                                        }
-                                    %>
-
-
-                                </tbody>
-                            </table>
+                            <button id="interesAddButton" class="btn btn-success"  onClick="dialogoPersona('add', 'adm', null, null, null, null, null, null, null, null)"><span class="glyphicons glyphicon-plus"></span> Agregar</button> 
 
                         </div>
                     </div>
+
+                    <div class="row" id="dataTable">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Listado de Adm</h3>
+                                    <div class="actions pull-right">
+                                        <i class="fa fa-chevron-down"></i>
+                                        <!--<i class="fa fa-times"></i>-->
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>DNI</th>
+                                                <th>Apellidos y Nombres</th>                                        
+                                                <th>Correo</th>
+                                                <th>Celular</th>
+                                                <th>Dirección</th>                                        
+
+
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <%                                        for (int i = 0; i < doc.size(); i++) {
+                                                    Object a[] = (Object[]) doc.get(i);
+                                            %>
+                                            <tr>
+
+                                                <td><%= a[1]%></td>
+                                                <td><%= a[2].toString() + " " + a[3].toString() + "," + a[4].toString()%></td>
+                                                <td><%= a[5]%></td>
+                                                <td><%= a[6]%></td>
+                                                <td><%= a[7]%></td>
+
+                                                <td align="center">
+                                                    <button class="btn btn-info" onclick="dialogoPersonaEdit('edit', 'adm', '<%= a[0]%>', '<%= a[1]%>', '<%=a[4]%>', '<%=a[2]%>', '<%=a[3]%>', '<%= a[5]%>', '<%= a[6]%>', '<%= a[7]%>')"><span class="glyphicon glyphicon-edit"></span></button>
+                                                    <button class="btn btn-danger" onclick="deletePersona('<%= a[0]%>')"><span class="glyphicon glyphicon-remove"></span></button>
+
+                                                </td>
+                                            </tr>
+                                            <%
+
+                                                }
+                                            %>
+
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+            </section>
+            <!--main content end-->
+            <!--sidebar right start-->
+            <aside class="sidebarRight">
+                <div id="rightside-navigation">
+                    <div class="sidebar-heading"><i class="fa fa-user"></i> Contacts</div>
+                    <div class="sidebar-title">online</div>
+                    <div class="list-contacts">
+                        <a href="javascript:void(0)" class="list-item">
+                            <div class="list-item-image">
+                                <img src="assets/img/avatar.gif" class="img-circle">
+                            </div>
+                            <div class="list-item-content">
+                                <h4>James Bagian</h4>
+                                <p>Los Angeles, CA</p>
+                            </div>
+                            <div class="item-status item-status-online"></div>
+                        </a>
+                        <a href="javascript:void(0)" class="list-item">
+                            <div class="list-item-image">
+                                <img src="assets/img/avatar1.gif" class="img-circle">
+                            </div>
+                            <div class="list-item-content">
+                                <h4>Jeffrey Ashby</h4>
+                                <p>New York, NY</p>
+                            </div>
+                            <div class="item-status item-status-online"></div>
+                        </a>
+                        <a href="javascript:void(0)" class="list-item">
+                            <div class="list-item-image">
+                                <img src="assets/img/avatar2.gif" class="img-circle">
+                            </div>
+                            <div class="list-item-content">
+                                <h4>John Douey</h4>
+                                <p>Dallas, TX</p>
+                            </div>
+                            <div class="item-status item-status-online"></div>
+                        </a>
+                        <a href="javascript:void(0)" class="list-item">
+                            <div class="list-item-image">
+                                <img src="assets/img/avatar3.gif" class="img-circle">
+                            </div>
+                            <div class="list-item-content">
+                                <h4>Ellen Baker</h4>
+                                <p>London</p>
+                            </div>
+                            <div class="item-status item-status-away"></div>
+                        </a>
+                    </div>
+
+                    <div class="sidebar-title">offline</div>
+                    <div class="list-contacts">
+                        <a href="javascript:void(0)" class="list-item">
+                            <div class="list-item-image">
+                                <img src="assets/img/avatar4.gif" class="img-circle">
+                            </div>
+                            <div class="list-item-content">
+                                <h4>Ivan Bella</h4>
+                                <p>Tokyo, Japan</p>
+                            </div>
+                            <div class="item-status"></div>
+                        </a>
+                        <a href="javascript:void(0)" class="list-item">
+                            <div class="list-item-image">
+                                <img src="assets/img/avatar5.gif" class="img-circle">
+                            </div>
+                            <div class="list-item-content">
+                                <h4>Gerald Carr</h4>
+                                <p>Seattle, WA</p>
+                            </div>
+                            <div class="item-status"></div>
+                        </a>
+                        <a href="javascript:void(0)" class="list-item">
+                            <div class="list-item-image">
+                                <img src="assets/img/avatar6.gif" class="img-circle">
+                            </div>
+                            <div class="list-item-content">
+                                <h4>Viktor Gorbatko</h4>
+                                <p>Palo Alto, CA</p>
+                            </div>
+                            <div class="item-status"></div>
+                        </a>
+                    </div>
                 </div>
-            </div>
-        </div>                                
-
-
+            </aside>
+            <!--sidebar right end-->
+        </section>
         <!--Global JS-->
         <script src="assets/js/jquery-1.10.2.min.js"></script>
         <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
         <script src="assets/plugins/waypoints/waypoints.min.js"></script>
+        <script src="assets/plugins/nanoScroller/jquery.nanoscroller.min.js"></script>
         <script src="assets/js/application.js"></script>
-
+        <!--Page Leve JS -->
         <script src="assets/plugins/dataTables/js/jquery.dataTables.js"></script>
         <script src="assets/plugins/dataTables/js/dataTables.bootstrap.js"></script>
 
         <script src="assets/js/jquery-ui.min.js"></script>
         <link rel="stylesheet" href="assets/css/jquery-ui.css">
-
         <script>
-
-
+                                                        $(document).ready(function () {
+                                                            $('#example').dataTable();
+                                                        });
         </script>
+
     </body>
 </html>

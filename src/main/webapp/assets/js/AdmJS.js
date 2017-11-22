@@ -29,7 +29,8 @@ function mostrarAlerta() {
             {
                 text: "Ok",
                 click: function () {
-                    $("#contenidoDerecha").load("administrador.jsp");
+                    //$("#contenidoDerecha").load("administrador.jsp");
+                    window.location.reload();
                     $(this).dialog("close");
                 }
             }
@@ -48,7 +49,7 @@ function mostrarAlertaError() {
             {
                 text: "Cerrar",
                 click: function () {
-                    $("#contenidoDerecha").load("administrador.jsp");
+                    window.location.reload();
                     $(this).dialog("close");
                 }
             }

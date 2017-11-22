@@ -12,10 +12,8 @@ import com.cpyt.model.Persona;
 import com.cpyt.model.Rol;
 import com.cpyt.model.Usuario;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -30,7 +28,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
  *
  * @author Yoel
  */
-public class PersonaServlet extends HttpServlet {
+public class EstudianteServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -61,9 +59,7 @@ public class PersonaServlet extends HttpServlet {
 
             
 
-            String url = "C:\\AulaVirtual_Files\\certificate"; 
-            String url2 = System.getProperty("user.dir")+"\\src\\main\\webapp\\certificate";
-            
+            String url = "C:\\AulaVirtual_Files\\certificate";
             DiskFileItemFactory factory = new DiskFileItemFactory();
             factory.setRepository(new File(url));
 
@@ -77,9 +73,7 @@ public class PersonaServlet extends HttpServlet {
 
                     if (!items.isFormField()) {
                         File file = new File(url, items.getName());
-                        File file2 = new File(url2, items.getName());
                         items.write(file);
-                        items.write(file2);
                         campos.put(items.getFieldName(), items.getName());
                     } else {
                         campos.put(items.getFieldName(), items.getString());
@@ -99,8 +93,7 @@ public class PersonaServlet extends HttpServlet {
                 p.setCorreo(campos.get("txtCorreo").toString());
                 p.setCelular(campos.get("txtCelular").toString());
                 p.setDireccion(campos.get("txtDireccion").toString());
-                p.setCip(campos.get("txtCIP").toString());
-                p.setImgCol(campos.get("imgDocente").toString());
+                
 
                 if (accion.equals("add")) {
                     g.insert(p);
@@ -114,10 +107,10 @@ public class PersonaServlet extends HttpServlet {
                 String password = campos.get("txtDNI").toString();
                 String destinatario = campos.get("txtCorreo").toString();
 
-                if (tipo.equals("docente") && accion.equals("add")) {
+                if (tipo.equals("adm") && accion.equals("add")) {
                     SendMail sm = new SendMail();
                     Rol rol = new Rol();
-                    rol.setIdRol(2);
+                    rol.setIdRol(1);
                     Persona per = new Persona();
                     per.setIdPer(g.ultimoID("idPer", "Persona"));
 
@@ -128,7 +121,10 @@ public class PersonaServlet extends HttpServlet {
                     usu.setPasUsu(password);
 
                     g.insert(usu);
-                    sm.enviarCredencialesAcceso(usuario, password, "Docente", destinatario);
+                    
+                    
+                    
+                    sm.enviarCredencialesAcceso(usuario, password, "Administrador", destinatario);
 
                 }
 

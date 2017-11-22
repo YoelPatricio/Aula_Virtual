@@ -1,7 +1,7 @@
-$(document).ready(function () {
-    $('#example').dataTable();
+//$(document).ready(function () {
+//    $('#example').dataTable();
 
-});
+//});
 
 
 
@@ -29,7 +29,7 @@ function mostrarAlerta() {
             {
                 text: "Ok",
                 click: function () {
-                    $("#contenidoDerecha").load("docente.jsp");
+                    window.location.reload();
                     $(this).dialog("close");
                 }
             }
@@ -48,7 +48,7 @@ function mostrarAlertaError() {
             {
                 text: "Cerrar",
                 click: function () {
-                    $("#contenidoDerecha").load("docente.jsp");
+                    window.location.reload();
                     $(this).dialog("close");
                 }
             }
@@ -171,7 +171,7 @@ function dialogCertificado(img) {
 }
 
 function dialogCertificado2(img) {
-
+debugger;
     if (img == "undefined" || img == "") {
         $('#imgCertificado').html("<br><br><br><br><br><br><br><br><h1>NO EXISTE CERTIFICADO ADJUNTADO</h1>");
 

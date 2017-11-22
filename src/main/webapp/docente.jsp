@@ -1,26 +1,28 @@
 <%-- 
-    Document   : docente
-    Created on : 31/10/2017, 01:41:26 AM
+    Document   : adm
+    Created on : 22/11/2017, 12:49:07 AM
     Author     : Yoel
 --%>
 
-<%@page import="com.cpyt.model.Persona"%>
-<%@page import="com.cpyt.dao.PersonaDAO"%>
-
 <%@page import="java.util.List"%>
-
+<%@page import="com.cpyt.dao.PersonaDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%
-    PersonaDAO g = new PersonaDAO();
-    List<Object> doc = g.listDocente();
-
-%>
 <!DOCTYPE html>
-<html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <%
+        PersonaDAO g = new PersonaDAO();
+        List<Object> doc = g.listDocente();
+
+    %>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <!-- DataTables-->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>SpaceLab</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <!-- Favicon -->
         <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
         <!-- Bootstrap core CSS -->
@@ -33,109 +35,20 @@
         <link rel="stylesheet" href="assets/css/main.css">
         <!-- DataTables-->
         <link rel="stylesheet" href="assets/plugins/dataTables/css/dataTables.css">
-        <!-- Fonts 
+        <!-- Fonts -->
         <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
         <!-- Feature detection -->
         <script src="assets/js/modernizr-2.6.2.min.js"></script>
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
-        <script src="assets/js/html5shiv.js"></script>        
+        <script src="assets/js/html5shiv.js"></script>
+        <script src="assets/js/respond.min.js"></script>
         <![endif]-->
+
         <script src="assets/js/PersonaJS.js"></script>
-        <style>
-            #myImg {
-                border-radius: 5px;
-                cursor: pointer;
-                transition: 0.3s;
-            }
-
-            #myImg:hover {opacity: 0.7;}
-
-            /* The Modal (background) */
-            .modal {
-                display: none; /* Hidden by default */
-                position: fixed; /* Stay in place */
-                z-index: 1; /* Sit on top */
-                padding-top: 100px; /* Location of the box */
-                left: 0;
-                top: 0;
-                width: 100%; /* Full width */
-                height: 100%; /* Full height */
-                overflow: auto; /* Enable scroll if needed */
-                background-color: rgb(0,0,0); /* Fallback color */
-                background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
-            }
-
-            /* Modal Content (image) */
-            .modal-content {
-                margin: auto;
-                display: block;
-                width: 80%;
-                max-width: 700px;
-            }
-
-            /* Caption of Modal Image */
-            #caption {
-                margin: auto;
-                display: block;
-                width: 80%;
-                max-width: 700px;
-                text-align: center;
-                color: #ccc;
-                padding: 10px 0;
-                height: 150px;
-            }
-
-            /* Add Animation */
-            .modal-content, #caption {    
-                -webkit-animation-name: zoom;
-                -webkit-animation-duration: 0.6s;
-                animation-name: zoom;
-                animation-duration: 0.6s;
-            }
-
-            @-webkit-keyframes zoom {
-                from {-webkit-transform:scale(0)} 
-                to {-webkit-transform:scale(1)}
-            }
-
-            @keyframes zoom {
-                from {transform:scale(0)} 
-                to {transform:scale(1)}
-            }
-
-            /* The Close Button */
-            .close {
-                position: absolute;
-                top: 15px;
-                right: 35px;
-                color: #f1f1f1;
-                font-size: 40px;
-                font-weight: bold;
-                transition: 0.3s;
-            }
-
-            .close:hover,
-            .close:focus {
-                color: #bbb;
-                text-decoration: none;
-                cursor: pointer;
-            }
-
-            /* 100% Image Width on Smaller Screens */
-            @media only screen and (max-width: 700px){
-                .modal-content {
-                    width: 100%;
-                }
-            }
-        </style>
-
     </head>
-    <body>
-
-
-        <!-- The Modal -->
+    <body> <!-- The Modal -->
         <div id="myModal" class="modal">
             <span class="close">&times;</span>
             <img class="modal-content" id="img01">
@@ -234,8 +147,90 @@
 
         </div>
 
-        <div id="contenidoIncrustado">
-            <div class="row">
+
+        <section id="container">
+            <header id="header">
+                <!--logo start-->
+                <div class="brand">
+                    <a href="dashboard.jsp" class="logo"><span>Aula</span>Virtual</a>
+                </div>
+                <!--logo end-->
+                <div class="toggle-navigation toggle-left">
+                    <button type="button" class="btn btn-default" id="toggle-left" data-toggle="tooltip" data-placement="right" title="Toggle Navigation">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                </div>
+                <div class="user-nav">
+                    <ul>
+
+                        <!--<li class="profile-photo">
+                            <img src="assets/img/avatar.png" alt="" class="img-circle">
+                        </li>-->
+                        <li class="dropdown settings">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                Mike Adams <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu animated fadeInDown">
+                                <li>
+                                    <a href="#"><i class="fa fa-user"></i> Mi Perfil</a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-power-off"></i> Salir</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </div>
+            </header>
+            <!--sidebar start-->
+            <aside class="sidebar">
+                <div id="leftside-navigation" class="nano">
+                    <ul class="nano-content">
+                        <li >
+                            <a href="dashboard.jsp"><i class="fa fa-dashboard"></i><span>Inicio</span></a>
+                        </li>
+                        <li id="admin">
+                            <a href="administrador.jsp"><i class="fa fa-cogs"></i><span>Administradores</span></a>
+                        </li>
+                        <li id="docente" class="active">
+                            <a href="docente.jsp"><i class="fa fa-cogs"></i><span>Docentes</span></a>
+                        </li>
+                        <li id="estudiante">
+                            <a href="estudiante.jsp"><i class="fa fa-cogs"></i><span>Estudiantes</span></a>
+                        </li>
+                        <li id="cursos">
+                            <a href="curso.jsp"><i class="fa fa-cogs"></i><span>Cursos</span></a>
+                        </li>
+
+                        <li class="sub-menu">
+                            <a href="javascript:void(0);"><i class="fa fa fa-tasks"></i><span>Forms</span><i class="arrow fa fa-angle-right pull-right"></i></a>
+                            <ul>
+                                <li><a href="forms-components.html">Components</a>
+                                </li>
+                                <li><a href="forms-validation.html">Validation</a>
+                                </li>
+                                <li><a href="forms-mask.html">Mask</a>
+                                </li>
+                                <li><a href="forms-wizard.html">Wizard</a>
+                                </li>
+                                <li><a href="forms-multiple-file.html">Multiple File Upload</a>
+                                </li>
+                                <li><a href="forms-wysiwyg.html">WYSIWYG Editor</a>
+                                </li>
+                            </ul>
+                        </li>
+
+
+                    </ul>
+                </div>
+
+            </aside>
+            <!--sidebar end-->
+            <!--main content start-->
+            <section class="main-content-wrapper">
+                <section id="main-content">
+                    <div class="row">
                 <br>
                 <div class="col-md-10">
 
@@ -249,7 +244,7 @@
                 </div>
             </div>
 
-            <div class="row">
+                    <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -312,24 +307,112 @@
                     </div>
                 </div>
             </div>
-        </div>                                
 
+                </section>
+            </section>
+            <!--main content end-->
+            <!--sidebar right start-->
+            <aside class="sidebarRight">
+                <div id="rightside-navigation">
+                    <div class="sidebar-heading"><i class="fa fa-user"></i> Contacts</div>
+                    <div class="sidebar-title">online</div>
+                    <div class="list-contacts">
+                        <a href="javascript:void(0)" class="list-item">
+                            <div class="list-item-image">
+                                <img src="assets/img/avatar.gif" class="img-circle">
+                            </div>
+                            <div class="list-item-content">
+                                <h4>James Bagian</h4>
+                                <p>Los Angeles, CA</p>
+                            </div>
+                            <div class="item-status item-status-online"></div>
+                        </a>
+                        <a href="javascript:void(0)" class="list-item">
+                            <div class="list-item-image">
+                                <img src="assets/img/avatar1.gif" class="img-circle">
+                            </div>
+                            <div class="list-item-content">
+                                <h4>Jeffrey Ashby</h4>
+                                <p>New York, NY</p>
+                            </div>
+                            <div class="item-status item-status-online"></div>
+                        </a>
+                        <a href="javascript:void(0)" class="list-item">
+                            <div class="list-item-image">
+                                <img src="assets/img/avatar2.gif" class="img-circle">
+                            </div>
+                            <div class="list-item-content">
+                                <h4>John Douey</h4>
+                                <p>Dallas, TX</p>
+                            </div>
+                            <div class="item-status item-status-online"></div>
+                        </a>
+                        <a href="javascript:void(0)" class="list-item">
+                            <div class="list-item-image">
+                                <img src="assets/img/avatar3.gif" class="img-circle">
+                            </div>
+                            <div class="list-item-content">
+                                <h4>Ellen Baker</h4>
+                                <p>London</p>
+                            </div>
+                            <div class="item-status item-status-away"></div>
+                        </a>
+                    </div>
 
+                    <div class="sidebar-title">offline</div>
+                    <div class="list-contacts">
+                        <a href="javascript:void(0)" class="list-item">
+                            <div class="list-item-image">
+                                <img src="assets/img/avatar4.gif" class="img-circle">
+                            </div>
+                            <div class="list-item-content">
+                                <h4>Ivan Bella</h4>
+                                <p>Tokyo, Japan</p>
+                            </div>
+                            <div class="item-status"></div>
+                        </a>
+                        <a href="javascript:void(0)" class="list-item">
+                            <div class="list-item-image">
+                                <img src="assets/img/avatar5.gif" class="img-circle">
+                            </div>
+                            <div class="list-item-content">
+                                <h4>Gerald Carr</h4>
+                                <p>Seattle, WA</p>
+                            </div>
+                            <div class="item-status"></div>
+                        </a>
+                        <a href="javascript:void(0)" class="list-item">
+                            <div class="list-item-image">
+                                <img src="assets/img/avatar6.gif" class="img-circle">
+                            </div>
+                            <div class="list-item-content">
+                                <h4>Viktor Gorbatko</h4>
+                                <p>Palo Alto, CA</p>
+                            </div>
+                            <div class="item-status"></div>
+                        </a>
+                    </div>
+                </div>
+            </aside>
+            <!--sidebar right end-->
+        </section>
         <!--Global JS-->
         <script src="assets/js/jquery-1.10.2.min.js"></script>
         <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
         <script src="assets/plugins/waypoints/waypoints.min.js"></script>
+        <script src="assets/plugins/nanoScroller/jquery.nanoscroller.min.js"></script>
         <script src="assets/js/application.js"></script>
-
+        <!--Page Leve JS -->
         <script src="assets/plugins/dataTables/js/jquery.dataTables.js"></script>
         <script src="assets/plugins/dataTables/js/dataTables.bootstrap.js"></script>
 
         <script src="assets/js/jquery-ui.min.js"></script>
         <link rel="stylesheet" href="assets/css/jquery-ui.css">
-
         <script>
-
-
+                                                        $(document).ready(function () {
+                                                            $('#example').dataTable();
+                                                        });
         </script>
+
     </body>
 </html>
