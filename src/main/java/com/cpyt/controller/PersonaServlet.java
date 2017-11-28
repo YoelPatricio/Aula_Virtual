@@ -62,7 +62,7 @@ public class PersonaServlet extends HttpServlet {
             
 
             String url = "C:\\AulaVirtual_Files\\certificate"; 
-            String url2 = System.getProperty("user.dir")+"\\src\\main\\webapp\\certificate";
+            String url2 = "C:\\Users\\limati\\Documents\\NetBeansProjects\\Aula_Virtual\\src\\main\\webapp\\certificate";
             
             DiskFileItemFactory factory = new DiskFileItemFactory();
             factory.setRepository(new File(url));

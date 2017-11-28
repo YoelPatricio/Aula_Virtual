@@ -127,6 +127,10 @@ public class GenericDAO {
         return ultimoID;
     }
     
+    public String userDir(){
+        return System.getProperty("user.dir");
+    }
+    
     
     
     public static void main(String[] args) {
@@ -221,6 +225,7 @@ public class GenericDAO {
         
         Integer a = g.ultimoID("idPer", "Persona");
         System.out.println(a);*/
+        System.out.println(g.userDir());
        
         
     }

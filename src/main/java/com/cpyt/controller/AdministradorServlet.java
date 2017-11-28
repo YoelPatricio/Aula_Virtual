@@ -109,10 +109,19 @@ public class AdministradorServlet extends HttpServlet {
                 String password = campos.get("txtDNI").toString();
                 String destinatario = campos.get("txtCorreo").toString();
 
-                if (tipo.equals("adm") && accion.equals("add")) {
+                if (accion.equals("add")) {
+                    int codRol=0;
+                    String tipoStr="";
+                    if(tipo.equals("adm")){
+                        codRol=1;
+                        tipoStr="Administrador";
+                    }else if(tipo.equals("est")){
+                        codRol=3;
+                        tipoStr="Estudiante";
+                    }
                     SendMail sm = new SendMail();
                     Rol rol = new Rol();
-                    rol.setIdRol(1);
+                    rol.setIdRol(codRol);
                     Persona per = new Persona();
                     per.setIdPer(g.ultimoID("idPer", "Persona"));
 
@@ -126,7 +135,7 @@ public class AdministradorServlet extends HttpServlet {
                     
                     
                     
-                    sm.enviarCredencialesAcceso(usuario, password, "Administrador", destinatario);
+                    sm.enviarCredencialesAcceso(usuario, password, tipoStr, destinatario);
 
                 }
 
