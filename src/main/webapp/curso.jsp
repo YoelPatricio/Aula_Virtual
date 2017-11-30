@@ -4,6 +4,7 @@
     Author     : Yoel
 --%>
 
+<%@page import="com.cpyt.dao.CursoDAO"%>
 <%@page import="java.util.List"%>
 <%@page import="com.cpyt.dao.PersonaDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -13,8 +14,8 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <%
-        PersonaDAO g = new PersonaDAO();
-        List<Object> doc = g.listDocente();
+        CursoDAO g = new CursoDAO();
+        List<Object> doc = g.listCurso();
 
     %>
     <head>
@@ -46,9 +47,16 @@
         <script src="assets/js/respond.min.js"></script>
         <![endif]-->
 
-        <script src="assets/js/PersonaJS.js"></script>
+        <script src="assets/js/AdmJS.js"></script>
+        <style>
+            .dialogCargando .ui-widget-header {
+                border: none;
+                background: transparent;
+            }
+        </style>
     </head>
-    <body> <!-- The Modal -->
+    <body>
+        <!-- The Modal -->
         <div id="myModal" class="modal">
             <span class="close">&times;</span>
             <img class="modal-content" id="img01">
@@ -75,20 +83,15 @@
 
         </div>
 
-        <div id="dialogCertificado" title="Certificado" style="display: none;">
 
-            <div id="imgCertificado" align="center">                
-
-            </div>
-
-        </div>
 
         <div id="dialogCargando" title="Cargando..." style="display: none;">
+            <div align="center">
             <br>
             <img id="gif" src="assets/img/loading.gif" width="128" height="128" alt="loading"/>
-
+            </div>
         </div>
-        <div id="dialog" title="Datos del Docente" style="display: none;">
+        <div id="dialog" title="Datos del Curso" style="display: none;">
             <div class="row">
                 <br>
                 <div class="col-md-6">
@@ -129,24 +132,14 @@
                     <label for="txtDireccion">Dirección:</label>
                     <input type="text" id="txtDireccion" placeholder="Dirección" class="form-control"/>
                 </div>
-                <div class="col-md-6">
-                    <label for="txtCIP">CIP:</label>
-                    <input type="text" id="txtCIP"  placeholder="CIP" class="form-control"/>
-                </div>
-            </div>
-            <br>
-            <div class="row">
-                <div class="col-md-12">
-                    <label for="imgDocente">Certificado de Colegiatura:</label>
-                    <input type="file" id="imgDocente" class="form-control"/>
-                </div>
 
             </div>
+            <br>
+
 
 
 
         </div>
-
 
         <section id="container">
             <header id="header">
@@ -190,17 +183,17 @@
                         <li >
                             <a href="dashboard.jsp"><i class="fa fa-dashboard"></i><span>Inicio</span></a>
                         </li>
-                        <li id="admin">
+                        <li id="admin" >
                             <a href="administrador.jsp"><i class="fa fa-cogs"></i><span>Administradores</span></a>
                         </li>
-                        <li id="docente" class="active">
+                        <li id="docente">
                             <a href="docente.jsp"><i class="fa fa-cogs"></i><span>Docentes</span></a>
                         </li>
                         <li id="estudiante">
-                            <a href="estudiante.jsp"><i class="fa fa-cogs"></i><span>Estudiantes</span></a>
+                            <a href="estudiante.jsp" ><i class="fa fa-cogs"></i><span>Estudiantes</span></a>
                         </li>
                         <li id="cursos">
-                            <a href="curso.jsp"><i class="fa fa-cogs"></i><span>Cursos</span></a>
+                            <a href="curso.jsp" class="active"><i class="fa fa-cogs"></i><span>Cursos</span></a>
                         </li>
 
                         <li class="sub-menu">
@@ -231,82 +224,79 @@
             <section class="main-content-wrapper">
                 <section id="main-content">
                     <div class="row">
-                <br>
-                <div class="col-md-10">
+                        <br>
+                        <div class="col-md-10">
 
-                    <h2 class="h1">Docentes</h2>
+                            <h2 class="h1">Curso</h2>
 
-                </div>
-                <div class="col-md-2">
-
-                    <button id="interesAddButton" class="btn btn-success"  onClick="dialogoPersona('add','docente', null, null, null, null, null, null, null, null, null, null)"><span class="glyphicons glyphicon-plus"></span> Agregar</button> 
-
-                </div>
-            </div>
-
-                    <div class="row">
-                <div class="col-md-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Listado de Docentes</h3>
-                            <div class="actions pull-right">
-                                <i class="fa fa-chevron-down"></i>
-                                <!--<i class="fa fa-times"></i>-->
-                            </div>
                         </div>
-                        <div class="panel-body">
-                            <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                                <thead>
-                                    <tr>
-                                        <th>DNI</th>
-                                        <th>Apellidos y Nombres</th>                                        
-                                        <th>Correo</th>
-                                        <th>Celular</th>
-                                        <th>Dirección</th>                                        
-                                        <th>CIP</th>
-                                        <th>Certificado</th>
+                        <div class="col-md-2">
 
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    <%   
-                                        for (int i = 0; i < doc.size(); i++) {
-                                            Object  a [] = (Object[]) doc.get(i);    
-                                    %>
-                                    <tr>
-
-                                        <td><%= a[1]%></td>
-                                        <td><%= a[2].toString() + " " + a[3].toString() + ", " + a[4].toString()%></td>
-                                        <td><%= a[5]%></td>
-                                        <td><%= a[6]%></td>
-                                        <td><%= a[7]%></td>
-                                        <td><%= a[8]%></td>
-
-                                        <td align="center">
-                                            <button class="btn btn-warning" onclick="dialogCertificado2('<%= a[9]%>')"><span class="glyphicon glyphicon-certificate"></span></button>
-
-                                        </td>
-                                        <td align="center">
-                                            <button class="btn btn-info" onclick="dialogoPersona('edit','docente', '<%= a[0]%>', '<%= a[1]%>', '<%=a[4]%>', '<%=a[2]%>', '<%=a[3]%>', '<%= a[5]%>', '<%= a[6]%>', '<%= a[7]%>', '<%= a[8]%>', '<%= a[9]%>')"><span class="glyphicon glyphicon-edit"></span></button>
-                                            <button class="btn btn-danger" onclick="deletePersona('<%= a[0]%>')"><span class="glyphicon glyphicon-remove"></span></button>
-
-                                        </td>
-                                    </tr>
-                                    <%
-
-                                        }
-                                    %>
-
-
-                                </tbody>
-                            </table>
+                            <button id="interesAddButton" class="btn btn-success"  onClick="dialogoPersona('add', 'est', null, null, null, null, null, null, null, null)"><span class="glyphicons glyphicon-plus"></span> Agregar</button> 
 
                         </div>
                     </div>
-                </div>
-            </div>
+
+                    <div class="row" id="dataTable">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Listado de Cursos</h3>
+                                    <div class="actions pull-right">
+                                        <i class="fa fa-chevron-down"></i>
+                                        <!--<i class="fa fa-times"></i>-->
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>Docente</th>
+                                                <th>Nombre de Curso</th>                                        
+                                                <th>Precio</th>
+                                                <th>Lecciones</th>
+                                                <th>Trabajo Final</th>                                        
+
+
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <%                                        for (int i = 0; i < doc.size(); i++) {
+                                                    Object a[] = (Object[]) doc.get(i);
+                                            %>
+                                            <tr>
+
+                                                <td><%= a[1].toString() + " " + a[2].toString() + ", " + a[3].toString()%></td>
+                                                <td><%= a[4]%></td>
+                                                <td><%= a[6]%></td>
+                                                <td align="center">
+                                                    <a class="btn btn-info" href="dashboard.jsp?id=5"><span class="glyphicon glyphicon-th-list"></span></a>
+                                                </td>
+                                                <td align="center">                                                                                                     
+                                                    <button class="btn btn-info" onclick="dialogCertificado2('<%= a[0]%>')"><span class="glyphicon glyphicon-upload"></span></button>
+                                                </td>
+
+                                                <td align="center">
+                                                    <button class="btn btn-info" onclick="dialogoPersonaEdit('edit', 'est', '<%= a[0]%>', '<%= a[1]%>', '<%=a[4]%>', '<%=a[2]%>', '<%=a[3]%>', '<%= a[5]%>', '<%= a[6]%>', '<%= a[7]%>')"><span class="glyphicon glyphicon-edit"></span></button>
+                                                    <button class="btn btn-danger" onclick="deletePersona('<%= a[0]%>')"><span class="glyphicon glyphicon-remove"></span></button>
+
+                                                </td>
+                                            </tr>
+                                            <%
+
+                                                }
+                                            %>
+
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                 </section>
             </section>
