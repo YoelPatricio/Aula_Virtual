@@ -5,12 +5,27 @@
  */
 package com.cpyt.controller;
 
+import com.cpyt.dao.GenericDAO;
+import com.cpyt.dao.LeccionDAO;
+import com.cpyt.dao.PersonaDAO;
+import com.cpyt.dao.SendMail;
+import com.cpyt.model.Curso;
+import com.cpyt.model.Lecciones;
+import com.cpyt.model.Persona;
+import com.cpyt.model.Rol;
+import com.cpyt.model.Usuario;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 /**
  *
@@ -30,17 +45,87 @@ public class LeccionServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet LeccionServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet LeccionServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        PrintWriter out = response.getWriter();
+        String accionDel = request.getParameter("accion");
+        GenericDAO g = new GenericDAO();
+        if ("delete".equals(accionDel)) {
+            String idLec = request.getParameter("idLec");
+            LeccionDAO ld = new LeccionDAO();
+            try {
+                 ld.deleteLeccion(idLec);
+            out.print("true");
+            } catch (Exception e) {
+                out.print("false");
+            }
+           
+        } else {
+
+            
+
+            String urlArchivo = "C:\\AulaVirtual_Files\\lessons\\file"; 
+            String urlVideo = "C:\\AulaVirtual_Files\\lessons\\video"; 
+            String url="";
+            //String url2 = "C:\\Users\\limati\\Documents\\NetBeansProjects\\Aula_Virtual\\src\\main\\webapp\\certificate";
+            
+            DiskFileItemFactory factory = new DiskFileItemFactory();
+            factory.setRepository(new File(urlArchivo));
+
+            ServletFileUpload upload = new ServletFileUpload(factory);
+
+            HashMap<String, Object> campos = new HashMap();
+            try {
+                List<FileItem> partes = upload.parseRequest(request);
+
+                for (FileItem items : partes) {
+
+                    if (!items.isFormField()) {
+                        
+                        if(items.getFieldName().equals("video")){
+                            url=urlVideo;
+                        }else{
+                            url=urlArchivo;
+                        }
+                        File file = new File(url, items.getName());
+                        
+                        items.write(file);
+                        
+                        campos.put(items.getFieldName(), items.getName());
+                    } else {
+                        campos.put(items.getFieldName(), items.getString());
+                    }
+
+                }
+                String accion = campos.get("accion").toString();
+               
+
+                
+               
+                Lecciones lec = new Lecciones();
+                Curso cur=new Curso();
+                cur.setIdCur(Integer.parseInt(campos.get("txtIdCur").toString()));
+                
+                lec.setCurso(cur);
+                lec.setNomLec(campos.get("txtNombre").toString());
+                lec.setVidLec(campos.get("video").toString());
+                lec.setArcLec(campos.get("archivo").toString());
+
+              
+                
+
+                if (accion.equals("add")) {
+                    g.insert(lec);
+                } else {
+                    lec.setIdLec(Integer.parseInt(campos.get("txtIdLec").toString()));
+                    g.update(lec);
+                }               
+
+                out.print("true");
+                System.out.println("Funkoooo");
+
+            } catch (Exception e) {
+                out.print("false");
+                System.out.println("Noooooooooo  :(" + e);
+            }
         }
     }
 

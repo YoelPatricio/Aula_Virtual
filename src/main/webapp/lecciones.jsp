@@ -19,7 +19,7 @@
         
         Integer idCur = Integer.parseInt(request.getParameter("idCur"));
         LeccionDAO ld = new LeccionDAO();
-        List<Object> lec = ld.listLeccion(1);
+        List<Object> lec = ld.listLeccion(idCur);
         List<Curso> c = ld.listCursoE(idCur);
         String nombCurso = c.get(0).getNomCur();
     %>
@@ -95,7 +95,7 @@
                 <div class="col-md-12">
                     <label for="txtNombre">Nombre de Lección:</label>
                     <input type="text" id="txtNombre" placeholder="Nombre de Lección" class="form-control"/>
-                    
+                    <input type="hidden" id="txtIdLec"/>
                 </div>
                 
             </div>
@@ -256,8 +256,8 @@
                                                
 
                                                 <td align="center">
-                                                    <button class="btn btn-info" onclick="dialogoPersonaEdit('edit', 'adm')"><span class="glyphicon glyphicon-edit"></span></button>
-                                                    <button class="btn btn-danger" onclick="deletePersona('<%= a[0]%>')"><span class="glyphicon glyphicon-remove"></span></button>
+                                                    <button class="btn btn-info" onclick="dialogoLeccionEdit('edit', '<%= a[0]%>','<%= idCur%>','<%= a[2]%>','<%= a[3]%>','<%= a[4]%>')"><span class="glyphicon glyphicon-edit"></span></button>
+                                                    <button class="btn btn-danger" onclick="deleteLeccion('<%= a[0]%>')"><span class="glyphicon glyphicon-remove"></span></button>
 
                                                 </td>
                                             </tr>

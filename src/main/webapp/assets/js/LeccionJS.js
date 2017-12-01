@@ -58,11 +58,9 @@ function mostrarAlertaError() {
 }
 
 function limpiarDialogo() {
-    $('#txtIdCur').val('');
+   
     $('#txtNombre').val('');
-    $('#txtDesc').val('');
-    $('#txtDoc').val(0);
-    $('#txtPrecio').val('');
+    
 
 
 }
@@ -98,8 +96,8 @@ function dialogoLeccion(accion,idCur) {
                     var data = new FormData();
                     debugger;
 
-                    data.append('txtVideo', video);
-                    data.append('txtArchivo', archivo);
+                    data.append('video', video);
+                    data.append('archivo', archivo);
                     data.append('txtNombre', $('#txtNombre').val());
                     data.append('txtIdCur', idCur);
                     data.append('accion', accion);
@@ -130,20 +128,15 @@ function dialogoLeccion(accion,idCur) {
     });
 }
 
-function dialogoCursoEdit(accion, idCur, nombre, desc, doc, precio, trabajo) {
+function dialogoLeccionEdit(accion, idLec,idCur, nombre, video, archivo) {
 
 
     debugger;
 
-    $('#txtIdCur').val(idCur);
+  
+    $('#txtIdLec').val(idLec); 
     $('#txtNombre').val(nombre);
-    $('#txtDesc').val(desc);
-    $('#txtDoc').val(doc);
-    $('#txtPrecio').val(precio);
-
-
-
-
+    
     $("#dialog").dialog({
         resizable: false,
         modal: true,
@@ -155,17 +148,20 @@ function dialogoCursoEdit(accion, idCur, nombre, desc, doc, precio, trabajo) {
                 click: function () {
 
 
-
+                    var inputFileVideo = document.getElementById("video");
+                    var video = inputFileVideo.files[0];
+                    var inputFileArchivo = document.getElementById("archivo");
+                    var archivo = inputFileArchivo.files[0];
                     var data = new FormData();
                     debugger;
-
+                    
+                    data.append('video', video);
+                    data.append('archivo', archivo);
+                    data.append('txtIdLec', idLec);
                     data.append('txtIdCur', idCur);
                     data.append('txtNombre', $('#txtNombre').val());
-                    data.append('txtDesc', $('#txtDesc').val());
-                    data.append('txtDoc', $('#txtDoc').val());
-                    data.append('txtPrecio', $('#txtPrecio').val());
-                    data.append('txtTrabajo', trabajo);
-
+                    
+                  
                     data.append('accion', accion);
 
 
@@ -195,14 +191,14 @@ function dialogoCursoEdit(accion, idCur, nombre, desc, doc, precio, trabajo) {
 
 
 
-function deleteCurso(idCurso) {
+function deleteLeccion(idLec) {
     debugger;
     cargando();
     $.ajax({
-        url: 'CursoServlet',
+        url: 'LeccionServlet',
         type: 'POST',
         data: {
-            idCur: idCurso,
+            idLec: idLec,
             accion: 'delete'
         },
         success: function (responseText) {
@@ -252,7 +248,7 @@ function addAjax(data) {
 }
 function editAjax(data) {
     $.ajax({
-        url: 'CursoServlet',
+        url: 'LeccionServlet',
         type: 'POST',
         contentType: false,
         data: data,
