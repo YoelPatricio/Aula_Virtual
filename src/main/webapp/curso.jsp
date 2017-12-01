@@ -17,6 +17,9 @@
         CursoDAO g = new CursoDAO();
         List<Object> doc = g.listCurso();
 
+        PersonaDAO p = new PersonaDAO();
+        List<Object> d = p.listDocente();
+
     %>
     <head>
         <meta charset="utf-8">
@@ -47,7 +50,7 @@
         <script src="assets/js/respond.min.js"></script>
         <![endif]-->
 
-        <script src="assets/js/AdmJS.js"></script>
+        <script src="assets/js/CursoJS.js"></script>
         <style>
             .dialogCargando .ui-widget-header {
                 border: none;
@@ -87,50 +90,52 @@
 
         <div id="dialogCargando" title="Cargando..." style="display: none;">
             <div align="center">
-            <br>
-            <img id="gif" src="assets/img/loading.gif" width="128" height="128" alt="loading"/>
+                <br>
+                <img id="gif" src="assets/img/loading.gif" width="128" height="128" alt="loading"/>
             </div>
         </div>
         <div id="dialog" title="Datos del Curso" style="display: none;">
             <div class="row">
                 <br>
-                <div class="col-md-6">
-                    <label for="txtDNI">DNI:</label>
-                    <input type="text" id="txtDNI" placeholder="DNI" class="form-control"/>
-                    <input type="hidden" id="txtIdPer"/>
+                <div class="col-md-12">
+                    <label for="txtNombre">Nombre del Curso:</label>
+                    <input type="text" id="txtNombre" placeholder="Nombre del Curso" class="form-control"/>
+                    <input type="hidden" id="txtIdCur"/>
                 </div>
-                <div class="col-md-6">
-                    <label for="txtNombres">Nombres:</label>
-                    <input type="text" id="txtNombres" placeholder="Nombres" class="form-control"/>
-                </div>
+
             </div>
             <br>
             <div class="row">
-                <div class="col-md-6">
-                    <label for="txtPaterno">Apellido Paterno:</label>
-                    <input type="text" id="txtPaterno" placeholder="Apellido Paterno" class="form-control"/>
-                </div>
-                <div class="col-md-6">
-                    <label for="txtMaterno">Apellido Materno:</label>
-                    <input type="text" id="txtMaterno"  placeholder="Apellido Materno" class="form-control"/>
-                </div>
+                <div class="col-md-12">
+                    <label for="txtDesc">Descripción:</label>
+                    <textarea id="txtDesc" placeholder="Resumen del curso" class="form-control"></textarea>
+                </div>                
             </div>
             <br>
             <div class="row">
-                <div class="col-md-6">
-                    <label for="txtCorreo">Correo Electrónico:</label>
-                    <input type="text" id="txtCorreo" placeholder="Correo Electrónico" class="form-control"/>
+                <div class="col-md-12">
+                    <label for="txtDoc">Docente:</label>
+                    <select class="form-control" id="txtDoc">
+                        <option value="0">--Seleccionar--</option>
+                        <%for (int i = 0; i < d.size(); i++) {
+                                                    Object b[] = (Object[]) d.get(i);
+                            
+                        %>
+                        <option value="<%= b[0]%>"><%= b[2].toString() + " " + b[3].toString() + ", " + b[4].toString()%></option>
+                        <%
+                            }
+                        %>
+                    </select>
+
+                    
                 </div>
-                <div class="col-md-6">
-                    <label for="txtCelular">Celular:</label>
-                    <input type="text" id="txtCelular"  placeholder="Celular" class="form-control"/>
-                </div>
+
             </div>
             <br>
             <div class="row">
-                <div class="col-md-6">
-                    <label for="txtDireccion">Dirección:</label>
-                    <input type="text" id="txtDireccion" placeholder="Dirección" class="form-control"/>
+                <div class="col-md-12">
+                    <label for="txtPrecio">Precio:</label>
+                    <input type="text" id="txtPrecio" placeholder="Precio" class="form-control"/>
                 </div>
 
             </div>
@@ -232,7 +237,7 @@
                         </div>
                         <div class="col-md-2">
 
-                            <button id="interesAddButton" class="btn btn-success"  onClick="dialogoPersona('add', 'est', null, null, null, null, null, null, null, null)"><span class="glyphicons glyphicon-plus"></span> Agregar</button> 
+                            <button id="interesAddButton" class="btn btn-success"  onClick="dialogoCurso('add', null, null, null, null, null,null)"><span class="glyphicons glyphicon-plus"></span> Agregar</button> 
 
                         </div>
                     </div>
@@ -263,7 +268,7 @@
                                         </thead>
 
                                         <tbody>
-                                            <%                                        for (int i = 0; i < doc.size(); i++) {
+                                            <%      for (int i = 0; i < doc.size(); i++) {
                                                     Object a[] = (Object[]) doc.get(i);
                                             %>
                                             <tr>
@@ -279,8 +284,8 @@
                                                 </td>
 
                                                 <td align="center">
-                                                    <button class="btn btn-info" onclick="dialogoPersonaEdit('edit', 'est', '<%= a[0]%>', '<%= a[1]%>', '<%=a[4]%>', '<%=a[2]%>', '<%=a[3]%>', '<%= a[5]%>', '<%= a[6]%>', '<%= a[7]%>')"><span class="glyphicon glyphicon-edit"></span></button>
-                                                    <button class="btn btn-danger" onclick="deletePersona('<%= a[0]%>')"><span class="glyphicon glyphicon-remove"></span></button>
+                                                    <button class="btn btn-info" onclick="dialogoCursoEdit('edit', '<%= a[0]%>', '<%= a[4]%>', '<%=a[5]%>', '<%=a[8]%>', '<%=a[6]%>', '<%=a[7]%>')"><span class="glyphicon glyphicon-edit"></span></button>
+                                                    <button class="btn btn-danger" onclick="deleteCurso('<%= a[0]%>')"><span class="glyphicon glyphicon-remove"></span></button>
 
                                                 </td>
                                             </tr>

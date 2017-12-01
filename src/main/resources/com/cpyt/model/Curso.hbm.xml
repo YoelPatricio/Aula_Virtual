@@ -21,7 +21,7 @@
             <column name="pre_cur" precision="10" not-null="true" />
         </property>
         <property name="traCur" type="string">
-            <column name="tra_cur" length="100" not-null="true" />
+            <column name="tra_cur" length="100" />
         </property>
         <set name="inscripcions" table="inscripcion" inverse="true" lazy="true" fetch="select">
             <key>

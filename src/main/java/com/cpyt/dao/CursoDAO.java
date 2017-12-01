@@ -29,16 +29,16 @@ public class CursoDAO {
     public static List<Object> listCurso() {
 
         Session session = sessionFactory.openSession();
-        Query query = session.createSQLQuery("select c.id_cur,p.apaterno,p.amaterno,p.nombres,c.nom_cur,c.des_cur,c.pre_cur,c.tra_cur from curso c inner join persona p on c.id_per=p.id_per where c.estado=0");
+        Query query = session.createSQLQuery("select c.id_cur,p.apaterno,p.amaterno,p.nombres,c.nom_cur,c.des_cur,c.pre_cur,c.tra_cur,c.id_per from curso c inner join persona p on c.id_per=p.id_per where c.estado=0");
         
         List results = query.list();
         return results;
     }
     
-    public void deletePersona(String idPer) {
+    public void deleteCurso(String idCur) {
 
         Session session = sessionFactory.openSession();
-        Query query = session.createSQLQuery("update persona set estado=1 where id_per="+idPer);
+        Query query = session.createSQLQuery("update curso set estado=1 where id_per="+idCur);
         //query.setParameter(0, idPer);
         
         query.executeUpdate();
