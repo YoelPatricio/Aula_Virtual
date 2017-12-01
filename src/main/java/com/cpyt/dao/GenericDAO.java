@@ -3,7 +3,10 @@ package com.cpyt.dao;
 
 
 
+import com.cpyt.model.Curso;
+import com.cpyt.model.Persona;
 import com.cpyt.model.Tarjeta; 
+import java.math.BigDecimal;
 import java.util.List; 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -225,7 +228,27 @@ public class GenericDAO {
         
         Integer a = g.ultimoID("idPer", "Persona");
         System.out.println(a);*/
-        System.out.println(g.userDir());
+        
+                Curso c = new Curso();
+                Persona p = new Persona();
+                
+                p.setIdPer(28);
+               
+
+                c.setNomCur("MySQL");
+                c.setDesCur("Fundamentos");
+                c.setPreCur(new BigDecimal("100"));
+                c.setTraCur("");
+                c.setPersona(p);
+
+                try {
+            g.insert(c);
+        } catch (Exception e) {
+                    System.out.println("Errorrr" + e);
+        }
+                    
+              
+        //System.out.println(g.userDir());
        
         
     }

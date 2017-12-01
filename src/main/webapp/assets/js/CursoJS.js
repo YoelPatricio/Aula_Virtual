@@ -208,7 +208,7 @@ function deleteCurso(idCurso) {
         url: 'CursoServlet',
         type: 'POST',
         data: {
-            idPer: idCurso,
+            idCur: idCurso,
             accion: 'delete'
         },
         success: function (responseText) {

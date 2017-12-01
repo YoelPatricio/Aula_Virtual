@@ -38,7 +38,7 @@ public class CursoDAO {
     public void deleteCurso(String idCur) {
 
         Session session = sessionFactory.openSession();
-        Query query = session.createSQLQuery("update curso set estado=1 where id_per="+idCur);
+        Query query = session.createSQLQuery("update curso set estado=1 where id_cur="+idCur);
         //query.setParameter(0, idPer);
         
         query.executeUpdate();

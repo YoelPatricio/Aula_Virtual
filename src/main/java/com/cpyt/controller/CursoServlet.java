@@ -84,26 +84,26 @@ public class CursoServlet extends HttpServlet {
 
                 }
                 String accion = campos.get("accion").toString();
-                String tipo = campos.get("tipo").toString();
+             
 
                 
                 Curso c = new Curso();
                 Persona p = new Persona();
                 
                 p.setIdPer(Integer.parseInt(campos.get("txtDoc").toString()));
-                c.setNomCur(url);
+               
 
                 c.setNomCur(campos.get("txtNombre").toString());
                 c.setDesCur(campos.get("txtDesc").toString());
                 c.setPreCur(new BigDecimal(campos.get("txtPrecio").toString()));
                 c.setTraCur(campos.get("txtTrabajo").toString());
+                c.setPersona(p);
                 
-
                 if (accion.equals("add")) {
-                    g.insert(p);
+                    g.insert(c);
                 } else {
                     c.setIdCur(Integer.parseInt(campos.get("txtIdCur").toString()));
-                    g.update(p);
+                    g.update(c);
                 }
 
                 
