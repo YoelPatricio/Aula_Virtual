@@ -63,31 +63,26 @@ function limpiarDialogo() {
     $('#txtDesc').val('');
     $('#txtDoc').val(0);
     $('#txtPrecio').val('');
-   
+
 
 }
 
-function dialogoCurso(accion, idCur, nombre, desc, doc, precio,trabajo) {
+function dialogoLeccion(accion,idCur) {
     debugger;
 
-    
-        if (accion == 'edit') {
-            $('#txtIdCur').val(idCur);
-            $('#txtNombre').val(nombre);
-            $('#txtDesc').val(desc);
-            $('#txtDoc').val(doc);
-            $('#txtPrecio').val(precio);         
+    if (accion == 'edit') {
 
-        } else {
-            limpiarDialogo();
-        }
-    
+
+    } else {
+        limpiarDialogo();
+    }
+
 
     $("#dialog").dialog({
         resizable: false,
         modal: true,
         width: 650,
-        height: 550,
+        height: 400,
         buttons: [
             {
                 text: "Grabar",
@@ -95,21 +90,20 @@ function dialogoCurso(accion, idCur, nombre, desc, doc, precio,trabajo) {
                     if (accion == 'add') {
                         cargando();
                     }
-                   
 
+                    var inputFileVideo = document.getElementById("video");
+                    var video = inputFileVideo.files[0];
+                    var inputFileArchivo = document.getElementById("archivo");
+                    var archivo = inputFileArchivo.files[0];
                     var data = new FormData();
                     debugger;
 
-                    data.append('txtIdCur', idCur);
+                    data.append('txtVideo', video);
+                    data.append('txtArchivo', archivo);
                     data.append('txtNombre', $('#txtNombre').val());
-                    data.append('txtDesc', $('#txtDesc').val());
-                    data.append('txtDoc', $('#txtDoc').val());
-                    data.append('txtPrecio', $('#txtPrecio').val());
-                    data.append('txtTrabajo', '');
-                    
-
+                    data.append('txtIdCur', idCur);
                     data.append('accion', accion);
-                  
+
 
                     $(this).dialog("close");
                     if (accion == 'add') {
@@ -136,19 +130,19 @@ function dialogoCurso(accion, idCur, nombre, desc, doc, precio,trabajo) {
     });
 }
 
-function dialogoCursoEdit(accion, idCur, nombre, desc, doc, precio,trabajo) {
+function dialogoCursoEdit(accion, idCur, nombre, desc, doc, precio, trabajo) {
 
 
     debugger;
-       
-            $('#txtIdCur').val(idCur);
-            $('#txtNombre').val(nombre);
-            $('#txtDesc').val(desc);
-            $('#txtDoc').val(doc);
-            $('#txtPrecio').val(precio);  
 
-        
-    
+    $('#txtIdCur').val(idCur);
+    $('#txtNombre').val(nombre);
+    $('#txtDesc').val(desc);
+    $('#txtDoc').val(doc);
+    $('#txtPrecio').val(precio);
+
+
+
 
     $("#dialog").dialog({
         resizable: false,
@@ -159,8 +153,8 @@ function dialogoCursoEdit(accion, idCur, nombre, desc, doc, precio,trabajo) {
             {
                 text: "Grabar",
                 click: function () {
-                    
-                   
+
+
 
                     var data = new FormData();
                     debugger;
@@ -173,12 +167,12 @@ function dialogoCursoEdit(accion, idCur, nombre, desc, doc, precio,trabajo) {
                     data.append('txtTrabajo', trabajo);
 
                     data.append('accion', accion);
-                
 
-                    
-                   
-                        editAjax(data);
-                    
+
+
+
+                    editAjax(data);
+
                     $(this).dialog("close");
 
 
@@ -232,7 +226,7 @@ function deleteCurso(idCurso) {
 function addAjax(data) {
 
     $.ajax({
-        url: 'CursoServlet',
+        url: 'LeccionServlet',
         type: 'POST',
         contentType: false,
         data: data,
@@ -244,7 +238,7 @@ function addAjax(data) {
             if (responseText == 'true') {
 
                 mostrarAlerta();
-                
+
             } else {
 
                 mostrarAlertaError();
@@ -270,11 +264,11 @@ function editAjax(data) {
             if (responseText == 'true') {
 
                 mostrarAlerta();
-                
+
             } else {
 
                 mostrarAlertaError();
-                
+
             }
 
         }

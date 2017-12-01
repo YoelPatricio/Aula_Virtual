@@ -4,6 +4,8 @@
     Author     : Yoel
 --%>
 
+<%@page import="com.cpyt.model.Curso"%>
+<%@page import="com.cpyt.dao.LeccionDAO"%>
 <%@page import="java.util.List"%>
 <%@page import="com.cpyt.dao.PersonaDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -13,9 +15,13 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <%
-        PersonaDAO g = new PersonaDAO();
-        List<Object> doc = g.listEst();
-
+        
+        
+        Integer idCur = Integer.parseInt(request.getParameter("idCur"));
+        LeccionDAO ld = new LeccionDAO();
+        List<Object> lec = ld.listLeccion(1);
+        List<Curso> c = ld.listCursoE(idCur);
+        String nombCurso = c.get(0).getNomCur();
     %>
     <head>
         <meta charset="utf-8">
@@ -46,13 +52,7 @@
         <script src="assets/js/respond.min.js"></script>
         <![endif]-->
 
-        <script src="assets/js/AdmJS.js"></script>
-        <style>
-            .dialogCargando .ui-widget-header {
-                border: none;
-                background: transparent;
-            }
-        </style>
+        <script src="assets/js/LeccionJS.js"></script>
     </head>
     <body>
         <!-- The Modal -->
@@ -85,55 +85,36 @@
 
 
         <div id="dialogCargando" title="Cargando..." style="display: none;">
-            <div align="center">
             <br>
             <img id="gif" src="assets/img/loading.gif" width="128" height="128" alt="loading"/>
-            </div>
+
         </div>
-        <div id="dialog" title="Datos del Estudiante" style="display: none;">
+        <div id="dialog" title="Datos de Lección" style="display: none;">
             <div class="row">
                 <br>
-                <div class="col-md-6">
-                    <label for="txtDNI">DNI:</label>
-                    <input type="text" id="txtDNI" placeholder="DNI" class="form-control"/>
-                    <input type="hidden" id="txtIdPer"/>
+                <div class="col-md-12">
+                    <label for="txtNombre">Nombre de Lección:</label>
+                    <input type="text" id="txtNombre" placeholder="Nombre de Lección" class="form-control"/>
+                    
                 </div>
-                <div class="col-md-6">
-                    <label for="txtNombres">Nombres:</label>
-                    <input type="text" id="txtNombres" placeholder="Nombres" class="form-control"/>
-                </div>
+                
             </div>
             <br>
             <div class="row">
-                <div class="col-md-6">
-                    <label for="txtPaterno">Apellido Paterno:</label>
-                    <input type="text" id="txtPaterno" placeholder="Apellido Paterno" class="form-control"/>
-                </div>
-                <div class="col-md-6">
-                    <label for="txtMaterno">Apellido Materno:</label>
-                    <input type="text" id="txtMaterno"  placeholder="Apellido Materno" class="form-control"/>
-                </div>
-            </div>
-            <br>
-            <div class="row">
-                <div class="col-md-6">
-                    <label for="txtCorreo">Correo Electrónico:</label>
-                    <input type="text" id="txtCorreo" placeholder="Correo Electrónico" class="form-control"/>
-                </div>
-                <div class="col-md-6">
-                    <label for="txtCelular">Celular:</label>
-                    <input type="text" id="txtCelular"  placeholder="Celular" class="form-control"/>
-                </div>
-            </div>
-            <br>
-            <div class="row">
-                <div class="col-md-6">
-                    <label for="txtDireccion">Dirección:</label>
-                    <input type="text" id="txtDireccion" placeholder="Dirección" class="form-control"/>
+                <div class="col-md-8">
+                    <label for="video">Adjuntar Video:</label>
+                    <input type="file" id="video" class="form-control"/>
                 </div>
 
             </div>
             <br>
+            <div class="row">
+                <div class="col-md-8">
+                    <label for="archivo">Adjuntar Archivo:</label>
+                    <input type="file" id="archivo" class="form-control"/>
+                </div>
+
+            </div>
 
 
 
@@ -182,17 +163,17 @@
                         <li >
                             <a href="dashboard.jsp"><i class="fa fa-dashboard"></i><span>Inicio</span></a>
                         </li>
-                        <li id="admin" >
+                        <li id="admin">
                             <a href="administrador.jsp"><i class="fa fa-cogs"></i><span>Administradores</span></a>
                         </li>
                         <li id="docente">
                             <a href="docente.jsp"><i class="fa fa-cogs"></i><span>Docentes</span></a>
                         </li>
-                        <li id="estudiante" class="active">
-                            <a href="estudiante.jsp" ><i class="fa fa-cogs"></i><span>Estudiantes</span></a>
+                        <li id="estudiante">
+                            <a href="estudiante.jsp"><i class="fa fa-cogs"></i><span>Estudiantes</span></a>
                         </li>
-                        <li id="cursos">
-                            <a href="curso.jsp"><i class="fa fa-cogs"></i><span>Cursos</span></a>
+                        <li id="cursos" class="active">
+                            <a href="curso.jsp"  ><i class="fa fa-cogs"></i><span>Cursos</span></a>
                         </li>
 
                         <li class="sub-menu">
@@ -226,12 +207,12 @@
                         <br>
                         <div class="col-md-10">
 
-                            <h2 class="h1">Estudiante</h2>
+                            <h2 class="h1"><%=nombCurso%></h2>
 
                         </div>
                         <div class="col-md-2">
 
-                            <button id="interesAddButton" class="btn btn-success"  onClick="dialogoPersona('add', 'est', null, null, null, null, null, null, null, null)"><span class="glyphicons glyphicon-plus"></span> Agregar</button> 
+                            <button id="interesAddButton" class="btn btn-success"  onClick="dialogoLeccion('add',<%=idCur%>)"><span class="glyphicons glyphicon-plus"></span> Agregar</button> 
 
                         </div>
                     </div>
@@ -240,7 +221,7 @@
                         <div class="col-md-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">Listado de Estudiantes</h3>
+                                    <h3 class="panel-title">Listado de Lecciones</h3>
                                     <div class="actions pull-right">
                                         <i class="fa fa-chevron-down"></i>
                                         <!--<i class="fa fa-times"></i>-->
@@ -250,31 +231,32 @@
                                     <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
-                                                <th>DNI</th>
-                                                <th>Apellidos y Nombres</th>                                        
-                                                <th>Correo</th>
-                                                <th>Celular</th>
-                                                <th>Dirección</th>                                        
-
+                                                <th>Nombre de Lección</th>
+                                                <th>Video</th>                                        
+                                                <th>Archivo</th>                                                                             
 
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
 
                                         <tbody>
-                                            <%                                        for (int i = 0; i < doc.size(); i++) {
-                                                    Object a[] = (Object[]) doc.get(i);
+                                            <%      for (int i = 0; i < lec.size(); i++) {
+                                                    Object a[] = (Object[]) lec.get(i);
+                                                    
                                             %>
                                             <tr>
 
-                                                <td><%= a[1]%></td>
-                                                <td><%= a[2].toString() + " " + a[3].toString() + ", " + a[4].toString()%></td>
-                                                <td><%= a[5]%></td>
-                                                <td><%= a[6]%></td>
-                                                <td><%= a[7]%></td>
+                                                <td><%= a[2]%></td>
+                                                <td align="center">
+                                                    <button class="btn btn-info" onclick=""><span class="glyphicon glyphicon-play"></span></button>
+                                                </td>
+                                                <td align="center">
+                                                    <button class="btn btn-info" onclick=""><span class="glyphicon glyphicon-cloud-download"></span></button>
+                                                </td>
+                                               
 
                                                 <td align="center">
-                                                    <button class="btn btn-info" onclick="dialogoPersonaEdit('edit', 'est', '<%= a[0]%>', '<%= a[1]%>', '<%=a[4]%>', '<%=a[2]%>', '<%=a[3]%>', '<%= a[5]%>', '<%= a[6]%>', '<%= a[7]%>')"><span class="glyphicon glyphicon-edit"></span></button>
+                                                    <button class="btn btn-info" onclick="dialogoPersonaEdit('edit', 'adm')"><span class="glyphicon glyphicon-edit"></span></button>
                                                     <button class="btn btn-danger" onclick="deletePersona('<%= a[0]%>')"><span class="glyphicon glyphicon-remove"></span></button>
 
                                                 </td>

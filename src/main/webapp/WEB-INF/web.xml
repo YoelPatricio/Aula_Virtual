@@ -24,6 +24,10 @@
         <servlet-name>CursoServlet</servlet-name>
         <servlet-class>com.cpyt.controller.CursoServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LeccionServlet</servlet-name>
+        <servlet-class>com.cpyt.controller.LeccionServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PersonaServlet</servlet-name>
         <url-pattern>/PersonaServlet</url-pattern>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>CursoServlet</servlet-name>
         <url-pattern>/CursoServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LeccionServlet</servlet-name>
+        <url-pattern>/LeccionServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

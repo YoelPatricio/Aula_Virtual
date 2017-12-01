@@ -72,8 +72,8 @@
             <aside class="sidebar">
                 <div id="leftside-navigation" class="nano">
                     <ul class="nano-content">
-                        <li >
-                            <a href="dashboard.jsp" class="active"><i class="fa fa-dashboard"></i><span>Inicio</span></a>
+                        <li class="active">
+                            <a href="dashboard.jsp"><i class="fa fa-dashboard"></i><span>Inicio</span></a>
                         </li>
                         <li id="admin">
                             <a href="administrador.jsp"><i class="fa fa-cogs"></i><span>Administradores</span></a>

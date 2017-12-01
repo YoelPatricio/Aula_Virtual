@@ -5,6 +5,7 @@
  */
 package com.cpyt.dao;
 
+import static com.cpyt.dao.CursoDAO.sessionFactory;
 import com.cpyt.model.Curso;
 import java.util.List;
 import org.hibernate.Query;
@@ -17,7 +18,7 @@ import org.hibernate.cfg.Configuration;
  *
  * @author limati
  */
-public class CursoDAO {
+public class LeccionDAO {
     
     static Session session = null;
     
@@ -27,10 +28,10 @@ public class CursoDAO {
 	}
         
         
-    public static List<Object> listCurso() {
+    public static List<Object> listLeccion(Integer idCur) {
 
         Session session = sessionFactory.openSession();
-        Query query = session.createSQLQuery("select c.id_cur,p.apaterno,p.amaterno,p.nombres,c.nom_cur,c.des_cur,c.pre_cur,c.tra_cur,c.id_per from curso c inner join persona p on c.id_per=p.id_per where c.estado=0");
+        Query query = session.createSQLQuery("select l.id_lec,c.nom_cur,l.nom_lec,l.vid_lec,l.arc_lec from lecciones l inner join curso c on l.id_cur=c.id_cur where l.estado=0 and l.id_cur="+idCur);
         
         List results = query.list();
         return results;
@@ -45,10 +46,10 @@ public class CursoDAO {
         return results;
     }
     
-    public void deleteCurso(String idCur) {
+    public void deleteLeccion(String idLec) {
 
         Session session = sessionFactory.openSession();
-        Query query = session.createSQLQuery("update curso set estado=1 where id_cur="+idCur);
+        Query query = session.createSQLQuery("update lecciones set estado=1 where id_cur="+idLec);
         //query.setParameter(0, idPer);
         
         query.executeUpdate();
@@ -61,7 +62,7 @@ public class CursoDAO {
     
     public static void main(String[] args) {
         
-        List<Object> per = listCurso();
+        List<Object> per = listLeccion(2);
         
         for (int i = 0; i < per.size(); i++) {
             Object  a [] = (Object[]) per.get(i);      

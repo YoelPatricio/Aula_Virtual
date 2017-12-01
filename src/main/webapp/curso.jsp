@@ -197,8 +197,8 @@
                         <li id="estudiante">
                             <a href="estudiante.jsp" ><i class="fa fa-cogs"></i><span>Estudiantes</span></a>
                         </li>
-                        <li id="cursos">
-                            <a href="curso.jsp" class="active"><i class="fa fa-cogs"></i><span>Cursos</span></a>
+                        <li id="cursos" class="active">
+                            <a href="curso.jsp" ><i class="fa fa-cogs"></i><span>Cursos</span></a>
                         </li>
 
                         <li class="sub-menu">
@@ -277,10 +277,10 @@
                                                 <td><%= a[4]%></td>
                                                 <td><%= a[6]%></td>
                                                 <td align="center">
-                                                    <a class="btn btn-info" href="dashboard.jsp?id=5"><span class="glyphicon glyphicon-th-list"></span></a>
+                                                    <a class="btn btn-info" href="lecciones.jsp?idCur=<%= a[0]%>"><span class="glyphicon glyphicon-th-list"></span></a>
                                                 </td>
                                                 <td align="center">                                                                                                     
-                                                    <button class="btn btn-info" onclick="dialogCertificado2('<%= a[0]%>')"><span class="glyphicon glyphicon-upload"></span></button>
+                                                    <button class="btn btn-info" onclick="dialogCertificado2('<%= a[0]%>')"><span class="glyphicon glyphicon-cloud-upload"></span></button>
                                                 </td>
 
                                                 <td align="center">
