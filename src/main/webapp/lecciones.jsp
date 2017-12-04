@@ -15,8 +15,7 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <%
-        
-        
+
         Integer idCur = Integer.parseInt(request.getParameter("idCur"));
         LeccionDAO ld = new LeccionDAO();
         List<Object> lec = ld.listLeccion(idCur);
@@ -62,7 +61,20 @@
             <div id="caption"></div>
         </div>
 
+        <div id="dialogoVideo" title="Video" style="display: none;">
+            
+            <div align="center">
+            <video id="sourceVideo" width="700" height="420" controls>
+               
+            </video>
+                <div id="divVideo">
+                    
+                </div>
+                
+            </div>
 
+
+        </div>
 
         <div id="dialogMensaje" title="Mensaje" style="display: none;">
             <br>
@@ -97,7 +109,7 @@
                     <input type="text" id="txtNombre" placeholder="Nombre de Lección" class="form-control"/>
                     <input type="hidden" id="txtIdLec"/>
                 </div>
-                
+
             </div>
             <br>
             <div class="row">
@@ -242,21 +254,21 @@
                                         <tbody>
                                             <%      for (int i = 0; i < lec.size(); i++) {
                                                     Object a[] = (Object[]) lec.get(i);
-                                                    
+
                                             %>
                                             <tr>
 
                                                 <td><%= a[2]%></td>
                                                 <td align="center">
-                                                    <button class="btn btn-info" onclick=""><span class="glyphicon glyphicon-play"></span></button>
+                                                    <button class="btn btn-info" onclick="dialogoVideo('<%= a[3]%>')"><span class="glyphicon glyphicon-play"></span></button>
                                                 </td>
                                                 <td align="center">
                                                     <button class="btn btn-info" onclick=""><span class="glyphicon glyphicon-cloud-download"></span></button>
                                                 </td>
-                                               
+
 
                                                 <td align="center">
-                                                    <button class="btn btn-info" onclick="dialogoLeccionEdit('edit', '<%= a[0]%>','<%= idCur%>','<%= a[2]%>','<%= a[3]%>','<%= a[4]%>')"><span class="glyphicon glyphicon-edit"></span></button>
+                                                    <button class="btn btn-info" onclick="dialogoLeccionEdit('edit', '<%= a[0]%>', '<%= idCur%>', '<%= a[2]%>', '<%= a[3]%>', '<%= a[4]%>')"><span class="glyphicon glyphicon-edit"></span></button>
                                                     <button class="btn btn-danger" onclick="deleteLeccion('<%= a[0]%>')"><span class="glyphicon glyphicon-remove"></span></button>
 
                                                 </td>

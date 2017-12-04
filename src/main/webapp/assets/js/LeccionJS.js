@@ -3,7 +3,38 @@
 
 //});
 
+function dialogoVideo(video) {
+    debugger;
+    if (video == "undefined" || video == "") {
+        $('#divVideo').html("<br><br><br><br><br><br><br><br><h1>NO EXISTE VIDEO ADJUNTADO</h1>");
 
+    } else {
+        var src="lessons/video/"+video;
+        $('#sourceVideo').html("<source src='"+src+"'  type='video/mp4'>");
+        //$('#divVideo').html("<img src='certificate/" + img + "' height='480' width='900'>");
+    }
+    
+    
+    $("#dialogoVideo").dialog({
+        resizable: false,
+        modal: true,
+        width: 750,
+        height: 550,
+        open: function (event, ui) {
+            $(".ui-dialog-titlebar-close", ui.dialog).hide();
+        },
+        buttons: [
+            {
+                text: "Cerrar",
+                click: function () {
+                    //$("#contenidoDerecha").load("administrador.jsp");
+                   
+                    $(this).dialog("close");
+                }
+            }
+        ]
+    });
+}
 
 
 
@@ -141,7 +172,7 @@ function dialogoLeccionEdit(accion, idLec,idCur, nombre, video, archivo) {
         resizable: false,
         modal: true,
         width: 650,
-        height: 550,
+        height: 400,
         buttons: [
             {
                 text: "Grabar",

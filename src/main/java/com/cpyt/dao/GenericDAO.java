@@ -131,7 +131,8 @@ public class GenericDAO {
     }
     
     public String userDir(){
-        return System.getProperty("user.dir");
+        String dir=System.getProperty("user.dir");
+        return dir;
     }
     
     
@@ -228,24 +229,8 @@ public class GenericDAO {
         
         Integer a = g.ultimoID("idPer", "Persona");
         System.out.println(a);*/
-        
-                Curso c = new Curso();
-                Persona p = new Persona();
-                
-                p.setIdPer(28);
-               
-
-                c.setNomCur("MySQL");
-                c.setDesCur("Fundamentos");
-                c.setPreCur(new BigDecimal("100"));
-                c.setTraCur("");
-                c.setPersona(p);
-
-                try {
-            g.insert(c);
-        } catch (Exception e) {
-                    System.out.println("Errorrr" + e);
-        }
+        String d=g.userDir();
+        System.out.println(d);
                     
               
         //System.out.println(g.userDir());
