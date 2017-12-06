@@ -301,3 +301,19 @@ function editAjax(data) {
         }
     });
 }
+
+function downloadFile(filename){
+    debugger;
+    $.ajax({
+        url: 'DownloadFileServlet',
+        type: 'GET',
+        data: {
+            filename: filename          
+        },
+        success: function (responseText) {
+
+
+
+        }
+    });
+}

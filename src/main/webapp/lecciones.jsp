@@ -263,7 +263,7 @@
                                                     <button class="btn btn-info" onclick="dialogoVideo('<%= a[3]%>')"><span class="glyphicon glyphicon-play"></span></button>
                                                 </td>
                                                 <td align="center">
-                                                    <button class="btn btn-info" onclick=""><span class="glyphicon glyphicon-cloud-download"></span></button>
+                                                    <a class="btn btn-info" href="DownloadFileServlet?filename=<%= a[4]%>"><span class="glyphicon glyphicon-cloud-download"></span></a>
                                                 </td>
 
 
