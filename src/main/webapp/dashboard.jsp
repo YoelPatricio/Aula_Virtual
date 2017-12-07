@@ -14,7 +14,14 @@
 <html>
     <!--<![endif]-->
     <%
-        //response.sendRedirect("login.jsp");
+        response.sendRedirect("login.jsp");
+        if(session.getAttribute("rol")!=null){
+        int rol = (int)session.getAttribute("rol");
+        String nombre = session.getAttribute("nombres").toString();
+        String paterno = session.getAttribute("paterno").toString();
+        String materno = session.getAttribute("materno").toString();
+        }
+        
 
     %>
     <head>

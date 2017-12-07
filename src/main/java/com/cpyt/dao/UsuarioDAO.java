@@ -27,11 +27,14 @@ public class UsuarioDAO {
 	}
         
         
-    public static List<Object> getUserInSession() {
+    public static List<Object> getUserInSession(String user,String pass) {
 
         Session session = sessionFactory.openSession();
-        Query query = session.createSQLQuery("select c.id_cur,p.apaterno,p.amaterno,p.nombres,c.nom_cur,c.des_cur,c.pre_cur,c.tra_cur,c.id_per from curso c inner join persona p on c.id_per=p.id_per where c.estado=0");
-        
+        Query query = session.createSQLQuery("select u.id_rol,p.nombres,p.apaterno,p.amaterno "
+                                            + " from persona p inner join usuario u on p.id_per=u.id_per "
+                                            + " where u.log_usu=? and u.pas_usu=?");
+        query.setParameter(0, user);
+        query.setParameter(1, pass);
         List results = query.list();
         return results;
     }
@@ -39,7 +42,7 @@ public class UsuarioDAO {
     
     public static void main(String[] args) {
         
-        List<Object> per = getUserInSession();
+        List<Object> per = getUserInSession("123","1253");
         
         for (int i = 0; i < per.size(); i++) {
             Object  a [] = (Object[]) per.get(i);      

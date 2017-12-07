@@ -32,6 +32,10 @@
         <servlet-name>DownloadFileServlet</servlet-name>
         <servlet-class>com.cpyt.controller.DownloadFileServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>com.cpyt.controller.LoginServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PersonaServlet</servlet-name>
         <url-pattern>/PersonaServlet</url-pattern>
@@ -63,6 +67,10 @@
     <servlet-mapping>
         <servlet-name>DownloadFileServlet</servlet-name>
         <url-pattern>/DownloadFileServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/LoginServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
