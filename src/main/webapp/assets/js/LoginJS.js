@@ -311,16 +311,31 @@ function validarLogin(){
         },
         success: function (responseText) {
             debugger;
-            /*if (responseText == 'true') {
-                $("#dialogCargando").dialog("close");
-                mostrarAlerta();
+       
+           if (responseText == 'false') {
 
-            } else {
-                $("#dialogCargando").dialog("close");
-                mostrarAlertaError();
+                //document.getElementById("errorSession").innerHTML = "<p style='color: red'>Usuario o Contraseña Incorrecto</p>";
+                
+            } 
 
-            }*/
+        }
+    });
+}
 
+function destroySession(){
+    debugger;
+
+    $.ajax({
+        url: 'LoginServlet',
+        type: 'POST',
+        data: {
+            accion: 'destroy'  
+        },
+        success: function (responseText) {
+            debugger;
+            var url='login.jsp';
+            
+            location.href = url;
         }
     });
 }

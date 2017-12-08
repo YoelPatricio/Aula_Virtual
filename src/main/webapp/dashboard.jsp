@@ -14,12 +14,16 @@
 <html>
     <!--<![endif]-->
     <%
-        response.sendRedirect("login.jsp");
+        String nameUser="";
         if(session.getAttribute("rol")!=null){
         int rol = (int)session.getAttribute("rol");
-        String nombre = session.getAttribute("nombres").toString();
-        String paterno = session.getAttribute("paterno").toString();
+        String nombre = session.getAttribute("nombres").toString().toUpperCase();
+        String paterno = session.getAttribute("paterno").toString().toUpperCase();
         String materno = session.getAttribute("materno").toString();
+        
+        nameUser=nombre+" "+paterno;
+        }else{
+            response.sendRedirect("login.jsp");
         }
         
 
@@ -39,7 +43,7 @@
 
         <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-
+        <script src="assets/js/LoginJS.js"></script>
     </head>
 
     <body>
@@ -63,14 +67,14 @@
                         </li>-->
                         <li class="dropdown settings">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                Mike Adams <i class="fa fa-angle-down"></i>
+                                <%= nameUser %> <i class="fa fa-angle-down"></i>
                             </a>
                             <ul class="dropdown-menu animated fadeInDown">
-                                <li>
+                                <!--<li>
                                     <a href="#"><i class="fa fa-user"></i> Mi Perfil</a>
-                                </li>
+                                </li>-->
                                 <li>
-                                    <a href="#"><i class="fa fa-power-off"></i> Salir</a>
+                                    <a onclick="destroySession()"><i class="fa fa-power-off"></i> Salir</a>
                                 </li>
                             </ul>
                         </li>

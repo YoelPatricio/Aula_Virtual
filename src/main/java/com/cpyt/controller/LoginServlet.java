@@ -33,8 +33,17 @@ public class LoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
        String user = request.getParameter("user");
        String pass = request.getParameter("pass");
+       String accion = request.getParameter("accion");
+       if("destroy".equals(accion)){
+           session.invalidate();
+           //response.sendRedirect("login.jsp");
+           //request.getRequestDispatcher("login.jsp").forward(request, response);
+           return;
+       }
        
         UsuarioDAO ud = new UsuarioDAO();
         List<Object> u = ud.getUserInSession(user, pass);
@@ -44,15 +53,18 @@ public class LoginServlet extends HttpServlet {
              String nombres = a[1].toString();
              String paterno = a[2].toString();
              String materno = a[3].toString();
-            HttpSession session = request.getSession();
+            
             session.setAttribute("rol", rol);
             session.setAttribute("nombres", nombres);
             session.setAttribute("paterno", paterno);
             session.setAttribute("materno", materno);
-            request.getRequestDispatcher(request.getContextPath()+"/dashboard.jsp").forward(request, response);
-            response.sendRedirect(request.getContextPath()+"/dashboard.jsp");
+            //request.getRequestDispatcher("dashboard.jsp").forward(request, response);
+            response.sendRedirect("dashboard.jsp");
+            //out.print("true");
         }else{
-            request.getRequestDispatcher("/login.jsp").include(request, response);
+            response.sendRedirect("login.jsp");
+            //out.print("true");
+            //request.getRequestDispatcher("/login.jsp").include(request, response);
         }
         //response.sendRedirect("dashboard.jsp");
         

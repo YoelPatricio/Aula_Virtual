@@ -23,6 +23,11 @@
                <source src='C:\\AulaVirtual_Files\\lessons\\video\\Ejemplo2.mp4'  type='video/mp4'>
             </video>
                 <div id="divVideo">
+                    <form action="LoginServlet" method="POST">
+                        <input id="user" name="user" type="text"><br><br>
+                        <input id="pass" name="pass" type="text"><br><br>
+                        <input type="submit" >Enviar</button> 
+                    </form>
                     
                 </div>
                 
