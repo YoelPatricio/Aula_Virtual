@@ -13,6 +13,17 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <%
+        String nameUser="";
+        if(session.getAttribute("rol")!=null){
+        int rol = (int)session.getAttribute("rol");
+        String nombre = session.getAttribute("nombres").toString().toUpperCase();
+        String paterno = session.getAttribute("paterno").toString().toUpperCase();
+        String materno = session.getAttribute("materno").toString();
+        
+        nameUser=nombre+" "+paterno;
+        }else{
+            response.sendRedirect("login.jsp");
+        }
         PersonaDAO g = new PersonaDAO();
         List<Object> doc = g.listEst();
 
@@ -47,6 +58,7 @@
         <![endif]-->
 
         <script src="assets/js/AdmJS.js"></script>
+        <script src="assets/js/LoginJS.js"></script>
         <style>
             .dialogCargando .ui-widget-header {
                 border: none;
@@ -160,14 +172,14 @@
                         </li>-->
                         <li class="dropdown settings">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                Mike Adams <i class="fa fa-angle-down"></i>
+                                <%= nameUser %> <i class="fa fa-angle-down"></i>
                             </a>
                             <ul class="dropdown-menu animated fadeInDown">
-                                <li>
+                                <!--<li>
                                     <a href="#"><i class="fa fa-user"></i> Mi Perfil</a>
-                                </li>
+                                </li>-->
                                 <li>
-                                    <a href="#"><i class="fa fa-power-off"></i> Salir</a>
+                                    <a onclick="destroySession()"><i class="fa fa-power-off"></i> Salir</a>
                                 </li>
                             </ul>
                         </li>
