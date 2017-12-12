@@ -280,3 +280,65 @@ function editAjax(data) {
         }
     });
 }
+
+function uploadJob(idCur) {
+    debugger;
+   
+
+
+    $("#uploadJob").dialog({
+        resizable: false,
+        modal: true,
+        width: 650,
+        height: 270,
+        buttons: [
+            {
+                text: "Grabar",
+                click: function () {
+                    
+                        cargando();
+                    
+                    
+                    debugger;
+                    var inputFileImage = document.getElementById("job");
+                    var file = inputFileImage.files[0];
+                    var data = new FormData();
+                    debugger;
+                    data.append('job', file);
+                    data.append('idCur', idCur);
+                    
+                    
+                    $.ajax({
+                        url: 'UploadJobServlet',
+                        type: 'POST',
+                        contentType: false,
+                        data: data,
+                        processData: false,
+                        cache: false,
+                        success: function (responseText) {
+                            debugger;
+                            $("#dialogCargando").dialog("close");
+                            if (responseText == 'true') {
+
+                                mostrarAlerta();
+
+                            } else {
+
+                                mostrarAlertaError();
+                              
+                            }
+
+                        }
+                    });
+                      
+                }
+
+            }, {
+                text: "Cancelar",
+                click: function () {
+                    $(this).dialog("close");
+                }
+            }
+        ]
+    });
+}

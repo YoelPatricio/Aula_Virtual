@@ -215,23 +215,7 @@
                             <a href="curso.jsp"><i class="fa fa-cogs"></i><span>Cursos</span></a>
                         </li>
 
-                        <li class="sub-menu">
-                            <a href="javascript:void(0);"><i class="fa fa fa-tasks"></i><span>Forms</span><i class="arrow fa fa-angle-right pull-right"></i></a>
-                            <ul>
-                                <li><a href="forms-components.html">Components</a>
-                                </li>
-                                <li><a href="forms-validation.html">Validation</a>
-                                </li>
-                                <li><a href="forms-mask.html">Mask</a>
-                                </li>
-                                <li><a href="forms-wizard.html">Wizard</a>
-                                </li>
-                                <li><a href="forms-multiple-file.html">Multiple File Upload</a>
-                                </li>
-                                <li><a href="forms-wysiwyg.html">WYSIWYG Editor</a>
-                                </li>
-                            </ul>
-                        </li>
+                         
 
 
                     </ul>

@@ -36,6 +36,15 @@ public class CursoDAO {
         return results;
     }
     
+    public static List<Object> listCursoDocente(String idPer) {
+
+        Session session = sessionFactory.openSession();
+        Query query = session.createSQLQuery("select c.id_cur,p.apaterno,p.amaterno,p.nombres,c.nom_cur,c.des_cur,c.pre_cur,c.tra_cur,c.id_per from curso c inner join persona p on c.id_per=p.id_per where c.estado=0 and c.id_per="+idPer);
+        
+        List results = query.list();
+        return results;
+    }
+    
     public static List<Curso> listCursoE(Integer idCur) {
 
         Session session = sessionFactory.openSession();
@@ -50,6 +59,19 @@ public class CursoDAO {
         Session session = sessionFactory.openSession();
         Query query = session.createSQLQuery("update curso set estado=1 where id_cur="+idCur);
         //query.setParameter(0, idPer);
+        
+        query.executeUpdate();
+        Transaction tx = session.beginTransaction();
+        tx.commit();
+        session.close();
+    }
+    
+    public void uploadJob(String idCur,String job) {
+
+        Session session = sessionFactory.openSession();
+        Query query = session.createSQLQuery("update curso set tra_cur=? where id_cur=?");
+        query.setParameter(0, job);
+        query.setParameter(1, idCur);
         
         query.executeUpdate();
         Transaction tx = session.beginTransaction();

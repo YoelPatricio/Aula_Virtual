@@ -29,6 +29,7 @@ function dialogoVideo(video) {
                 click: function () {
                     //$("#contenidoDerecha").load("administrador.jsp");
                    
+                    window.location.reload();
                     $(this).dialog("close");
                 }
             }

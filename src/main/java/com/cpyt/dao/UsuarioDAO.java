@@ -30,7 +30,7 @@ public class UsuarioDAO {
     public static List<Object> getUserInSession(String user,String pass) {
 
         Session session = sessionFactory.openSession();
-        Query query = session.createSQLQuery("select u.id_rol,p.nombres,p.apaterno,p.amaterno "
+        Query query = session.createSQLQuery("select u.id_rol,p.nombres,p.apaterno,p.amaterno,p.id_per "
                                             + " from persona p inner join usuario u on p.id_per=u.id_per "
                                             + " where u.log_usu=? and u.pas_usu=?");
         query.setParameter(0, user);

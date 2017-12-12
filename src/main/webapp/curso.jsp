@@ -14,19 +14,26 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <%
-        String nameUser="";
-        if(session.getAttribute("rol")!=null){
-        int rol = (int)session.getAttribute("rol");
-        String nombre = session.getAttribute("nombres").toString().toUpperCase();
-        String paterno = session.getAttribute("paterno").toString().toUpperCase();
-        String materno = session.getAttribute("materno").toString();
-        
-        nameUser=nombre+" "+paterno;
-        }else{
+        String nameUser = "";
+        int rol = 0;
+        if (session.getAttribute("rol") != null) {
+            rol = (int) session.getAttribute("rol");
+            String nombre = session.getAttribute("nombres").toString().toUpperCase();
+            String paterno = session.getAttribute("paterno").toString().toUpperCase();
+            String materno = session.getAttribute("materno").toString();
+
+            nameUser = nombre + " " + paterno;
+        } else {
             response.sendRedirect("login.jsp");
         }
         CursoDAO g = new CursoDAO();
-        List<Object> doc = g.listCurso();
+        String idPer = session.getAttribute("idPer").toString();
+        List<Object> doc = null;
+        if (rol == 1) {
+            doc = g.listCurso();
+        } else if (rol == 2) {
+            doc = g.listCursoDocente(idPer);
+        }
 
         PersonaDAO p = new PersonaDAO();
         List<Object> d = p.listDocente();
@@ -78,7 +85,17 @@
             <div id="caption"></div>
         </div>
 
+        <div id="uploadJob" title="Trabajo Final" style="display: none;">  
+            <br>
+            <div class="row">
+                <div class="col-md-8">
+                    <label for="job">Adjuntar Trabajo</label>
+                    <input type="file" id="job" class="form-control"/>
+                </div>
 
+            </div>
+            <br>
+        </div>
 
         <div id="dialogMensaje" title="Mensaje" style="display: none;">
             <br>
@@ -130,8 +147,8 @@
                     <select class="form-control" id="txtDoc">
                         <option value="0">--Seleccionar--</option>
                         <%for (int i = 0; i < d.size(); i++) {
-                                                    Object b[] = (Object[]) d.get(i);
-                            
+                                Object b[] = (Object[]) d.get(i);
+
                         %>
                         <option value="<%= b[0]%>"><%= b[2].toString() + " " + b[3].toString() + ", " + b[4].toString()%></option>
                         <%
@@ -139,7 +156,7 @@
                         %>
                     </select>
 
-                    
+
                 </div>
 
             </div>
@@ -178,7 +195,7 @@
                         </li>-->
                         <li class="dropdown settings">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                <%= nameUser %> <i class="fa fa-angle-down"></i>
+                                <%= nameUser%> <i class="fa fa-angle-down"></i>
                             </a>
                             <ul class="dropdown-menu animated fadeInDown">
                                 <!--<li>
@@ -200,20 +217,38 @@
                         <li >
                             <a href="dashboard.jsp"><i class="fa fa-dashboard"></i><span>Inicio</span></a>
                         </li>
-                        <li id="admin" >
+                        <%
+                        if(rol==1){                           
+                        
+                        %>
+                        <li id="admin">
                             <a href="administrador.jsp"><i class="fa fa-cogs"></i><span>Administradores</span></a>
                         </li>
                         <li id="docente">
                             <a href="docente.jsp"><i class="fa fa-cogs"></i><span>Docentes</span></a>
                         </li>
                         <li id="estudiante">
-                            <a href="estudiante.jsp" ><i class="fa fa-cogs"></i><span>Estudiantes</span></a>
+                            <a href="estudiante.jsp"><i class="fa fa-cogs"></i><span>Estudiantes</span></a>
                         </li>
                         <li id="cursos" class="active">
-                            <a href="curso.jsp" ><i class="fa fa-cogs"></i><span>Cursos</span></a>
+                            <a href="curso.jsp"><i class="fa fa-cogs"></i><span>Cursos</span></a>
                         </li>
-
-                        <li class="sub-menu">
+                        <%
+                            }
+                            
+                        %>
+                        <%
+                        if(rol==2){                           
+                        
+                        %>
+                        <li class="active">
+                            <a href="curso.jsp"><i class="fa fa-cogs"></i><span>Mis Cursos</span></a>
+                        </li>
+                        <%
+                            }
+                            
+                        %>
+                        <!--<li class="sub-menu">
                             <a href="javascript:void(0);"><i class="fa fa fa-tasks"></i><span>Forms</span><i class="arrow fa fa-angle-right pull-right"></i></a>
                             <ul>
                                 <li><a href="forms-components.html">Components</a>
@@ -229,7 +264,7 @@
                                 <li><a href="forms-wysiwyg.html">WYSIWYG Editor</a>
                                 </li>
                             </ul>
-                        </li>
+                        </li>-->
 
 
                     </ul>
@@ -248,9 +283,13 @@
 
                         </div>
                         <div class="col-md-2">
-
-                            <button id="interesAddButton" class="btn btn-success"  onClick="dialogoCurso('add', null, null, null, null, null,null)"><span class="glyphicons glyphicon-plus"></span> Agregar</button> 
-
+                            <%
+                                if (rol == 1) {
+                            %>
+                            <button id="interesAddButton" class="btn btn-success"  onClick="dialogoCurso('add', null, null, null, null, null, null)"><span class="glyphicons glyphicon-plus"></span> Agregar</button> 
+                            <%
+                                }
+                            %>
                         </div>
                     </div>
 
@@ -267,15 +306,32 @@
                                 <div class="panel-body">
                                     <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                         <thead>
-                                            <tr>
+                                            <tr><%
+                                                if (rol == 1) {
+                                                %>
                                                 <th>Docente</th>
+                                                    <%
+                                                        }
+                                                    %>
                                                 <th>Nombre de Curso</th>                                        
                                                 <th>Precio</th>
                                                 <th>Lecciones</th>
                                                 <th>Trabajo Final</th>                                        
-
-
+                                                
+                                                <%
+                                                    if (rol == 1) {
+                                                %>
                                                 <th>Action</th>
+                                                    <%
+                                                        }
+                                                    %>
+                                                <%
+                                                    if (rol == 2) {
+                                                %>
+                                                <th>Alumnos</th>
+                                                    <%
+                                                        }
+                                                    %>
                                             </tr>
                                         </thead>
 
@@ -284,25 +340,50 @@
                                                     Object a[] = (Object[]) doc.get(i);
                                             %>
                                             <tr>
-
+                                                <%
+                                                    if (rol == 1) {
+                                                %>
                                                 <td><%= a[1].toString() + " " + a[2].toString() + ", " + a[3].toString()%></td>
+                                                <%
+                                                    }
+                                                %>
                                                 <td><%= a[4]%></td>
                                                 <td><%= a[6]%></td>
                                                 <td align="center">
                                                     <a class="btn btn-info" href="lecciones.jsp?idCur=<%= a[0]%>"><span class="glyphicon glyphicon-th-list"></span></a>
                                                 </td>
                                                 <td align="center">                                                                                                     
-                                                    <button class="btn btn-info" onclick="dialogCertificado2('<%= a[0]%>')"><span class="glyphicon glyphicon-cloud-upload"></span></button>
+                                                    <button class="btn btn-info" onclick="uploadJob('<%= a[0]%>')"><span class="glyphicon glyphicon-cloud-upload"></span></button>
+                                                        <%
+                                                            if (rol == 3) {
+                                                        %>
+                                                    <a class="btn btn-info" href="DownloadJobServlet?filename=<%= a[7]%>"><span class="glyphicon glyphicon-cloud-download"></span></a>
+                                                        <%
+                                                            }
+                                                        %>
                                                 </td>
-
+                                                <%
+                                                    if (rol == 1) {
+                                                %>
                                                 <td align="center">
                                                     <button class="btn btn-info" onclick="dialogoCursoEdit('edit', '<%= a[0]%>', '<%= a[4]%>', '<%=a[5]%>', '<%=a[8]%>', '<%=a[6]%>', '<%=a[7]%>')"><span class="glyphicon glyphicon-edit"></span></button>
                                                     <button class="btn btn-danger" onclick="deleteCurso('<%= a[0]%>')"><span class="glyphicon glyphicon-remove"></span></button>
 
                                                 </td>
+                                                <%
+                                                    }
+                                                %>
+                                                <%
+                                                    if (rol == 2) {
+                                                %>
+                                                <td align="center">
+                                                    <a class="btn btn-info" href="alumForCurso.jsp?idCur=<%= a[0]%>"><span class="glyphicon glyphicon-user"></span></a>
+                                                </td>
+                                                    <%
+                                                        }
+                                                    %>
                                             </tr>
                                             <%
-
                                                 }
                                             %>
 

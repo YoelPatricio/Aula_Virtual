@@ -65,7 +65,8 @@ public class LeccionServlet extends HttpServlet {
             String urlArchivo = "C:\\AulaVirtual_Files\\lessons\\file"; 
             String urlVideo = "C:\\AulaVirtual_Files\\lessons\\video"; 
             String url="";
-            //String url2 = "C:\\Users\\limati\\Documents\\NetBeansProjects\\Aula_Virtual\\src\\main\\webapp\\certificate";
+            String url2 = "";
+            String urlVideo2 = "C:\\Users\\Yoel\\Documents\\NetBeansProjects\\AulaVirtual\\Aula_Virtual\\src\\main\\webapp\\lessons\\video";
             
             DiskFileItemFactory factory = new DiskFileItemFactory();
             factory.setRepository(new File(urlArchivo));
@@ -81,13 +82,23 @@ public class LeccionServlet extends HttpServlet {
                     if (!items.isFormField()) {
                         
                         if(items.getFieldName().equals("video")){
-                            url=urlVideo;
+                            url=urlVideo2;
+                            //url2=urlVideo;
                         }else{
                             url=urlArchivo;
                         }
+                        
                         File file = new File(url, items.getName());
                         
                         items.write(file);
+                        
+                        /*if(url2!=null || !"".equals(url2)){
+                            File file2 = new File(url2, items.getName());                        
+                            items.write(file2);
+                            url2="";
+                        }*/
+                        
+                        
                         
                         campos.put(items.getFieldName(), items.getName());
                     } else {

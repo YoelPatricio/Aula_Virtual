@@ -17,8 +17,9 @@
     <%
 
         String nameUser="";
+        int rol=0;
         if(session.getAttribute("rol")!=null){
-        int rol = (int)session.getAttribute("rol");
+        rol = (int)session.getAttribute("rol");
         String nombre = session.getAttribute("nombres").toString().toUpperCase();
         String paterno = session.getAttribute("paterno").toString().toUpperCase();
         String materno = session.getAttribute("materno").toString();
@@ -185,9 +186,13 @@
             <aside class="sidebar">
                 <div id="leftside-navigation" class="nano">
                     <ul class="nano-content">
-                        <li >
+                        <li class="active">
                             <a href="dashboard.jsp"><i class="fa fa-dashboard"></i><span>Inicio</span></a>
                         </li>
+                        <%
+                        if(rol==1){                           
+                        
+                        %>
                         <li id="admin">
                             <a href="administrador.jsp"><i class="fa fa-cogs"></i><span>Administradores</span></a>
                         </li>
@@ -197,11 +202,25 @@
                         <li id="estudiante">
                             <a href="estudiante.jsp"><i class="fa fa-cogs"></i><span>Estudiantes</span></a>
                         </li>
-                        <li id="cursos" class="active">
-                            <a href="curso.jsp"  ><i class="fa fa-cogs"></i><span>Cursos</span></a>
+                        <li id="cursos">
+                            <a href="curso.jsp"><i class="fa fa-cogs"></i><span>Cursos</span></a>
                         </li>
-
-                        <li class="sub-menu">
+                        <%
+                            }
+                            
+                        %>
+                        <%
+                        if(rol==2){                           
+                        
+                        %>
+                        <li>
+                            <a href="curso.jsp"><i class="fa fa-cogs"></i><span>Mis Cursos</span></a>
+                        </li>
+                        <%
+                            }
+                            
+                        %>
+                        <!--<li class="sub-menu">
                             <a href="javascript:void(0);"><i class="fa fa fa-tasks"></i><span>Forms</span><i class="arrow fa fa-angle-right pull-right"></i></a>
                             <ul>
                                 <li><a href="forms-components.html">Components</a>
@@ -217,7 +236,7 @@
                                 <li><a href="forms-wysiwyg.html">WYSIWYG Editor</a>
                                 </li>
                             </ul>
-                        </li>
+                        </li>-->
 
 
                     </ul>

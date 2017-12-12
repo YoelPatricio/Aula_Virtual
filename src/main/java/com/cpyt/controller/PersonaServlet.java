@@ -62,8 +62,9 @@ public class PersonaServlet extends HttpServlet {
             
 
             String url = "C:\\AulaVirtual_Files\\certificate"; 
-            String url2 = "C:\\Users\\limati\\Documents\\NetBeansProjects\\Aula_Virtual\\src\\main\\webapp\\certificate";
-            
+            //String url2 = "C:\\Users\\limati\\Documents\\NetBeansProjects\\Aula_Virtual\\src\\main\\webapp\\certificate";
+            String url2 = "C:\\Users\\Yoel\\Documents\\NetBeansProjects\\AulaVirtual\\Aula_Virtual\\src\\main\\webapp\\certificate";
+
             DiskFileItemFactory factory = new DiskFileItemFactory();
             factory.setRepository(new File(url));
 
@@ -76,9 +77,9 @@ public class PersonaServlet extends HttpServlet {
                 for (FileItem items : partes) {
 
                     if (!items.isFormField()) {
-                        File file = new File(url, items.getName());
+                        //File file = new File(url, items.getName());
                         File file2 = new File(url2, items.getName());
-                        items.write(file);
+                        //items.write(file);
                         items.write(file2);
                         campos.put(items.getFieldName(), items.getName());
                     } else {

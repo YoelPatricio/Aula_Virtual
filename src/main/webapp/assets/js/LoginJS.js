@@ -6,7 +6,7 @@
 
 
 
-
+/*
 function cargando() {
     $("#dialogCargando").dialog({
         resizable: false,
@@ -296,7 +296,7 @@ function editAjax(data) {
 
         }
     });
-}
+}*/
 
 function validarLogin(){
     debugger;

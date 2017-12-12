@@ -36,6 +36,14 @@
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>com.cpyt.controller.LoginServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UploadJobServlet</servlet-name>
+        <servlet-class>com.cpyt.controller.UploadJobServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DownloadJobServlet</servlet-name>
+        <servlet-class>com.cpyt.controller.DownloadJobServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PersonaServlet</servlet-name>
         <url-pattern>/PersonaServlet</url-pattern>
@@ -71,6 +79,14 @@
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UploadJobServlet</servlet-name>
+        <url-pattern>/UploadJobServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DownloadJobServlet</servlet-name>
+        <url-pattern>/DownloadJobServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -53,11 +53,13 @@ public class LoginServlet extends HttpServlet {
              String nombres = a[1].toString();
              String paterno = a[2].toString();
              String materno = a[3].toString();
+             String idPer = a[4].toString();
             
             session.setAttribute("rol", rol);
             session.setAttribute("nombres", nombres);
             session.setAttribute("paterno", paterno);
             session.setAttribute("materno", materno);
+            session.setAttribute("idPer", idPer);
             //request.getRequestDispatcher("dashboard.jsp").forward(request, response);
             response.sendRedirect("dashboard.jsp");
             //out.print("true");
