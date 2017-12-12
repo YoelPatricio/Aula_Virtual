@@ -53,6 +53,12 @@ public class InscripcionDAO {
         session.close();
     }
     
+    public static void main(String[] args) {
+        int a = 0;
+        List<Object> ins = listAlumForCurso(1);
+        int ad = 0;
+    }
+    
     
     
    

@@ -16,20 +16,19 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <%
-        String nameUser="";
-        int rol=0;
-        if(session.getAttribute("rol")!=null){
-        rol = (int)session.getAttribute("rol");
-        String nombre = session.getAttribute("nombres").toString().toUpperCase();
-        String paterno = session.getAttribute("paterno").toString().toUpperCase();
-        String materno = session.getAttribute("materno").toString();
-        
-        nameUser=nombre+" "+paterno;
-        }else{
+        String nameUser = "";
+        int rol = 0;
+        if (session.getAttribute("rol") != null) {
+            rol = (int) session.getAttribute("rol");
+            String nombre = session.getAttribute("nombres").toString().toUpperCase();
+            String paterno = session.getAttribute("paterno").toString().toUpperCase();
+            String materno = session.getAttribute("materno").toString();
+
+            nameUser = nombre + " " + paterno;
+        } else {
             response.sendRedirect("login.jsp");
         }
-       
-        
+
         Integer idCur = Integer.parseInt(request.getParameter("idCur"));
         InscripcionDAO id = new InscripcionDAO();
         List<Object> doc = id.listAlumForCurso(idCur);
@@ -108,8 +107,8 @@
 
         <div id="dialogCargando" title="Cargando..." style="display: none;">
             <div align="center">
-            <br>
-            <img id="gif" src="assets/img/loading.gif" width="128" height="128" alt="loading"/>
+                <br>
+                <img id="gif" src="assets/img/loading.gif" width="128" height="128" alt="loading"/>
             </div>
         </div>
         <div id="dialog" title="Datos del Estudiante" style="display: none;">
@@ -182,7 +181,7 @@
                         </li>-->
                         <li class="dropdown settings">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                <%= nameUser %> <i class="fa fa-angle-down"></i>
+                                <%= nameUser%> <i class="fa fa-angle-down"></i>
                             </a>
                             <ul class="dropdown-menu animated fadeInDown">
                                 <!--<li>
@@ -205,8 +204,8 @@
                             <a href="dashboard.jsp"><i class="fa fa-dashboard"></i><span>Inicio</span></a>
                         </li>
                         <%
-                        if(rol==1){                           
-                        
+                            if (rol == 1) {
+
                         %>
                         <li id="admin">
                             <a href="administrador.jsp"><i class="fa fa-cogs"></i><span>Administradores</span></a>
@@ -220,22 +219,19 @@
                         <li id="cursos" class="active">
                             <a href="curso.jsp"><i class="fa fa-cogs"></i><span>Cursos</span></a>
                         </li>
-                        <%
-                            }
-                            
+                        <%                            }
+
                         %>
-                        <%
-                        if(rol==2){                           
-                        
+                        <%                            if (rol == 2) {
+
                         %>
                         <li class="active">
                             <a href="curso.jsp"><i class="fa fa-cogs"></i><span>Mis Cursos</span></a>
                         </li>
-                        <%
-                            }
-                            
+                        <%                            }
+
                         %>
-                        
+
                     </ul>
                 </div>
 
@@ -277,6 +273,8 @@
                                                 <th>Trabajo Final</th>
                                                 <th>Nota</th>                                  
                                                 <th>Estado</th>
+                                                <th>Subir Nota</th>
+
                                             </tr>
                                         </thead>
 
@@ -287,16 +285,49 @@
                                             <tr>
 
                                                 <td><%= a[2].toString() + " " + a[3].toString() + ", " + a[4].toString()%></td>
-                                               
+
                                                 <td><%= a[5]%></td>
-                                                <td></td>
-                                                <td></td>
+                                                <td align="center">
+                                                    <%
+                                                        if(Integer.parseInt(a[6].toString())!=0) {
+                                                    %>
+
+                                                    <a class="btn btn-info" href="DownloadFileServlet?filename=<%= a[4]%>"><span class="glyphicon glyphicon-cloud-download"></span></a>
+                                                    
+                                                    <%
+                                                        }
+                                                    %>
+                                                </td>
+                                                <td>
+                                                    <%
+                                                        if(a[8]!=null ){
+                                                            if(!a[8].toString().equals("0")){
+                                                        
+                                                    %>
+                                                    
+                                                    <%= a[8]%>
+                                                    
+                                                    <%}}%>
+                                                
+                                                </td>
 
                                                 <td align="center">
-                                                   
-                                                    <!--<button class="btn btn-info" onclick="dialogoPersonaEdit('edit', 'est', '<%= a[0]%>', '<%= a[1]%>', '<%=a[4]%>', '<%=a[2]%>', '<%=a[3]%>', '<%= a[5]%>', '<%= a[6]%>', '<%= a[7]%>')"><span class="glyphicon glyphicon-edit"></span></button>
-                                                    <button class="btn btn-danger" onclick="deletePersona('<%= a[0]%>')"><span class="glyphicon glyphicon-remove"></span></button>
-                                                        -->
+                                                    <%
+                                                        if (Integer.parseInt(a[6].toString()) == 0) {
+
+                                                    %>
+                                                    Inscrito
+                                                    <% } else if (Integer.parseInt(a[6].toString()) == 1){%>
+                                                    Por Revisar
+                                                    <% } else{%>
+                                                    Concluido
+                                                    <% }%>
+                                                     <!--<button class="btn btn-info" onclick="dialogoPersonaEdit('edit', 'est', '<%= a[0]%>', '<%= a[1]%>', '<%=a[4]%>', '<%=a[2]%>', '<%=a[3]%>', '<%= a[5]%>', '<%= a[6]%>', '<%= a[7]%>')"><span class="glyphicon glyphicon-edit"></span></button>
+                                                     <button class="btn btn-danger" onclick="deletePersona('<%= a[0]%>')"><span class="glyphicon glyphicon-remove"></span></button>
+                                                    -->
+                                                </td>
+                                                <td>
+
                                                 </td>
                                             </tr>
                                             <%
@@ -330,9 +361,9 @@
         <script src="assets/js/jquery-ui.min.js"></script>
         <link rel="stylesheet" href="assets/css/jquery-ui.css">
         <script>
-                                                        $(document).ready(function () {
-                                                            $('#example').dataTable();
-                                                        });
+                                        $(document).ready(function () {
+                                            $('#example').dataTable();
+                                        });
         </script>
 
     </body>
