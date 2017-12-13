@@ -66,7 +66,7 @@
         <script src="assets/js/respond.min.js"></script>
         <![endif]-->
 
-        <script src="assets/js/AdmJS.js"></script>
+        <script src="assets/js/NotaJS.js"></script>
         <script src="assets/js/LoginJS.js"></script>
         <style>
             .dialogCargando .ui-widget-header {
@@ -111,54 +111,19 @@
                 <img id="gif" src="assets/img/loading.gif" width="128" height="128" alt="loading"/>
             </div>
         </div>
-        <div id="dialog" title="Datos del Estudiante" style="display: none;">
+        
+        <div id="dialog" title="Nota Final" style="display: none;">
+            <br>
             <div class="row">
                 <br>
                 <div class="col-md-6">
-                    <label for="txtDNI">DNI:</label>
-                    <input type="text" id="txtDNI" placeholder="DNI" class="form-control"/>
-                    <input type="hidden" id="txtIdPer"/>
+                    <label for="nota">Nota:</label>
+                    <input type="number" id="nota" placeholder="Ingrese la nota" class="form-control"/>
+                    <input type="hidden" id="txtIdTra"/>
                 </div>
-                <div class="col-md-6">
-                    <label for="txtNombres">Nombres:</label>
-                    <input type="text" id="txtNombres" placeholder="Nombres" class="form-control"/>
-                </div>
+                 
             </div>
             <br>
-            <div class="row">
-                <div class="col-md-6">
-                    <label for="txtPaterno">Apellido Paterno:</label>
-                    <input type="text" id="txtPaterno" placeholder="Apellido Paterno" class="form-control"/>
-                </div>
-                <div class="col-md-6">
-                    <label for="txtMaterno">Apellido Materno:</label>
-                    <input type="text" id="txtMaterno"  placeholder="Apellido Materno" class="form-control"/>
-                </div>
-            </div>
-            <br>
-            <div class="row">
-                <div class="col-md-6">
-                    <label for="txtCorreo">Correo Electrónico:</label>
-                    <input type="text" id="txtCorreo" placeholder="Correo Electrónico" class="form-control"/>
-                </div>
-                <div class="col-md-6">
-                    <label for="txtCelular">Celular:</label>
-                    <input type="text" id="txtCelular"  placeholder="Celular" class="form-control"/>
-                </div>
-            </div>
-            <br>
-            <div class="row">
-                <div class="col-md-6">
-                    <label for="txtDireccion">Dirección:</label>
-                    <input type="text" id="txtDireccion" placeholder="Dirección" class="form-control"/>
-                </div>
-
-            </div>
-            <br>
-
-
-
-
         </div>
 
         <section id="container">
@@ -289,26 +254,27 @@
                                                 <td><%= a[5]%></td>
                                                 <td align="center">
                                                     <%
-                                                        if(Integer.parseInt(a[6].toString())!=0) {
+                                                        if (Integer.parseInt(a[6].toString()) != 0) {
                                                     %>
 
-                                                    <a class="btn btn-info" href="DownloadFileServlet?filename=<%= a[4]%>"><span class="glyphicon glyphicon-cloud-download"></span></a>
-                                                    
+                                                    <a class="btn btn-info" href="DownloadJobStudentServlet?filename=<%= a[7]%>"><span class="glyphicon glyphicon-cloud-download"></span></a>
+
                                                     <%
                                                         }
                                                     %>
                                                 </td>
                                                 <td>
                                                     <%
-                                                        if(a[8]!=null ){
-                                                            if(!a[8].toString().equals("0")){
-                                                        
+                                                        if (a[8] != null) {
+                                                            if (!a[8].toString().equals("0")) {
+
                                                     %>
-                                                    
+
                                                     <%= a[8]%>
-                                                    
-                                                    <%}}%>
-                                                
+
+                                                    <%}
+                                                        }%>
+
                                                 </td>
 
                                                 <td align="center">
@@ -317,17 +283,23 @@
 
                                                     %>
                                                     Inscrito
-                                                    <% } else if (Integer.parseInt(a[6].toString()) == 1){%>
+                                                    <% } else if (Integer.parseInt(a[6].toString()) == 1) {%>
                                                     Por Revisar
-                                                    <% } else{%>
+                                                    <% } else {%>
                                                     Concluido
                                                     <% }%>
                                                      <!--<button class="btn btn-info" onclick="dialogoPersonaEdit('edit', 'est', '<%= a[0]%>', '<%= a[1]%>', '<%=a[4]%>', '<%=a[2]%>', '<%=a[3]%>', '<%= a[5]%>', '<%= a[6]%>', '<%= a[7]%>')"><span class="glyphicon glyphicon-edit"></span></button>
                                                      <button class="btn btn-danger" onclick="deletePersona('<%= a[0]%>')"><span class="glyphicon glyphicon-remove"></span></button>
                                                     -->
                                                 </td>
-                                                <td>
-
+                                                <td align="center">
+                                                    <%
+                                                        if (Integer.parseInt(a[6].toString()) != 0) {
+                                                    %>
+                                                    <button class="btn btn-info" onclick="dialogoNota('<%= a[9]%>')"><span class="glyphicon glyphicon-edit"></span></button>
+                                                    <%
+                                                        }
+                                                    %>
                                                 </td>
                                             </tr>
                                             <%
@@ -361,9 +333,9 @@
         <script src="assets/js/jquery-ui.min.js"></script>
         <link rel="stylesheet" href="assets/css/jquery-ui.css">
         <script>
-                                        $(document).ready(function () {
-                                            $('#example').dataTable();
-                                        });
+                                                        $(document).ready(function () {
+                                                            $('#example').dataTable();
+                                                        });
         </script>
 
     </body>

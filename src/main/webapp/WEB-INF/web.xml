@@ -44,6 +44,14 @@
         <servlet-name>DownloadJobServlet</servlet-name>
         <servlet-class>com.cpyt.controller.DownloadJobServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DownloadJobStudentServlet</servlet-name>
+        <servlet-class>com.cpyt.controller.DownloadJobStudentServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>NotaServlet</servlet-name>
+        <servlet-class>com.cpyt.controller.NotaServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PersonaServlet</servlet-name>
         <url-pattern>/PersonaServlet</url-pattern>
@@ -87,6 +95,14 @@
     <servlet-mapping>
         <servlet-name>DownloadJobServlet</servlet-name>
         <url-pattern>/DownloadJobServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DownloadJobStudentServlet</servlet-name>
+        <url-pattern>/DownloadJobStudentServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NotaServlet</servlet-name>
+        <url-pattern>/NotaServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

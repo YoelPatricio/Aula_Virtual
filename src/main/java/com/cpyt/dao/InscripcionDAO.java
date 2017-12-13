@@ -30,7 +30,7 @@ public class InscripcionDAO {
     public static List<Object> listAlumForCurso(Integer idCur) {
 
         Session session = sessionFactory.openSession();
-        Query query = session.createSQLQuery("select i.id_ins,i.id_per,p.apaterno,p.amaterno,p.nombres,i.fec_ins,i.est_ins,tf.arc_tra,tf.not_tra "
+        Query query = session.createSQLQuery("select i.id_ins,i.id_per,p.apaterno,p.amaterno,p.nombres,i.fec_ins,i.est_ins,tf.arc_tra,tf.not_tra,tf.id_tra "
                                                 + " from inscripcion i inner join persona p "
                                                 + " on i.id_per=p.id_per left join trabajo_final tf on i.id_ins=tf.id_ins"
                                                 + " where p.estado=0 and i.id_cur="+idCur);
