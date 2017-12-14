@@ -42,6 +42,19 @@ public class NotaDAO {
         session.close();
     }
     
+    public void cursoConcluido(Integer idTra,Integer nota) {
+
+        Session session = sessionFactory.openSession();
+        Query query = session.createSQLQuery("update trabajo_final set not_tra=? where id_tra=?");
+        query.setParameter(0, nota);
+        query.setParameter(1, idTra);
+        
+        query.executeUpdate();
+        Transaction tx = session.beginTransaction();
+        tx.commit();
+        session.close();
+    }
+    
     
     
     

@@ -38,6 +38,7 @@ public class NotaServlet extends HttpServlet {
 
         
            NotaDAO nd=new NotaDAO();
+           
             try {
                 nd.subirNota(idTra, nota);
             out.print("true");
