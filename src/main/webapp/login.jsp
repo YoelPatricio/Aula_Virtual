@@ -27,10 +27,10 @@
 
 
 
-        <div id="dialogMensaje" title="Mensaje" style="display: none;">
+        <div id="dialogMensaje" title="Exitoso!" style="display: none;">
             <br>
             <div align="center">
-                <h3>Exito!</h3> 
+                
                 <p>Se le envio un correo</p>
                 <p>con su usuario y contraseña</p>
             </div>
