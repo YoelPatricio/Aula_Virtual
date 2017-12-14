@@ -60,7 +60,7 @@ function mostrarAlertaError() {
 
 
 
-function dialogoNota(idTra) {
+function dialogoNota(idTra,idIns) {
     debugger;
     $('#nota').val(null);
 
@@ -81,7 +81,8 @@ function dialogoNota(idTra) {
                         type: 'POST',
                         data: {
                             idTra: idTra,
-                            nota: $('#nota').val()
+                            nota: $('#nota').val(),
+                            idIns: idIns
                         },
                         success: function (responseText) {
                             debugger;

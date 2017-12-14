@@ -296,7 +296,7 @@
                                                     <%
                                                         if (Integer.parseInt(a[6].toString()) != 0) {
                                                     %>
-                                                    <button class="btn btn-info" onclick="dialogoNota('<%= a[9]%>')"><span class="glyphicon glyphicon-edit"></span></button>
+                                                    <button class="btn btn-info" onclick="dialogoNota('<%= a[9]%>','<%= a[0]%>')"><span class="glyphicon glyphicon-edit"></span></button>
                                                     <%
                                                         }
                                                     %>

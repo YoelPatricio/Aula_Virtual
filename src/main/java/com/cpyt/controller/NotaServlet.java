@@ -34,6 +34,7 @@ public class NotaServlet extends HttpServlet {
          PrintWriter out = response.getWriter();
         Integer idTra = Integer.parseInt(request.getParameter("idTra"));
         Integer nota = Integer.parseInt(request.getParameter("nota"));
+        Integer idIns = Integer.parseInt(request.getParameter("idIns"));
       
 
         
@@ -41,6 +42,7 @@ public class NotaServlet extends HttpServlet {
            
             try {
                 nd.subirNota(idTra, nota);
+                nd.cursoConcluido(idIns);
             out.print("true");
             } catch (Exception e) {
                 out.print("false");
