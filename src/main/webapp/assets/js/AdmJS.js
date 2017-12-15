@@ -72,7 +72,7 @@ function limpiarDialogo() {
 
 
 function dialogoPersona(accion, tipo, idPer, dni, nombres, paterno, materno, correo, celular, direccion) {
-    debugger;
+    
 
     
         if (accion == 'edit') {
@@ -99,6 +99,50 @@ function dialogoPersona(accion, tipo, idPer, dni, nombres, paterno, materno, cor
             {
                 text: "Grabar",
                 click: function () {
+                    debugger;
+                    var dni = $('#txtDNI').val();
+                    var correo = $('#txtCorreo').val();
+                    if(dni==""){
+                        alert('INGRESE EL DNI');
+                        return;
+                    }
+                    if(dni.length!=8){
+                        alert('EL DNI DEBE CONTENER 8 CARACTERES');
+                        return;
+                    }
+                    if($('#txtNombres').val()==""){
+                        alert('INGRESE EL/LOS NOMBRES');
+                        return;
+                    }
+                    if($('#txtPaterno').val()==""){
+                        alert('INGRESE EL APELLIDO PATERNO');
+                        return;
+                    }
+                    if($('#txtMaterno').val()==""){
+                        alert('INGRESE EL APELLIDO MATERNO');
+                        return;
+                    }
+                    if(correo==""){
+                        alert('INGRESE EL CORREO');
+                        return;
+                    }
+                    if(correo.indexOf("@")==-1){
+                        alert('EL CORREO NO TIENE EL FORMATO ADECUADO');
+                        return;
+                    }
+                    if(correo.indexOf(".com")==-1 && correo.indexOf(".es")==-1 && correo.indexOf(".COM")==-1 && correo.indexOf(".ES")==-1){
+                        alert('EL CORREO NO TIENE EL FORMATO ADECUADO');
+                        return;
+                    }
+                    if($('#txtCelular').val()==""){
+                        alert('INGRESE EL NÚMERO DE CELULAR');
+                        return;
+                    }
+                    if($('#txtDireccion').val()==""){
+                        alert('INGRESE LA DIRECCION');
+                        return;
+                    }
+                    
                     if (accion == 'add') {
                         cargando();
                     }
