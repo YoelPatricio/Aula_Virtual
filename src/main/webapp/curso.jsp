@@ -376,7 +376,7 @@
                                                         if (rol == 3) {
                                                     %>
                                                 <th>Nota</th>
-                                                <th>Certificado</th>
+                                                <!--<th>Certificado</th>-->
                                                 <th>Estado</th>
                                                     <%
                                                         }
@@ -480,15 +480,16 @@
 
 
                                                 </td>
-                                                <td align="center" >
+                                                <!--<td align="center" >-->
                                                     <%
                                                         if (a[12].toString().equals("2")) {
                                                     %>
+                                                    <!--
                                                     <button class="btn btn-warning" onclick=""><span class="glyphicon glyphicon-certificate"></span></button>
-
+                                                    -->
                                                     <%} %>
 
-                                                </td>
+                                                <!--</td>-->
                                                 <td align="center" >
 
                                                     <!--<a class="btn btn-info" href="alumForCurso.jsp?idCur=%= a[0]%>"><span class="glyphicon glyphicon-user"></span></a>
