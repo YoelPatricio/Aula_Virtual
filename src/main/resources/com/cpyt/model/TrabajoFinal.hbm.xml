@@ -15,7 +15,7 @@
             <column name="arc_tra" length="50" not-null="true" />
         </property>
         <property name="desTra" type="string">
-            <column name="des_tra" length="250" not-null="true" />
+            <column name="des_tra" length="250" />
         </property>
         <property name="notTra" type="int">
             <column name="not_tra" not-null="true" />

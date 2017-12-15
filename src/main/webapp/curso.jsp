@@ -33,6 +33,8 @@
             doc = g.listCurso();
         } else if (rol == 2) {
             doc = g.listCursoDocente(idPer);
+        } else if (rol == 3) {
+            doc = g.listCursoEstudiante(idPer);
         }
 
         PersonaDAO p = new PersonaDAO();
@@ -175,6 +177,27 @@
 
         </div>
 
+        <div id="dialogoPublicar" title="Publicación del Curso" style="display: none;">
+            
+            <br>
+            
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="publicar">¿Publicar?</label>
+                    <select class="form-control" id="publicar" name="publicar">
+                        <option value="-1">--Seleccionar--</option>
+                        <option value="0">Sí</option>
+                        <option value="0">No</option>
+                        
+                    </select>
+                </div>
+
+            </div>
+            
+            <br>
+
+        </div>
+
         <section id="container">
             <header id="header">
                 <!--logo start-->
@@ -218,8 +241,8 @@
                             <a href="dashboard.jsp"><i class="fa fa-dashboard"></i><span>Inicio</span></a>
                         </li>
                         <%
-                        if(rol==1){                           
-                        
+                            if (rol == 1) {
+
                         %>
                         <li id="admin">
                             <a href="administrador.jsp"><i class="fa fa-cogs"></i><span>Administradores</span></a>
@@ -233,20 +256,29 @@
                         <li id="cursos" class="active">
                             <a href="curso.jsp"><i class="fa fa-cogs"></i><span>Cursos</span></a>
                         </li>
-                        <%
-                            }
-                            
+                        <%                            }
+
                         %>
-                        <%
-                        if(rol==2){                           
-                        
+                        <%                            if (rol == 2) {
+
                         %>
                         <li class="active">
                             <a href="curso.jsp"><i class="fa fa-cogs"></i><span>Mis Cursos</span></a>
                         </li>
-                        <%
-                            }
-                            
+                        <%                            }
+
+                        %>
+                        <%                            if (rol == 3) {
+
+                        %>
+                        <li>
+                            <a href="allcursosE.jsp"><i class="fa fa-cogs"></i><span>Cursos</span></a>
+                        </li>
+                        <li class="active">
+                            <a href="curso.jsp" ><i class="fa fa-cogs"></i><span>Mis Cursos</span></a>
+                        </li>
+                        <%                            }
+
                         %>
                         <!--<li class="sub-menu">
                             <a href="javascript:void(0);"><i class="fa fa fa-tasks"></i><span>Forms</span><i class="arrow fa fa-angle-right pull-right"></i></a>
@@ -283,8 +315,7 @@
 
                         </div>
                         <div class="col-md-2">
-                            <%
-                                if (rol == 1) {
+                            <%                                if (rol == 1) {
                             %>
                             <button id="interesAddButton" class="btn btn-success"  onClick="dialogoCurso('add', null, null, null, null, null, null)"><span class="glyphicons glyphicon-plus"></span> Agregar</button> 
                             <%
@@ -307,7 +338,7 @@
                                     <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                         <thead>
                                             <tr><%
-                                                if (rol == 1) {
+                                                if (rol == 1 || rol == 3) {
                                                 %>
                                                 <th>Docente</th>
                                                     <%
@@ -315,20 +346,38 @@
                                                     %>
                                                 <th>Nombre de Curso</th>                                        
                                                 <th>Precio</th>
-                                                <th>Lecciones</th>
-                                                <th>Trabajo Final</th>                                        
-                                                
-                                                <%
-                                                    if (rol == 1) {
-                                                %>
-                                                <th>Action</th>
+                                                    <%
+                                                        if (rol == 3) {
+                                                    %>
+                                                <th>Fecha Ins.</th>
                                                     <%
                                                         }
                                                     %>
+                                                <th>Lecciones</th>
+                                                <th>Trabajo Final</th>                                        
+
                                                 <%
-                                                    if (rol == 2) {
+                                                    if (rol == 1) {
                                                 %>
+                                                <th>Acción</th>
+                                                    <%
+                                                        }
+                                                    %>
+                                                    <%
+                                                        if (rol == 2) {
+                                                    %>
                                                 <th>Alumnos</th>
+                                                <th>¿Publicado?</th>
+                                                <th>Publicar Curso</th>
+                                                    <%
+                                                        }
+                                                    %>
+                                                    <%
+                                                        if (rol == 3) {
+                                                    %>
+                                                <th>Nota</th>
+                                                <th>Certificado</th>
+                                                <th>Estado</th>
                                                     <%
                                                         }
                                                     %>
@@ -341,7 +390,7 @@
                                             %>
                                             <tr>
                                                 <%
-                                                    if (rol == 1) {
+                                                    if (rol == 1 || rol == 3) {
                                                 %>
                                                 <td><%= a[1].toString() + " " + a[2].toString() + ", " + a[3].toString()%></td>
                                                 <%
@@ -349,11 +398,31 @@
                                                 %>
                                                 <td><%= a[4]%></td>
                                                 <td><%= a[6]%></td>
+                                                <%
+                                                    if (rol == 3) {
+                                                %>
+                                                <td><%= a[11]%></td>
+                                                <%
+                                                    }
+                                                %>
                                                 <td align="center">
                                                     <a class="btn btn-info" href="lecciones.jsp?idCur=<%= a[0]%>"><span class="glyphicon glyphicon-th-list"></span></a>
                                                 </td>
-                                                <td align="center">                                                                                                     
+                                                <td align="center">   
+                                                    <%
+                                                        if (rol != 3) {
+                                                    %>
                                                     <button class="btn btn-info" onclick="uploadJob('<%= a[0]%>')"><span class="glyphicon glyphicon-cloud-upload"></span></button>
+                                                        <%
+                                                            }
+                                                        %>
+                                                        <%
+                                                            if (rol == 3) {
+                                                        %>
+                                                    <button class="btn btn-info" onclick="uploadStudentJob('<%= a[10]%>')"><span class="glyphicon glyphicon-cloud-upload"></span></button>
+                                                        <%
+                                                            }
+                                                        %>
                                                         <%
                                                             if (rol == 3) {
                                                         %>
@@ -379,9 +448,64 @@
                                                 <td align="center">
                                                     <a class="btn btn-info" href="alumForCurso.jsp?idCur=<%= a[0]%>"><span class="glyphicon glyphicon-user"></span></a>
                                                 </td>
+                                                <td align="center">
+                                                    <%if (a[9].toString().equals("1")) {%>
+                                                    No
+                                                    <%} else {%>
+                                                    Sí
+                                                    <%}%>
+
+                                                </td>
+                                                <td align="center">
+                                                    <button class="btn btn-info" onclick="dialogoPublicar('<%= a[0]%>')"><span class="glyphicon glyphicon-send"></span></button>
+                                                </td>
+                                                <%
+                                                    }
+                                                %>
+
+                                                <%
+                                                    if (rol == 3) {
+                                                %>
+                                                <td align="center" >
                                                     <%
-                                                        }
+                                                        if (a[13] != null) {
+                                                            if (!a[13].toString().equals("0")) {
+
                                                     %>
+
+                                                    <%= a[13]%>
+
+                                                    <%}
+                                                        }%>
+
+
+                                                </td>
+                                                <td align="center" >
+                                                    <%
+                                                        if (a[12].toString().equals("2")) {
+                                                    %>
+                                                    <button class="btn btn-warning" onclick=""><span class="glyphicon glyphicon-certificate"></span></button>
+
+                                                    <%} %>
+
+                                                </td>
+                                                <td align="center" >
+
+                                                    <!--<a class="btn btn-info" href="alumForCurso.jsp?idCur=%= a[0]%>"><span class="glyphicon glyphicon-user"></span></a>
+                                                    -->
+                                                    <%
+                                                        if (a[12].toString().equals("0")) {
+                                                    %>
+                                                    Inscrito
+                                                    <%} else if (a[12].toString().equals("1")) {%>
+                                                    Por revisar
+                                                    <%} else {%>
+                                                    Concluido
+                                                    <%}%>
+                                                </td>
+                                                <%
+                                                    }
+                                                %>
                                             </tr>
                                             <%
                                                 }

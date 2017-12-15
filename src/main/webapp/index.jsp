@@ -19,6 +19,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
 
     <!-- Custom fonts for this template -->
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -48,7 +49,7 @@
               <a class="nav-link js-scroll-trigger" href="index.jsp">Inicio</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#services">Cursos</a>
+              <a class="nav-link js-scroll-trigger" href="login.jsp">Login</a>
             </li>
             
           </ul>
@@ -67,7 +68,7 @@
           </div>
           <div class="col-lg-8 mx-auto">
             <p class="text-faded mb-5">Adquiere conocimientos tecnológicos</p>
-            <a class="btn btn-primary btn-xl js-scroll-trigger" href="login.jsp">Ingresar</a>
+            <a class="btn btn-primary btn-xl js-scroll-trigger" href="allcursos.jsp">Cursos</a>
           </div>
         </div>
       </div>

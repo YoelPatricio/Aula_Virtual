@@ -135,6 +135,19 @@ public class GenericDAO {
         return dir;
     }
     
+    public void cursoPorRevisar(Integer idIns) {
+
+        Session session = sessionFactory.openSession();
+        Query query = session.createSQLQuery("update inscripcion set est_ins=1 where id_ins=?");
+        query.setParameter(0, idIns);
+        
+        
+        query.executeUpdate();
+        Transaction tx = session.beginTransaction();
+        tx.commit();
+        session.close();
+    }
+    
     
     
     public static void main(String[] args) {

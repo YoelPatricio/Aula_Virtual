@@ -121,6 +121,20 @@
                             }
                             
                         %>
+                        <%
+                        if(rol==3){                           
+                        
+                        %>
+                        <li>
+                            <a href="allcursosE.jsp"><i class="fa fa-cogs"></i><span>Cursos</span></a>
+                        </li>
+                        <li>
+                            <a href="curso.jsp"><i class="fa fa-cogs"></i><span>Mis Cursos</span></a>
+                        </li>
+                        <%
+                            }
+                            
+                        %>
                         <!--<li class="sub-menu">
                             <a href="javascript:void(0);"><i class="fa fa fa-tasks"></i><span>Forms</span><i class="arrow fa fa-angle-right pull-right"></i></a>
                             <ul>
@@ -151,7 +165,7 @@
                 <section id="main-content">
                     <!--tiles start-->
                     <div id="contenidoDerecha">
-                        <div class="row">
+                       <!-- <div class="row">
                             <div class="col-md-3 col-sm-6">
                                 <div class="dashboard-tile detail tile-red">
                                     <div class="content">
@@ -193,7 +207,12 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
                         <br>
                         <div class="row" >
                             <br>

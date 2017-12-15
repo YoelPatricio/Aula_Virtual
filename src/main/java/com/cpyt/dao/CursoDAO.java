@@ -30,7 +30,7 @@ public class CursoDAO {
     public static List<Object> listCurso() {
 
         Session session = sessionFactory.openSession();
-        Query query = session.createSQLQuery("select c.id_cur,p.apaterno,p.amaterno,p.nombres,c.nom_cur,c.des_cur,c.pre_cur,c.tra_cur,c.id_per from curso c inner join persona p on c.id_per=p.id_per where c.estado=0");
+        Query query = session.createSQLQuery("select c.id_cur,p.apaterno,p.amaterno,p.nombres,c.nom_cur,c.des_cur,c.pre_cur,c.tra_cur,c.id_per,c.publicado from curso c inner join persona p on c.id_per=p.id_per where c.estado=0");
         
         List results = query.list();
         return results;
@@ -39,7 +39,19 @@ public class CursoDAO {
     public static List<Object> listCursoDocente(String idPer) {
 
         Session session = sessionFactory.openSession();
-        Query query = session.createSQLQuery("select c.id_cur,p.apaterno,p.amaterno,p.nombres,c.nom_cur,c.des_cur,c.pre_cur,c.tra_cur,c.id_per from curso c inner join persona p on c.id_per=p.id_per where c.estado=0 and c.id_per="+idPer);
+        Query query = session.createSQLQuery("select c.id_cur,p.apaterno,p.amaterno,p.nombres,c.nom_cur,c.des_cur,c.pre_cur,c.tra_cur,c.id_per,c.publicado from curso c inner join persona p on c.id_per=p.id_per where c.estado=0 and c.id_per="+idPer);
+        
+        List results = query.list();
+        return results;
+    }
+    
+    public static List<Object> listCursoEstudiante(String idPer) {
+
+        Session session = sessionFactory.openSession();
+        Query query = session.createSQLQuery("select c.id_cur,p.apaterno,p.amaterno,p.nombres,c.nom_cur,c.des_cur,c.pre_cur,c.tra_cur,c.id_per,c.publicado,i.id_ins,i.fec_ins,i.est_ins,tf.not_tra "
+                                            + " from inscripcion i inner join curso c on i.id_cur=c.id_cur "
+                                            + " inner join persona p on c.id_per=p.id_per "
+                                            + " left join trabajo_final tf on i.id_ins=tf.id_ins where i.id_per="+idPer);
         
         List results = query.list();
         return results;
@@ -77,6 +89,15 @@ public class CursoDAO {
         Transaction tx = session.beginTransaction();
         tx.commit();
         session.close();
+    }
+    
+    public static List<Object> listCursoAll() {
+
+        Session session = sessionFactory.openSession();
+        Query query = session.createSQLQuery("select c.id_cur,p.apaterno,p.amaterno,p.nombres,c.nom_cur,c.des_cur,c.pre_cur,c.tra_cur,c.id_per from curso c inner join persona p on c.id_per=p.id_per where c.estado=0 and c.publicado=0");
+        
+        List results = query.list();
+        return results;
     }
     
     

@@ -63,25 +63,25 @@ function limpiarDialogo() {
     $('#txtDesc').val('');
     $('#txtDoc').val(0);
     $('#txtPrecio').val('');
-   
+
 
 }
 
-function dialogoCurso(accion, idCur, nombre, desc, doc, precio,trabajo) {
+function dialogoCurso(accion, idCur, nombre, desc, doc, precio, trabajo) {
     debugger;
 
-    
-        if (accion == 'edit') {
-            $('#txtIdCur').val(idCur);
-            $('#txtNombre').val(nombre);
-            $('#txtDesc').val(desc);
-            $('#txtDoc').val(doc);
-            $('#txtPrecio').val(precio);         
 
-        } else {
-            limpiarDialogo();
-        }
-    
+    if (accion == 'edit') {
+        $('#txtIdCur').val(idCur);
+        $('#txtNombre').val(nombre);
+        $('#txtDesc').val(desc);
+        $('#txtDoc').val(doc);
+        $('#txtPrecio').val(precio);
+
+    } else {
+        limpiarDialogo();
+    }
+
 
     $("#dialog").dialog({
         resizable: false,
@@ -95,7 +95,7 @@ function dialogoCurso(accion, idCur, nombre, desc, doc, precio,trabajo) {
                     if (accion == 'add') {
                         cargando();
                     }
-                   
+
 
                     var data = new FormData();
                     debugger;
@@ -106,10 +106,10 @@ function dialogoCurso(accion, idCur, nombre, desc, doc, precio,trabajo) {
                     data.append('txtDoc', $('#txtDoc').val());
                     data.append('txtPrecio', $('#txtPrecio').val());
                     data.append('txtTrabajo', '');
-                    
+
 
                     data.append('accion', accion);
-                  
+
 
                     $(this).dialog("close");
                     if (accion == 'add') {
@@ -136,19 +136,19 @@ function dialogoCurso(accion, idCur, nombre, desc, doc, precio,trabajo) {
     });
 }
 
-function dialogoCursoEdit(accion, idCur, nombre, desc, doc, precio,trabajo) {
+function dialogoCursoEdit(accion, idCur, nombre, desc, doc, precio, trabajo) {
 
 
     debugger;
-       
-            $('#txtIdCur').val(idCur);
-            $('#txtNombre').val(nombre);
-            $('#txtDesc').val(desc);
-            $('#txtDoc').val(doc);
-            $('#txtPrecio').val(precio);  
 
-        
-    
+    $('#txtIdCur').val(idCur);
+    $('#txtNombre').val(nombre);
+    $('#txtDesc').val(desc);
+    $('#txtDoc').val(doc);
+    $('#txtPrecio').val(precio);
+
+
+
 
     $("#dialog").dialog({
         resizable: false,
@@ -159,8 +159,8 @@ function dialogoCursoEdit(accion, idCur, nombre, desc, doc, precio,trabajo) {
             {
                 text: "Grabar",
                 click: function () {
-                    
-                   
+
+
 
                     var data = new FormData();
                     debugger;
@@ -173,12 +173,12 @@ function dialogoCursoEdit(accion, idCur, nombre, desc, doc, precio,trabajo) {
                     data.append('txtTrabajo', trabajo);
 
                     data.append('accion', accion);
-                
 
-                    
-                   
-                        editAjax(data);
-                    
+
+
+
+                    editAjax(data);
+
                     $(this).dialog("close");
 
 
@@ -244,7 +244,7 @@ function addAjax(data) {
             if (responseText == 'true') {
 
                 mostrarAlerta();
-                
+
             } else {
 
                 mostrarAlertaError();
@@ -270,11 +270,11 @@ function editAjax(data) {
             if (responseText == 'true') {
 
                 mostrarAlerta();
-                
+
             } else {
 
                 mostrarAlertaError();
-                
+
             }
 
         }
@@ -283,7 +283,7 @@ function editAjax(data) {
 
 function uploadJob(idCur) {
     debugger;
-   
+
 
 
     $("#uploadJob").dialog({
@@ -295,10 +295,10 @@ function uploadJob(idCur) {
             {
                 text: "Grabar",
                 click: function () {
-                    
-                        cargando();
-                    
-                    
+
+                    cargando();
+
+
                     debugger;
                     var inputFileImage = document.getElementById("job");
                     var file = inputFileImage.files[0];
@@ -306,8 +306,8 @@ function uploadJob(idCur) {
                     debugger;
                     data.append('job', file);
                     data.append('idCur', idCur);
-                    
-                    
+
+
                     $.ajax({
                         url: 'UploadJobServlet',
                         type: 'POST',
@@ -325,14 +325,140 @@ function uploadJob(idCur) {
                             } else {
 
                                 mostrarAlertaError();
-                              
+
                             }
 
                         }
                     });
-                      
+
                 }
 
+            }, {
+                text: "Cancelar",
+                click: function () {
+                    $(this).dialog("close");
+                }
+            }
+        ]
+    });
+}
+
+
+function uploadStudentJob(idIns) {
+    debugger;
+
+
+
+    $("#uploadJob").dialog({
+        resizable: false,
+        modal: true,
+        width: 650,
+        height: 270,
+        buttons: [
+            {
+                text: "Grabar",
+                click: function () {
+
+                    cargando();
+
+
+                    debugger;
+                    var inputFileImage = document.getElementById("job");
+                    var file = inputFileImage.files[0];
+                    var data = new FormData();
+                    debugger;
+                    data.append('job', file);
+                    data.append('idIns', idIns);
+
+
+                    $.ajax({
+                        url: 'UploadStudentJobServlet',
+                        type: 'POST',
+                        contentType: false,
+                        data: data,
+                        processData: false,
+                        cache: false,
+                        success: function (responseText) {
+                            debugger;
+                            $("#dialogCargando").dialog("close");
+                            if (responseText == 'true') {
+
+                                mostrarAlerta();
+
+                            } else {
+
+                                mostrarAlertaError();
+
+                            }
+
+                        }
+                    });
+
+                }
+
+            }, {
+                text: "Cancelar",
+                click: function () {
+                    $(this).dialog("close");
+                }
+            }
+        ]
+    });
+}
+
+
+function dialogoPublicar(idCur) {
+
+
+    $('#publicar').val(-1);
+
+
+    $("#dialogoPublicar").dialog({
+        resizable: false,
+        modal: true,
+        width: 250,
+        height: 250,
+        buttons: [
+            {
+                text: "Grabar",
+                click: function () {
+
+                        debugger;
+                        cargando();
+                        $.ajax({
+                            url: 'PublicarServlet',
+                            type: 'POST',
+                            data: {
+                                idCur: idCur,
+                                estado: $('#publicar').val()
+                            },
+                            success: function (responseText) {
+                                debugger;
+                                if (responseText == 'true') {
+                                    $("#dialogCargando").dialog("close");
+                                    mostrarAlerta();
+
+                                } else {
+                                    $("#dialogCargando").dialog("close");
+                                    mostrarAlertaError();
+
+                                }
+
+                            }
+                        });
+
+                        //$(this).dialog("close");
+                    
+
+                    $(this).dialog("close");
+
+
+                }
+
+
+                // Uncommenting the following line would hide the text,
+                // resulting in the label being used as a tooltip
+                //showText: false
             }, {
                 text: "Cancelar",
                 click: function () {

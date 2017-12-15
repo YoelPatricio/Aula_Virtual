@@ -41,6 +41,10 @@
         <servlet-class>com.cpyt.controller.UploadJobServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>UploadStudentJobServlet</servlet-name>
+        <servlet-class>com.cpyt.controller.UploadStudentJobServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>DownloadJobServlet</servlet-name>
         <servlet-class>com.cpyt.controller.DownloadJobServlet</servlet-class>
     </servlet>
@@ -51,6 +55,14 @@
     <servlet>
         <servlet-name>NotaServlet</servlet-name>
         <servlet-class>com.cpyt.controller.NotaServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InscripcionServlet</servlet-name>
+        <servlet-class>com.cpyt.controller.InscripcionServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PublicarServlet</servlet-name>
+        <servlet-class>com.cpyt.controller.PublicarServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>PersonaServlet</servlet-name>
@@ -93,6 +105,10 @@
         <url-pattern>/UploadJobServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>UploadStudentJobServlet</servlet-name>
+        <url-pattern>/UploadStudentJobServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>DownloadJobServlet</servlet-name>
         <url-pattern>/DownloadJobServlet</url-pattern>
     </servlet-mapping>
@@ -103,6 +119,14 @@
     <servlet-mapping>
         <servlet-name>NotaServlet</servlet-name>
         <url-pattern>/NotaServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InscripcionServlet</servlet-name>
+        <url-pattern>/InscripcionServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PublicarServlet</servlet-name>
+        <url-pattern>/PublicarServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -16,19 +16,19 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <%
 
-        String nameUser="";
-        int rol=0;
-        if(session.getAttribute("rol")!=null){
-        rol = (int)session.getAttribute("rol");
-        String nombre = session.getAttribute("nombres").toString().toUpperCase();
-        String paterno = session.getAttribute("paterno").toString().toUpperCase();
-        String materno = session.getAttribute("materno").toString();
-        
-        nameUser=nombre+" "+paterno;
-        }else{
+        String nameUser = "";
+        int rol = 0;
+        if (session.getAttribute("rol") != null) {
+            rol = (int) session.getAttribute("rol");
+            String nombre = session.getAttribute("nombres").toString().toUpperCase();
+            String paterno = session.getAttribute("paterno").toString().toUpperCase();
+            String materno = session.getAttribute("materno").toString();
+
+            nameUser = nombre + " " + paterno;
+        } else {
             response.sendRedirect("login.jsp");
         }
-        
+
         Integer idCur = Integer.parseInt(request.getParameter("idCur"));
         LeccionDAO ld = new LeccionDAO();
         List<Object> lec = ld.listLeccion(idCur);
@@ -76,15 +76,15 @@
         </div>
 
         <div id="dialogoVideo" title="Video" style="display: none;">
-            
+
             <div align="center">
-            <video id="sourceVideo" width="700" height="420" controls>
-               
-            </video>
+                <video id="sourceVideo" width="700" height="420" controls>
+
+                </video>
                 <div id="divVideo">
-                    
+
                 </div>
-                
+
             </div>
 
 
@@ -167,7 +167,7 @@
                         </li>-->
                         <li class="dropdown settings">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                <%= nameUser %> <i class="fa fa-angle-down"></i>
+                                <%= nameUser%> <i class="fa fa-angle-down"></i>
                             </a>
                             <ul class="dropdown-menu animated fadeInDown">
                                 <!--<li>
@@ -186,12 +186,12 @@
             <aside class="sidebar">
                 <div id="leftside-navigation" class="nano">
                     <ul class="nano-content">
-                        <li class="active">
+                        <li >
                             <a href="dashboard.jsp"><i class="fa fa-dashboard"></i><span>Inicio</span></a>
                         </li>
                         <%
-                        if(rol==1){                           
-                        
+                            if (rol == 1) {
+
                         %>
                         <li id="admin">
                             <a href="administrador.jsp"><i class="fa fa-cogs"></i><span>Administradores</span></a>
@@ -205,20 +205,29 @@
                         <li id="cursos">
                             <a href="curso.jsp"><i class="fa fa-cogs"></i><span>Cursos</span></a>
                         </li>
-                        <%
-                            }
-                            
+                        <%                            }
+
                         %>
-                        <%
-                        if(rol==2){                           
-                        
+                        <%                            if (rol == 2) {
+
                         %>
                         <li>
                             <a href="curso.jsp"><i class="fa fa-cogs"></i><span>Mis Cursos</span></a>
                         </li>
-                        <%
-                            }
-                            
+                        <%                            }
+
+                        %>
+                        <%                            if (rol == 3) {
+
+                        %>
+                        <li>
+                            <a href="allcursosE.jsp"><i class="fa fa-cogs"></i><span>Cursos</span></a>
+                        </li>
+                        <li class="active">
+                            <a href="curso.jsp"><i class="fa fa-cogs"></i><span>Mis Cursos</span></a>
+                        </li>
+                        <%                            }
+
                         %>
                         <!--<li class="sub-menu">
                             <a href="javascript:void(0);"><i class="fa fa fa-tasks"></i><span>Forms</span><i class="arrow fa fa-angle-right pull-right"></i></a>
@@ -255,9 +264,15 @@
 
                         </div>
                         <div class="col-md-2">
+                            <%
+                                if (rol != 3) {
 
+                            %>
                             <button id="interesAddButton" class="btn btn-success"  onClick="dialogoLeccion('add',<%=idCur%>)"><span class="glyphicons glyphicon-plus"></span> Agregar</button> 
+                            <%
+                                }
 
+                            %>
                         </div>
                     </div>
 
@@ -278,8 +293,13 @@
                                                 <th>Nombre de Lección</th>
                                                 <th>Video</th>                                        
                                                 <th>Archivo</th>                                                                             
+                                                    <%                                                    if (rol != 3) {
 
-                                                <th>Action</th>
+                                                    %>
+                                                <th>Acción</th>
+                                                    <%                                                    }
+
+                                                    %>
                                             </tr>
                                         </thead>
 
@@ -298,16 +318,21 @@
                                                     <a class="btn btn-info" href="DownloadFileServlet?filename=<%= a[4]%>"><span class="glyphicon glyphicon-cloud-download"></span></a>
                                                 </td>
 
+                                                <%
+                                                    if (rol != 3) {
 
+                                                %>
                                                 <td align="center">
                                                     <button class="btn btn-info" onclick="dialogoLeccionEdit('edit', '<%= a[0]%>', '<%= idCur%>', '<%= a[2]%>', '<%= a[3]%>', '<%= a[4]%>')"><span class="glyphicon glyphicon-edit"></span></button>
                                                     <button class="btn btn-danger" onclick="deleteLeccion('<%= a[0]%>')"><span class="glyphicon glyphicon-remove"></span></button>
 
                                                 </td>
-                                            </tr>
-                                            <%
+                                                <%
+                                                    }
 
-                                                }
+                                                %>
+                                            </tr>
+                                            <%                                                }
                                             %>
 
 
