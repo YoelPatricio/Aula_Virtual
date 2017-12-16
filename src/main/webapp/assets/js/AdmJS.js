@@ -151,57 +151,41 @@ function dialogoPersona(accion, tipo, idPer, dni, nombres, paterno, materno, cor
                     }
 
 
-                    $.ajax({
-                        url: 'ValidarDNIServlet',
-                        type: 'POST',
-                        data: {
-                            dni: dni
 
-                        },
-                        success: function (responseText) {
-                            debugger;
-                            if (responseText == 'true') {
-                                if (accion == 'add') {
-                                    cargando();
-                                }
+                    if (accion == 'add') {
+                        cargando();
+                    }
 
 
 
 
-                                var txtDNI = $('#txtDNI').val();
-                                var porId = document.getElementById("txtDNI").value;
-                                debugger;
+                    var txtDNI = $('#txtDNI').val();
+                    var porId = document.getElementById("txtDNI").value;
+                    debugger;
 
-                                var data = new FormData();
-                                debugger;
+                    var data = new FormData();
+                    debugger;
 
-                                data.append('txtIdPer', idPer);
-                                data.append('txtDNI', $('#txtDNI').val());
-                                data.append('txtNombres', $('#txtNombres').val());
-                                data.append('txtPaterno', $('#txtPaterno').val());
-                                data.append('txtMaterno', $('#txtMaterno').val());
-                                data.append('txtCorreo', $('#txtCorreo').val());
-                                data.append('txtCelular', $('#txtCelular').val());
-                                data.append('txtDireccion', $('#txtDireccion').val());
+                    data.append('txtIdPer', idPer);
+                    data.append('txtDNI', $('#txtDNI').val());
+                    data.append('txtNombres', $('#txtNombres').val());
+                    data.append('txtPaterno', $('#txtPaterno').val());
+                    data.append('txtMaterno', $('#txtMaterno').val());
+                    data.append('txtCorreo', $('#txtCorreo').val());
+                    data.append('txtCelular', $('#txtCelular').val());
+                    data.append('txtDireccion', $('#txtDireccion').val());
 
-                                data.append('accion', accion);
-                                data.append('tipo', tipo);
+                    data.append('accion', accion);
+                    data.append('tipo', tipo);
 
-                                $(this).dialog("close");
-                                if (accion == 'add') {
-                                    addAjax(data);
-                                } else {
-                                    editAjax(data);
-                                }
+                    $(this).dialog("close");
+                    if (accion == 'add') {
+                        addAjax(data);
+                    } else {
+                        editAjax(data);
+                    }
 
-                            } else {
-                                alert("EL DNI INGRESADO YA SE ENCUENTRA REGISTRADO");
-                                return;
 
-                            }
-
-                        }
-                    });
 
 
 
@@ -291,17 +275,8 @@ function dialogoPersonaEdit(accion, tipo, idPer, dni, nombres, paterno, materno,
                         alert('INGRESE LA DIRECCION');
                         return;
                     }
-                    
-                    $.ajax({
-                        url: 'ValidarDNIServlet',
-                        type: 'POST',
-                        data: {
-                            dni: dni
 
-                        },
-                        success: function (responseText) {
-                            debugger;
-                            if (responseText == 'true') {
+                   
                                 cargando();
 
                                 var txtDNI = $('#txtDNI').val();
@@ -329,14 +304,7 @@ function dialogoPersonaEdit(accion, tipo, idPer, dni, nombres, paterno, materno,
 
                                 $(this).dialog("close");
 
-                            } else {
-                                alert("EL DNI INGRESADO YA SE ENCUENTRA REGISTRADO");
-                                return;
-
-                            }
-
-                        }
-                    });
+                           
 
 
 
