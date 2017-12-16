@@ -100,6 +100,19 @@ public class CursoDAO {
         return results;
     }
     
+    public void publicarCurso(String idCur,String estado) {
+
+        Session session = sessionFactory.openSession();
+        Query query = session.createSQLQuery("update curso set publicado=? where id_cur=?");
+        query.setParameter(0, estado);
+        query.setParameter(1, idCur);
+        
+        query.executeUpdate();
+        Transaction tx = session.beginTransaction();
+        tx.commit();
+        session.close();
+    }
+    
     
     
     public static void main(String[] args) {

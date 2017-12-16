@@ -64,6 +64,10 @@
         <servlet-name>PublicarServlet</servlet-name>
         <servlet-class>com.cpyt.controller.PublicarServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ValidarDNIServlet</servlet-name>
+        <servlet-class>com.cpyt.controller.ValidarDNIServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PersonaServlet</servlet-name>
         <url-pattern>/PersonaServlet</url-pattern>
@@ -127,6 +131,10 @@
     <servlet-mapping>
         <servlet-name>PublicarServlet</servlet-name>
         <url-pattern>/PublicarServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ValidarDNIServlet</servlet-name>
+        <url-pattern>/ValidarDNIServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

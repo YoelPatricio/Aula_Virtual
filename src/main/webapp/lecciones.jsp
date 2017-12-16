@@ -120,7 +120,7 @@
                 <br>
                 <div class="col-md-12">
                     <label for="txtNombre">Nombre de Lección:</label>
-                    <input type="text" id="txtNombre" placeholder="Nombre de Lección" class="form-control"/>
+                    <input type="text" id="txtNombre" placeholder="Nombre de Lección" class="form-control" maxlength="100"/>
                     <input type="hidden" id="txtIdLec"/>
                 </div>
 

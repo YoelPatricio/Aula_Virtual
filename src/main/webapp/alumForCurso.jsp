@@ -118,7 +118,7 @@
                 <br>
                 <div class="col-md-6">
                     <label for="nota">Nota:</label>
-                    <input type="number" id="nota" placeholder="Ingrese la nota" class="form-control"/>
+                    <input type="text" id="nota" placeholder="Ingrese la nota" class="form-control" maxlength="2" onkeypress="return soloNumeros(event)"/>
                     <input type="hidden" id="txtIdTra"/>
                 </div>
                  

@@ -9,12 +9,12 @@ function dialogoVideo(video) {
         $('#divVideo').html("<br><br><br><br><br><br><br><br><h1>NO EXISTE VIDEO ADJUNTADO</h1>");
 
     } else {
-        var src="lessons/video/"+video;
-        $('#sourceVideo').html("<source src='"+src+"'  type='video/mp4'>");
+        var src = "lessons/video/" + video;
+        $('#sourceVideo').html("<source src='" + src + "'  type='video/mp4'>");
         //$('#divVideo').html("<img src='certificate/" + img + "' height='480' width='900'>");
     }
-    
-    
+
+
     $("#dialogoVideo").dialog({
         resizable: false,
         modal: true,
@@ -28,7 +28,7 @@ function dialogoVideo(video) {
                 text: "Cerrar",
                 click: function () {
                     //$("#contenidoDerecha").load("administrador.jsp");
-                   
+
                     window.location.reload();
                     $(this).dialog("close");
                 }
@@ -90,14 +90,14 @@ function mostrarAlertaError() {
 }
 
 function limpiarDialogo() {
-   
+
     $('#txtNombre').val('');
-    
+
 
 
 }
 
-function dialogoLeccion(accion,idCur) {
+function dialogoLeccion(accion, idCur) {
     debugger;
 
     if (accion == 'edit') {
@@ -117,15 +117,36 @@ function dialogoLeccion(accion,idCur) {
             {
                 text: "Grabar",
                 click: function () {
-                    if (accion == 'add') {
-                        cargando();
-                    }
-
                     var inputFileVideo = document.getElementById("video");
                     var video = inputFileVideo.files[0];
                     var inputFileArchivo = document.getElementById("archivo");
                     var archivo = inputFileArchivo.files[0];
                     var data = new FormData();
+                    if ($('#txtNombre').val() == "") {
+                        alert('INGRESE EL NOMBRE DE LA LECCION');
+                        return;
+                    }
+                    if (video == undefined) {
+                        alert('INGRESE EL VIDEO');
+                        return;
+                    }
+                    if ((video.name).indexOf(".mp4") == -1 && (video.name).indexOf(".MP4") == -1) {
+                        alert('EL FORMATO DEL VIDEO DEBE SER MP4');
+                        return;
+                    }
+                    if (archivo == undefined) {
+                        alert('INGRESE EL ARCHIVO DE LA LECCION');
+                        return;
+                    }
+                    if ((archivo.name).indexOf(".JAR") == -1 && (archivo.name).indexOf(".jar") == -1 && (archivo.name).indexOf(".ZIP") == -1 && (archivo.name).indexOf(".zip") == -1) {
+                        alert('EL ARCHIVO DE LA LECCION DEBE SER DE FORMATO JAR/ZIP');
+                        return;
+                    }
+                    if (accion == 'add') {
+                        cargando();
+                    }
+
+
                     debugger;
 
                     data.append('video', video);
@@ -160,15 +181,15 @@ function dialogoLeccion(accion,idCur) {
     });
 }
 
-function dialogoLeccionEdit(accion, idLec,idCur, nombre, video, archivo) {
+function dialogoLeccionEdit(accion, idLec, idCur, nombre, video, archivo) {
 
 
     debugger;
 
-  
-    $('#txtIdLec').val(idLec); 
+
+    $('#txtIdLec').val(idLec);
     $('#txtNombre').val(nombre);
-    
+
     $("#dialog").dialog({
         resizable: false,
         modal: true,
@@ -178,22 +199,42 @@ function dialogoLeccionEdit(accion, idLec,idCur, nombre, video, archivo) {
             {
                 text: "Grabar",
                 click: function () {
-
-
                     var inputFileVideo = document.getElementById("video");
                     var video = inputFileVideo.files[0];
                     var inputFileArchivo = document.getElementById("archivo");
                     var archivo = inputFileArchivo.files[0];
                     var data = new FormData();
+                    if ($('#txtNombre').val() == "") {
+                        alert('INGRESE EL NOMBRE DE LA LECCION');
+                        return;
+                    }
+                    if (video == undefined) {
+                        alert('INGRESE EL VIDEO');
+                        return;
+                    }
+                    if ((video.name).indexOf(".mp4") == -1 && (video.name).indexOf(".MP4") == -1) {
+                        alert('EL FORMATO DEL VIDEO DEBE SER MP4');
+                        return;
+                    }
+                    if (archivo == undefined) {
+                        alert('INGRESE EL ARCHIVO DE LA LECCION');
+                        return;
+                    }
+                    if ((archivo.name).indexOf(".JAR") == -1 && (archivo.name).indexOf(".jar") == -1 && (archivo.name).indexOf(".ZIP") == -1 && (archivo.name).indexOf(".zip") == -1) {
+                        alert('EL ARCHIVO DE LA LECCION DEBE SER DE FORMATO JAR/ZIP');
+                        return;
+                    }
+
+                    cargando();
                     debugger;
-                    
+
                     data.append('video', video);
                     data.append('archivo', archivo);
                     data.append('txtIdLec', idLec);
                     data.append('txtIdCur', idCur);
                     data.append('txtNombre', $('#txtNombre').val());
-                    
-                  
+
+
                     data.append('accion', accion);
 
 
@@ -303,13 +344,13 @@ function editAjax(data) {
     });
 }
 
-function downloadFile(filename){
+function downloadFile(filename) {
     debugger;
     $.ajax({
         url: 'DownloadFileServlet',
         type: 'GET',
         data: {
-            filename: filename          
+            filename: filename
         },
         success: function (responseText) {
 

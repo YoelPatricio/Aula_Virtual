@@ -77,7 +77,7 @@ function dialogoInscripcion(idPer,idCur,precio) {
     $("#dialog").dialog({
         resizable: false,
         modal: true,
-        width: 400,
+        width: 450,
         height: 350,
         buttons: [
             {

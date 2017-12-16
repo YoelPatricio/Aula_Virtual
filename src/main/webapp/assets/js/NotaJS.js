@@ -73,7 +73,14 @@ function dialogoNota(idTra,idIns) {
             {
                 text: "Grabar",
                 click: function () {
-
+                    if( $('#nota').val()==""){
+                        alert("INGRESE LA NOTA");
+                        return;
+                    }
+                    if( $('#nota').val()>20){
+                        alert("LA NOTA MAXIMA ES 20");
+                        return;
+                    }
                     debugger;
                     cargando();
                     $.ajax({

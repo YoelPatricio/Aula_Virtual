@@ -3,8 +3,71 @@
 
 //});
 
+function validarLogin(){
+    debugger;
+    var user = $('#user').val();
+    var pass = $('#pass').val();
+    $.ajax({
+        url: 'LoginServlet',
+        type: 'POST',
+        data: {
+            user: user,
+            pass: pass
+        },
+        success: function (responseText) {
+            debugger;
+       
+           if (responseText == 'false') {
 
+                //document.getElementById("errorSession").innerHTML = "<p style='color: red'>Usuario o Contraseña Incorrecto</p>";
+                
+            } 
 
+        }
+    });
+}
+
+function destroySession(){
+    debugger;
+
+    $.ajax({
+        url: 'LoginServlet',
+        type: 'POST',
+        data: {
+            accion: 'destroy'  
+        },
+        success: function (responseText) {
+            debugger;
+            var url='login.jsp';
+            
+            location.href = url;
+        }
+    });
+}
+
+function soloNumeros(e){
+	var key = window.Event ? e.which : e.keyCode
+	return (key >= 48 && key <= 57)
+}
+
+function soloLetras(e){
+       key = e.keyCode || e.which;
+       tecla = String.fromCharCode(key).toLowerCase();
+       letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
+       especiales = "8-37-39-46";
+
+       tecla_especial = false
+       for(var i in especiales){
+            if(key == especiales[i]){
+                tecla_especial = true;
+                break;
+            }
+        }
+
+        if(letras.indexOf(tecla)==-1 && !tecla_especial){
+            return false;
+        }
+    }
 
 /*
 function cargando() {
@@ -298,44 +361,3 @@ function editAjax(data) {
     });
 }*/
 
-function validarLogin(){
-    debugger;
-    var user = $('#user').val();
-    var pass = $('#pass').val();
-    $.ajax({
-        url: 'LoginServlet',
-        type: 'POST',
-        data: {
-            user: user,
-            pass: pass
-        },
-        success: function (responseText) {
-            debugger;
-       
-           if (responseText == 'false') {
-
-                //document.getElementById("errorSession").innerHTML = "<p style='color: red'>Usuario o Contraseña Incorrecto</p>";
-                
-            } 
-
-        }
-    });
-}
-
-function destroySession(){
-    debugger;
-
-    $.ajax({
-        url: 'LoginServlet',
-        type: 'POST',
-        data: {
-            accion: 'destroy'  
-        },
-        success: function (responseText) {
-            debugger;
-            var url='login.jsp';
-            
-            location.href = url;
-        }
-    });
-}

@@ -68,6 +68,16 @@ public class PersonaDAO {
         session.close();
     }
     
+    public static List<Persona> validarDNI(String dni) {
+
+        Session session = sessionFactory.openSession();
+        Query query = session.createQuery("from Persona where dni=?");
+        query.setParameter(0, dni);
+        
+        List results = query.list();
+        return results;
+    }
+    
     
     
     public static void main(String[] args) {

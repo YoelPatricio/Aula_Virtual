@@ -130,7 +130,7 @@
                 <br>
                 <div class="col-md-12">
                     <label for="txtNombre">Nombre del Curso:</label>
-                    <input type="text" id="txtNombre" placeholder="Nombre del Curso" class="form-control"/>
+                    <input type="text" id="txtNombre" placeholder="Nombre del Curso" class="form-control" maxlength="100"/>
                     <input type="hidden" id="txtIdCur"/>
                 </div>
 
@@ -139,7 +139,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <label for="txtDesc">Descripción:</label>
-                    <textarea id="txtDesc" placeholder="Resumen del curso" class="form-control"></textarea>
+                    <textarea id="txtDesc" placeholder="Resumen del curso" class="form-control" maxlength="500"></textarea>
                 </div>                
             </div>
             <br>
@@ -166,7 +166,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <label for="txtPrecio">Precio:</label>
-                    <input type="text" id="txtPrecio" placeholder="Precio" class="form-control"/>
+                    <input type="number" id="txtPrecio" placeholder="Precio" class="form-control"/>
                 </div>
 
             </div>
@@ -187,7 +187,7 @@
                     <select class="form-control" id="publicar" name="publicar">
                         <option value="-1">--Seleccionar--</option>
                         <option value="0">Sí</option>
-                        <option value="0">No</option>
+                        <option value="1">No</option>
                         
                     </select>
                 </div>

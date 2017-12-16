@@ -106,7 +106,7 @@
                 <br>
                 <div class="col-md-12">
                     <label for="tarjeta">Número de Tarjeta:</label>
-                    <input type="number" id="tarjeta" name="tarjeta" placeholder="Número" class="form-control" maxlength="16"/>
+                    <input type="text" id="tarjeta" name="tarjeta" placeholder="Número" class="form-control" maxlength="16" onkeypress="return soloNumeros(event)"/>
                     <input type="hidden" id="IdPer" name="IdPer" value="<%= idPer%>"/>
                 </div>
 
@@ -119,7 +119,7 @@
                 </div>    
                  <div class="col-md-6">
                     <label for="ccv">CCV:</label>
-                    <input id="ccv" name="ccv" type="number" placeholder="CCV" class="form-control" maxlength="3"></input>
+                    <input id="ccv" name="ccv" type="text" placeholder="CCV" class="form-control" maxlength="3" onkeypress="return soloNumeros(event)"/></input>
                 </div>   
             </div>
                        

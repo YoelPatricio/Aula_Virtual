@@ -99,94 +99,113 @@ function dialogoPersona(accion, tipo, idPer, dni, nombres, paterno, materno, cor
                     debugger;
                     var dni = $('#txtDNI').val();
                     var correo = $('#txtCorreo').val();
-                    if(dni==""){
+                    if (dni == "") {
                         alert('INGRESE EL DNI');
                         $('#txtDNI').focus();
                         return;
                     }
-                    if(dni.length!=8){
+                    if (dni.length != 8) {
                         alert('EL DNI DEBE CONTENER 8 CARACTERES');
                         $('#txtDNI').focus();
                         return;
                     }
-                    if($('#txtNombres').val()==""){
+                    if ($('#txtNombres').val() == "") {
                         alert('INGRESE EL/LOS NOMBRES');
                         return;
                     }
-                    if($('#txtPaterno').val()==""){
+                    if ($('#txtPaterno').val() == "") {
                         alert('INGRESE EL APELLIDO PATERNO');
                         return;
                     }
-                    if($('#txtMaterno').val()==""){
+                    if ($('#txtMaterno').val() == "") {
                         alert('INGRESE EL APELLIDO MATERNO');
                         return;
                     }
-                    if(correo==""){
+                    if (correo == "") {
                         alert('INGRESE EL CORREO');
                         return;
                     }
-                    if(correo.indexOf("@")==-1){
+                    if (correo.indexOf("@") == -1) {
                         alert('EL CORREO NO TIENE EL FORMATO ADECUADO');
                         return;
                     }
-                    if(correo.indexOf(".com")==-1 && correo.indexOf(".es")==-1 && correo.indexOf(".COM")==-1 && correo.indexOf(".ES")==-1){
+                    if (correo.indexOf(".com") == -1 && correo.indexOf(".es") == -1 && correo.indexOf(".COM") == -1 && correo.indexOf(".ES") == -1) {
                         alert('EL CORREO NO TIENE EL FORMATO ADECUADO');
                         return;
                     }
-                    if($('#txtCelular').val()==""){
+                    if ($('#txtCelular').val() == "") {
                         alert('INGRESE EL NÚMERO DE CELULAR');
                         return;
                     }
-                    if($('#txtDireccion').val()==""){
+                    if ($('#txtDireccion').val() == "") {
                         alert('INGRESE LA DIRECCION');
                         return;
                     }
-                    if($('#txtCIP').val()==""){
+                    if ($('#txtCIP').val() == "") {
                         alert('INGRESE EL CIP');
                         return;
                     }
                     var inputFileImage = document.getElementById("imgDocente");
                     var file = inputFileImage.files[0];
                     var data = new FormData();
-                    
-                    if(file==undefined){
+
+                    if (file == undefined) {
                         alert('INGRESE EL CERTIFICADO DE COLEGIATURA');
                         return;
                     }
-                    if((file.name).indexOf(".jpg")==-1 && (file.name).indexOf(".png")==-1 && (file.name).indexOf(".JPG")==-1 && (file.name).indexOf(".PNG")==-1){
+                    if ((file.name).indexOf(".jpg") == -1 && (file.name).indexOf(".png") == -1 && (file.name).indexOf(".JPG") == -1 && (file.name).indexOf(".PNG") == -1) {
                         alert('EL CERTIFICADO DE COLEGIATURA DEBE SER DE FORMATO JPG/PNG');
                         return;
                     }
-                    
-                    
-                    
-                    if(accion == 'add'){
-                        cargando();
-                    }
-                    
-                    
-                    data.append('imgDocente', file);
-                    data.append('txtIdPer', $('#txtIdPer').val());
-                    data.append('txtDNI', $('#txtDNI').val());
-                    data.append('txtNombres', $('#txtNombres').val());
-                    data.append('txtPaterno', $('#txtPaterno').val());
-                    data.append('txtMaterno', $('#txtMaterno').val());
-                    data.append('txtCorreo', $('#txtCorreo').val());
-                    data.append('txtCelular', $('#txtCelular').val());
-                    data.append('txtDireccion', $('#txtDireccion').val());
-                    data.append('txtCIP', $('#txtCIP').val());
-                    data.append('accion', accion);
-                    data.append('tipo', tipo);
-                    
-                    $(this).dialog("close");
-                    if(accion == 'add'){
-                        addAjax(data);
-                    }else{
-                        editAjax(data);
-                    }
-                    
-                    
-                    
+
+                    $.ajax({
+                        url: 'ValidarDNIServlet',
+                        type: 'POST',
+                        data: {
+                            dni: dni
+
+                        },
+                        success: function (responseText) {
+                            debugger;
+                            if (responseText == 'true') {
+                                if (accion == 'add') {
+                                    cargando();
+                                }
+
+
+                                data.append('imgDocente', file);
+                                data.append('txtIdPer', $('#txtIdPer').val());
+                                data.append('txtDNI', $('#txtDNI').val());
+                                data.append('txtNombres', $('#txtNombres').val());
+                                data.append('txtPaterno', $('#txtPaterno').val());
+                                data.append('txtMaterno', $('#txtMaterno').val());
+                                data.append('txtCorreo', $('#txtCorreo').val());
+                                data.append('txtCelular', $('#txtCelular').val());
+                                data.append('txtDireccion', $('#txtDireccion').val());
+                                data.append('txtCIP', $('#txtCIP').val());
+                                data.append('accion', accion);
+                                data.append('tipo', tipo);
+
+                                $(this).dialog("close");
+                                if (accion == 'add') {
+                                    addAjax(data);
+                                } else {
+                                    editAjax(data);
+                                }
+
+
+                            } else {
+                                alert("EL DNI INGRESADO YA SE ENCUENTRA REGISTRADO");
+                                return;
+
+                            }
+
+                        }
+                    });
+
+
+
+
                 }
 
 
@@ -231,7 +250,7 @@ function dialogCertificado(img) {
 }
 
 function dialogCertificado2(img) {
-debugger;
+    debugger;
     if (img == "undefined" || img == "") {
         $('#imgCertificado').html("<br><br><br><br><br><br><br><br><h1>NO EXISTE CERTIFICADO ADJUNTADO</h1>");
 
@@ -265,7 +284,7 @@ function deletePersona(idPer) {
         type: 'POST',
         data: {
             idPer: idPer,
-            accion:'delete'
+            accion: 'delete'
         },
         success: function (responseText) {
             debugger;
@@ -285,54 +304,77 @@ function deletePersona(idPer) {
     //$(this).dialog("close");
 }
 
-function addAjax(data){
-    
-                    $.ajax({
-                        url: 'PersonaServlet',
-                        type: 'POST',
-                        contentType: false,
-                        data: data,
-                        processData: false,
-                        cache: false,
-                        success: function (responseText) {
-                            debugger;
-                            $("#dialogCargando").dialog("close");
-                            if (responseText == 'true') {
-                                
-                                mostrarAlerta();
-                                
-                            } else {
-                                
-                                mostrarAlertaError();
-                                
-                            }
+function addAjax(data) {
 
-                        }
-                    });
-                   
+    $.ajax({
+        url: 'PersonaServlet',
+        type: 'POST',
+        contentType: false,
+        data: data,
+        processData: false,
+        cache: false,
+        success: function (responseText) {
+            debugger;
+            $("#dialogCargando").dialog("close");
+            if (responseText == 'true') {
+
+                mostrarAlerta();
+
+            } else {
+
+                mostrarAlertaError();
+
+            }
+
+        }
+    });
+
 
 }
-function editAjax(data){
+function editAjax(data) {
     $.ajax({
-                        url: 'PersonaServlet',
-                        type: 'POST',
-                        contentType: false,
-                        data: data,
-                        processData: false,
-                        cache: false,
-                        success: function (responseText) {
-                            
-                            
-                            if (responseText == 'true') {
-                                
-                                mostrarAlerta();
-                                
-                            } else {
-                                
-                                mostrarAlertaError();
-                                
-                            }
+        url: 'PersonaServlet',
+        type: 'POST',
+        contentType: false,
+        data: data,
+        processData: false,
+        cache: false,
+        success: function (responseText) {
 
-                        }
-                    });
+
+            if (responseText == 'true') {
+
+                mostrarAlerta();
+
+            } else {
+
+                mostrarAlertaError();
+
+            }
+
+        }
+    });
+}
+
+function validarDNI(dni) {
+    $.ajax({
+        url: 'ValidarDNIServlet',
+        type: 'POST',
+        data: {
+            dni: dni
+
+        },
+        success: function (responseText) {
+            debugger;
+            if (responseText == 'true') {
+
+
+            } else {
+                alert("EL DNI INGRESADO YA SE ENCUENTRA REGISTRADO");
+                return;
+
+            }
+
+        }
+    });
 }

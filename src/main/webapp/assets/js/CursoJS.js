@@ -92,6 +92,31 @@ function dialogoCurso(accion, idCur, nombre, desc, doc, precio, trabajo) {
             {
                 text: "Grabar",
                 click: function () {
+                    
+                    if($('#txtNombre').val()==""){
+                        alert('INGRESE EL NOMBRE DEL CURSO');
+                  
+                        return;
+                    }
+                    if($('#txtDesc').val()==""){
+                        alert('INGRESE LA DESCRIPCION DEL CURSO');
+                  
+                        return;
+                    }
+                    if($('#txtDoc').val()==0){
+                        alert('SELECCIONE AL DOCENTE');
+                  
+                        return;
+                    }
+                    if($('#txtPrecio').val()==""){
+                        alert('INGRESE EL PRECIO');
+                  
+                        return;
+                    }
+                    
+                    
+                    
+                    
                     if (accion == 'add') {
                         cargando();
                     }
@@ -160,8 +185,27 @@ function dialogoCursoEdit(accion, idCur, nombre, desc, doc, precio, trabajo) {
                 text: "Grabar",
                 click: function () {
 
-
-
+                    if($('#txtNombre').val()==""){
+                        alert('INGRESE EL NOMBRE DEL CURSO');
+                  
+                        return;
+                    }
+                    if($('#txtDesc').val()==""){
+                        alert('INGRESE LA DESCRIPCION DEL CURSO');
+                  
+                        return;
+                    }
+                    if($('#txtDoc').val()==0){
+                        alert('SELECCIONE AL DOCENTE');
+                  
+                        return;
+                    }
+                    if($('#txtPrecio').val()==""){
+                        alert('INGRESE EL PRECIO');
+                  
+                        return;
+                    }
+                    cargando();
                     var data = new FormData();
                     debugger;
 
@@ -296,14 +340,21 @@ function uploadJob(idCur) {
                 text: "Grabar",
                 click: function () {
 
-                    cargando();
-
-
-                    debugger;
+                    
                     var inputFileImage = document.getElementById("job");
                     var file = inputFileImage.files[0];
                     var data = new FormData();
-                    debugger;
+                    if(file==undefined){
+                        alert('INGRESE EL TRABAJO FINAL DEL CURSO');
+                        return;
+                    }
+                    if((file.name).indexOf(".JAR")==-1 && (file.name).indexOf(".jar")==-1 && (file.name).indexOf(".ZIP")==-1 && (file.name).indexOf(".zip")==-1){
+                        alert('EL ARCHIVO DEL TRABAJO FINAL DEBE SER DE FORMATO JAR/ZIP');
+                        return;
+                    }
+                    
+                    cargando();
+                   
                     data.append('job', file);
                     data.append('idCur', idCur);
 
@@ -359,13 +410,22 @@ function uploadStudentJob(idIns) {
                 text: "Grabar",
                 click: function () {
 
-                    cargando();
+                    
 
 
                     debugger;
                     var inputFileImage = document.getElementById("job");
                     var file = inputFileImage.files[0];
                     var data = new FormData();
+                    if(file==undefined){
+                        alert('INGRESE EL TRABAJO FINAL DEL CURSO');
+                        return;
+                    }
+                    if((file.name).indexOf(".JAR")==-1 && (file.name).indexOf(".jar")==-1 && (file.name).indexOf(".ZIP")==-1 && (file.name).indexOf(".zip")==-1){
+                        alert('EL ARCHIVO DEL TRABAJO FINAL DEBE SER DE FORMATO JAR/ZIP');
+                        return;
+                    }
+                    cargando();
                     debugger;
                     data.append('job', file);
                     data.append('idIns', idIns);
@@ -422,7 +482,10 @@ function dialogoPublicar(idCur) {
             {
                 text: "Grabar",
                 click: function () {
-
+                        if($('#publicar').val()==-1){
+                            alert("Eliga opción");
+                            return;
+                    }
                         debugger;
                         cargando();
                         $.ajax({

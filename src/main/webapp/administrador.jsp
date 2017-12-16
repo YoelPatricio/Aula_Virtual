@@ -101,41 +101,41 @@
                 <br>
                 <div class="col-md-6">
                     <label for="txtDNI">DNI:</label>
-                    <input type="text" id="txtDNI" placeholder="DNI" class="form-control"/>
+                    <input type="text" id="txtDNI" placeholder="DNI" class="form-control" maxlength="8" onKeyPress="return soloNumeros(event)"/>
                     <input type="hidden" id="txtIdPer"/>
                 </div>
                 <div class="col-md-6">
                     <label for="txtNombres">Nombres:</label>
-                    <input type="text" id="txtNombres" placeholder="Nombres" class="form-control"/>
+                    <input type="text" id="txtNombres" placeholder="Nombres" class="form-control" maxlength="100" onKeyPress="return soloLetras(event)"/>
                 </div>
             </div>
             <br>
             <div class="row">
                 <div class="col-md-6">
                     <label for="txtPaterno">Apellido Paterno:</label>
-                    <input type="text" id="txtPaterno" placeholder="Apellido Paterno" class="form-control"/>
+                    <input type="text" id="txtPaterno" placeholder="Apellido Paterno" class="form-control" maxlength="100" onKeyPress="return soloLetras(event)"/>
                 </div>
                 <div class="col-md-6">
                     <label for="txtMaterno">Apellido Materno:</label>
-                    <input type="text" id="txtMaterno"  placeholder="Apellido Materno" class="form-control"/>
+                    <input type="text" id="txtMaterno"  placeholder="Apellido Materno" class="form-control" maxlength="100" onKeyPress="return soloLetras(event)"/>
                 </div>
             </div>
             <br>
             <div class="row">
                 <div class="col-md-6">
                     <label for="txtCorreo">Correo Electrónico:</label>
-                    <input type="text" id="txtCorreo" placeholder="Correo Electrónico" class="form-control"/>
+                    <input type="text" id="txtCorreo" placeholder="Correo Electrónico" class="form-control" maxlength="100"/>
                 </div>
                 <div class="col-md-6">
                     <label for="txtCelular">Celular:</label>
-                    <input type="text" id="txtCelular"  placeholder="Celular" class="form-control"/>
+                    <input type="text" id="txtCelular"  placeholder="Celular" class="form-control" maxlength="9" onKeyPress="return soloNumeros(event)"/>
                 </div>
             </div>
             <br>
             <div class="row">
                 <div class="col-md-6">
                     <label for="txtDireccion">Dirección:</label>
-                    <input type="text" id="txtDireccion" placeholder="Dirección" class="form-control"/>
+                    <input type="text" id="txtDireccion" placeholder="Dirección" class="form-control" maxlength="100"/>
                 </div>
 
             </div>

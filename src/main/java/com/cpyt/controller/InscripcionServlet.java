@@ -61,12 +61,12 @@ public class InscripcionServlet extends HttpServlet {
             BigDecimal saldo = t.get(0).getSaldo();
             Integer idTar = t.get(0).getIdTar();
             
-            Integer saldo2=Integer.parseInt(saldo.toString());
-            Integer precio2=Integer.parseInt(precio.toString());
-            if(saldo2<precio2){
-                out.print("false");
-                return;
-            }
+            //Integer saldo2=Integer.parseInt(saldo.toString());
+            //Integer precio2=Integer.parseInt(precio.toString());
+            //if(saldo2<precio2){
+            //    out.print("false");
+            //    return;
+            //}
             
             BigDecimal saldoActualizado = saldo.subtract(precio);
             
